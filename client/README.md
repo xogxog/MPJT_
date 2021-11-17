@@ -1,4 +1,4 @@
-# mpjt
+# client
 
 ## Project setup
 ```
