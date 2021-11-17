@@ -31,9 +31,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'account',
+    #lacal apps
+    'accounts',
     'movie',
+    
+    #extions
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
 
+
+    'rest_framework',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -107,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'UTC'
 
@@ -127,3 +137,25 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL='accounts.User'
+
+# 인증된 user
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#     ),
+# }
+
+# social login
+# AUTHENTICATION_BACKENDS = [
+#     # Needed to login by username in Django admin, regardless of `allauth`
+#     'django.contrib.auth.backends.ModelBackend',
+#     # `allauth` specific authentication methods, such as login by e-mail
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# ]
+
+# SITE_ID = 1
