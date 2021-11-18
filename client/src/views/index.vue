@@ -2,8 +2,8 @@
   <div>
     <a @click="enterMain" style="z-index: 1;">
       <div class="index-img d-flex justify-center">
-      <v-img 
-        max-width="75%" height="70%"
+      <v-img
+        max-width="65%" height="60%"
         src="@/assets/index_test.jpg"
         ></v-img>
     </div></a>
@@ -30,5 +30,8 @@ export default {
 </script>
 
 <style>
+  .index-img {
+    padding-top: 3%;
+  }
 
 </style>
