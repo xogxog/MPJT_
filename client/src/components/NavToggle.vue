@@ -36,11 +36,13 @@
         ></v-autocomplete>
       </v-list-item>
 
-      <v-list dense>
+      <v-list>
         <v-list-item
           v-for="item in items"
           :key="item.title"
-          link
+          :to="item.to"
+          router
+          exact
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -62,8 +64,11 @@
       return {
         drawer: null,
         items: [
-          { title: 'Home', icon: 'mdi-view-dashboard' },
-          { title: 'About', icon: 'mdi-forum' },
+          { title: 'Index', icon: 'mdi-view-dashboard', to: '/', },
+          { title: 'test', icon: 'mdi-forum', to: '/test'},
+          { title: 'Main', icon: 'mdi-forum', to: '/Main'},
+          { title: 'Login', icon: 'mdi-forum', to: '/Login'},
+          { title: 'Signup', icon: 'mdi-forum', to: '/Signup'},
         ],
       }
     },

@@ -5,8 +5,7 @@
   <div>
     <carousel-3d
       class="carousel"
-      style="width: 100%"
-      :space="300"
+      :space="280"
       :width="300"
       :height="400"
       :border="1"
@@ -17,10 +16,15 @@
       <!-- <slide v-for="(movie, i) in movieList" :key="i" :index="i">
         
       </slide> -->
-      <slide :index="0">
-        Slide 1 Content
+      <slide v-for="(movie, index) in movies" :key="index" :index="index">
+        <figure>
+          <img src="@/assets/dune_poster.jpg" alt="movie-poster">
+          <figcaption>
+            Dune Overview
+          </figcaption>
+        </figure>
       </slide>
-      <slide :index="1">
+      <!-- <slide :index="1">
         Slide 2 Content
       </slide>
       <slide :index="2">
@@ -37,7 +41,7 @@
       </slide>
       <slide :index="6">
         Slide 4 Content
-      </slide>
+      </slide> -->
       
     </carousel-3d>
   </div>
@@ -52,13 +56,39 @@ export default {
     Carousel3d,
     Slide,
   },
+  data: function() {
+    return {
+      movies: 7,
+    }
+  },
+
+  created() {
+    
+  }
 }
 </script>
 
 <style>
-  .carousel {
-    z-index: 99;
-    width: 100%;
-  }
+.carousel {
+  z-index: 99;
+  width: 100%;
+}
+
+.carousel-3d-container figure {
+  margin:0;
+}
+
+.carousel-3d-container figcaption {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  bottom: 0;
+  position: absolute;
+  bottom: 0;
+  padding: 15px;
+  font-size: 12px;
+  min-width: 100%;
+  box-sizing: border-box;
+}
 
 </style>

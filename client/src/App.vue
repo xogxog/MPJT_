@@ -10,9 +10,7 @@
         <v-img max-height="250px" max-width="250px" src="@/assets/logo.png"></v-img>
         <nav-toggle class="nav-toggle nav-in-box" style="z-index: 2" />
       </div>
-      <template>
-        <router-view style="z-index: 99" />
-      </template>
+      <router-view style="z-index: 1" />
     </v-app>
 
 
@@ -101,6 +99,7 @@ export default {
   overflow-y: hidden; 
   z-index: 0; */
   width: 100%;
+  height: 100vh;
   position: fixed;
   top: 0;
   right: 0;
