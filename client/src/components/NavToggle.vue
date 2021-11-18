@@ -65,8 +65,10 @@
         drawer: null,
         items: [
           { title: 'Index', icon: 'mdi-view-dashboard', to: '/', },
+          { title: 'test', icon: 'mdi-forum', to: '/test'},
           { title: 'Main', icon: 'mdi-forum', to: '/Main'},
           { title: 'Login', icon: 'mdi-forum', to: '/Login'},
+          { title: 'Signup', icon: 'mdi-forum', to: '/Signup'},
         ],
       }
     },

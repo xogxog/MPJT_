@@ -1,27 +1,26 @@
 <template>
-  <div>
-    <div class="login-box">
-      <h1>Login</h1>
-      <form action="">
-        <div class="user-box">
-          <input type="text" name="" required="">
-          <label>Username</label>
-        </div>
-        <div class="user-box">
-          <input type="password">
-          <label for="">Password</label>
-        </div>
-        <a href="">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Invia
-        </a>
-      </form>
-    </div>
-
-  </div>
+<div class="container">
+	<div class="login-box">
+		<h1>Login</h1>
+		<form action="">
+			<div class="user-box">
+				<input type="text" name="" required="">
+				<label>ID</label>
+			</div>
+			<div class="user-box">
+				<input type="password" required="">
+				<label for="">Password</label>
+			</div>
+			<a href="">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				Login
+			</a>
+		</form>
+	</div>
+</div>
 </template>
 
 <script>
@@ -167,7 +166,7 @@
 	0%{
 		right: -100%;
 	}
-	50%,100% {
+	50%, 100% {
 		right: 100%;
 	}
 }
@@ -179,7 +178,7 @@
 	height: 100%;
 	background: linear-gradient(360deg, transparent, #000000);
 	animation: btn-anim4 1s linear infinite;
-	animation-dealy: .75s;
+  animation-delay: .75s;
 }
 
 @keyframes btn-anim4 {

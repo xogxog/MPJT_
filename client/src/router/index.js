@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
+import test from '../views/test.vue'
 import index from '../views/index.vue'
 import Login from '../views/Login.vue'
+import Signup from '../views/Signup.vue'
 
 Vue.use(VueRouter)
 
@@ -13,6 +15,11 @@ const routes = [
     component: index
   },
   {
+    path: '/test',
+    name: 'test',
+    component: test
+  },
+  {
     path: '/main',
     name: 'Main',
     component: Main
@@ -21,6 +28,11 @@ const routes = [
     path: '/login',
     name: 'Loing',
     component: Login
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
   },
 ]
 
