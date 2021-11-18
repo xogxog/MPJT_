@@ -10,9 +10,7 @@
         <v-img max-height="250px" max-width="250px" src="@/assets/logo.png"></v-img>
         <nav-toggle class="nav-toggle nav-in-box" style="z-index: 2" />
       </div>
-      <template>
-        <router-view style="z-index: 99" />
-      </template>
+      <router-view style="z-index: 1" />
     </v-app>
 
 
