@@ -13,6 +13,7 @@ class Genre(models.Model):
         return f'{self.genre_id}, {self.genre_name}'
 
 class Movie(models.Model):
+    movie_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100)
     overview = models.TextField()
     poster_path = models.CharField(max_length=500)
