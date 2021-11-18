@@ -66,6 +66,7 @@
         items: [
           { title: 'Index', icon: 'mdi-view-dashboard', to: '/', },
           { title: 'Main', icon: 'mdi-forum', to: '/Main'},
+          { title: 'Login', icon: 'mdi-forum', to: '/Login'},
         ],
       }
     },

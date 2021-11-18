@@ -69,9 +69,26 @@ export default {
 </script>
 
 <style>
-  .carousel {
-    z-index: 99;
-    width: 100%;
-  }
+.carousel {
+  z-index: 99;
+  width: 100%;
+}
+
+.carousel-3d-container figure {
+  margin:0;
+}
+
+.carousel-3d-container figcaption {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  bottom: 0;
+  position: absolute;
+  bottom: 0;
+  padding: 15px;
+  font-size: 12px;
+  min-width: 100%;
+  box-sizing: border-box;
+}
 
 </style>
