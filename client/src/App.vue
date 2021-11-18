@@ -5,14 +5,16 @@
   <div id="app">
     <!-- 로고 -->
     <v-app>
-      
       <div class="logo-bar d-flex justify-center justify-space-between">
         <div class="nav-in-box"></div>
         <v-img max-height="250px" max-width="250px" src="@/assets/logo.png"></v-img>
         <nav-toggle class="nav-toggle nav-in-box" style="z-index: 2" />
       </div>
-      <router-view />
+      <template>
+        <router-view style="z-index: 99" />
+      </template>
     </v-app>
+
 
     <!-- particles 배경 -->
     <vue-particles
