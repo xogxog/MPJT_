@@ -27,10 +27,11 @@ class Commentserializer(serializers.ModelSerializer) :
     class Meta :
         model= Comment
         fields = ('id','user','comment')
+        read_only_fields = ('comment')
 
 
 
-# 리뷰 - 영화상세 에서 보여줌
+# 리뷰 - 영화상세 에서 보여줌 - 조회
 class ReviewListSerializer(serializers.ModelSerializer):
     
     like_users = UserInfoSerializer(read_only=True)
@@ -39,14 +40,16 @@ class ReviewListSerializer(serializers.ModelSerializer):
         model = Review
         fields = ('id','title','user','updated_at','like_users') #user는 작성자
 
-# 리뷰상세 - 리뷰 프로필(유저serializer에서 프로필정보 들고오기)
-class ReviewDetailSerializer(serializers.ModelSerializer):
-    # 안가져와질 수도 있음..!
+# 리뷰 - 하나 
+class ReviewSerializer(serializers.ModelSerializer):
+    
     user = UserInfoSerializer(read_only=True) # 작성자
 
     class Meta :
         model = Review
-        fields = ('id','user','title','content','like_users')
+        fields = ('id','title','content','rank','created_at','updated_at','movie','user')
+        read_only_fields =('movie','user',)
+    
 
 
 # 영화 상세 - 리뷰 넣어야 함

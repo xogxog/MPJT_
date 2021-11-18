@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response 
 from rest_framework import serializers, status 
 from .models import Director, Genre, Movie, Actor, Review
-from .serializers import ActorSerializer,DirectorSerializer, MovieListSerializer,MovieSerializer,ReviewListSerializer
+from .serializers import ActorSerializer,DirectorSerializer, MovieListSerializer,MovieSerializer,ReviewListSerializer,ReviewSerializer
 import requests
 
 
@@ -32,10 +32,38 @@ def movie_detail(request,movie_pk) :
 
     return Response(serializers)
 
+# 리뷰생성
+@api_view(['POST'])
+def create_review(request, movie_pk):
+    # 리뷰생성
+    if request.method =='POST' :
+        movie = get_object_or_404(Movie, movie_id=movie_pk)
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user,movie=movie)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-# 리뷰상세
-@api_view(['GET'])
+# 리뷰상세 - 가져오기, 삭제, 수정
+@api_view(['GET', 'DELETE', 'PUT'])
+def review_detail(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    # 리뷰 상세 부르기
+    if request.method == 'GET' :
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
+    # 본인만 수정 삭제 가능함.
+    if request.user == review.user :
+        # 삭제
+        if request.method == 'DELETE' :
+            review.delete()
+            return Response({'delete': review_pk }, status=status.HTTP_204_NO_CONTENT)
+        # 수정
+        elif request.method == 'PUT' :
+            serializer = ReviewSerializer(review, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
 
+                return Response(serializer.data)
 
 
 

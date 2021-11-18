@@ -5,7 +5,8 @@ from . import views
 urlpatterns = [
     path('movie/',views.movie_list), # main page
     path('movie/<int:movie_pk>/', views.movie_detail),
-
+    path('movie/<int:movie_pk>/review/', views.create_review), #리뷰생성
+    path('movie/review/<int:review_pk>/', views.review_detail),
     # 데이터 들고오기
     path('create_genre/', views.genre_get),
     path('create_movie/', views.movie_get),
