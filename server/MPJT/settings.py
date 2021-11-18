@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #lacal apps
+    
     'accounts',
     'movie',
     
@@ -40,8 +41,8 @@ INSTALLED_APPS = [
     # 'allauth.account',
     # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
-
-
+    'corsheaders',
+    'imagekit',
     'rest_framework',
     'django_extensions',
     'django.contrib.admin',
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'MPJT.urls'
 
@@ -133,6 +137,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = BASE_DIR / 'media' 
+MEDIA_URL = '/media/' 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -149,6 +156,14 @@ AUTH_USER_MODEL='accounts.User'
 #         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
 #     ),
 # }
+
+# 토큰 유효기간
+# import datetime
+# JWT_AUTH ={
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+# }
+
+
 
 # social login
 # AUTHENTICATION_BACKENDS = [

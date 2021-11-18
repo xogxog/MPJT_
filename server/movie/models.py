@@ -13,6 +13,7 @@ class Genre(models.Model):
         return f'{self.genre_id}, {self.genre_name}'
 
 class Movie(models.Model):
+    movie_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100)
     overview = models.TextField()
     poster_path = models.CharField(max_length=500)
@@ -42,7 +43,7 @@ class Actor(models.Model):
     name = models.CharField(max_length=50)
     original_name = models.CharField(max_length=50)
     profile_path = models.CharField(max_length=500)
-    movie_act = models.ManyToManyField(Movie, related_name='moive_actor')
+    movie_act = models.ManyToManyField(Movie, related_name='movie_actor')
 
     def __str__(self) -> str:
         return f'{self.actor_id},{self.name}'
