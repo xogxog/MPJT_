@@ -2,16 +2,14 @@
   <div>
     <div class="d-flex flex-end">
       <v-btn
-        class=""
-        outlined
-        fab
-        color="white"
-        dark
-        style="z-index: 1;"
-        @click.stop="drawer = !drawer"
-        >
-        -
-      </v-btn>
+      class="mx-2"
+      fab
+      dark
+      @click.stop="drawer = !drawer">
+      <v-icon dark>
+        mdi-format-list-bulleted-square
+      </v-icon>
+    </v-btn>
     </div>
 
     <v-navigation-drawer
@@ -28,6 +26,15 @@
       </v-list-item>
 
       <v-divider></v-divider>
+
+      <v-list-item>
+        <v-autocomplete
+          label="Search"
+          dense
+          filled
+          rounded
+        ></v-autocomplete>
+      </v-list-item>
 
       <v-list dense>
         <v-list-item
