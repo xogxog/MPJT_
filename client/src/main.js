@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import Vuetify from 'vuetify/lib'
 import VueParticles from 'vue-particles'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
@@ -10,6 +11,11 @@ import "bootstrap"
 Vue.config.productionTip = false
 // 배경
 Vue.use(VueParticles)
+Vue.use(Vuetify)
+
+export default new Vuetify({
+  theme: { dark: true },
+})
 
 new Vue({
   router,

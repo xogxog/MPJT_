@@ -9,11 +9,13 @@
 export default {
   name: 'Main',
   components: {
-
   },
 }
 </script>
 
-<style>
+<style scoped>
+  #main {
+    color: white;
+  }
 
 </style>
