@@ -2,14 +2,14 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework.decorators import api_view 
 from rest_framework.response import Response 
 from rest_framework import serializers, status 
-from . models import Director, Genre, Movie, Actor
-from .serializers import MovieListSerializer
+from .models import Director, Genre, Movie, Actor, Review
+from .serializers import ActorSerializer,DirectorSerializer, MovieListSerializer,MovieSerializer,ReviewListSerializer
 import requests
 
 
 # Create your views here.
 
-#main page 전체영화 - 추천영화 알고리즘 짜기
+#main page 전체영화 - 추천영화 알고리즘 짜기(5개만 보내기)
 @api_view(['GET'])
 def movie_list(request):
     movies = get_list_or_404(Movie)
@@ -20,6 +20,28 @@ def movie_list(request):
 @api_view(['GET'])
 def movie_detail(request,movie_pk) :
     movie = get_object_or_404(Movie,pk=movie_pk)
+    movie_serializer = MovieSerializer(movie)
+
+    reviews = Review.objects.filter(movie=movie_pk)
+    reviews_serializers = ReviewListSerializer(reviews, many=True)
+
+    serializers = {
+        'movie' : movie_serializer.data,
+        'reviews' : reviews_serializers.data,
+        } 
+
+    return Response(serializers)
+
+
+# 리뷰상세
+@api_view(['GET'])
+
+
+
+
+
+
+
 
 
 
