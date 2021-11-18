@@ -5,12 +5,15 @@
   <div id="app">
     <!-- 로고 -->
     <v-app>
-      <div class="logo-bar d-flex justify-center">
+      
+      <div class="logo-bar d-flex justify-center justify-space-between">
+        <div class="nav-in-box"></div>
         <v-img max-height="250px" max-width="250px" src="@/assets/logo.png"></v-img>
+        <nav-toggle class="nav-toggle nav-in-box" style="z-index: 2" />
       </div>
       <router-view />
     </v-app>
-      
+
     <!-- particles 배경 -->
     <vue-particles
       id="particles-js"
@@ -36,12 +39,15 @@
 </template>
 
 <script>
+import NavToggle from './components/NavToggle.vue'
 export default {
   name: 'App',
+  components: {
+  NavToggle,
+  },
 
   data: () => {
     return {
-      flag: false,
     }
   },
 };
@@ -53,21 +59,52 @@ export default {
     margin-bottom: 5%;
   }
 
-  #app {
-    background: black;
+  .nav-in-box {
+    width: 250px; height: 250px;
   }
 
+  .nav-toggle {
+    padding-top: 50px;
+    padding-left: 150px
+  }
+
+  #app {
+    background: black;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
+/* 
   #particles-js{
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
     display: block;
-    height: 100VH !important;
+    height: 100vh !important;
     left: 0;
-    position: absolute;
     top: 0;
-    width: 100VW !important;
+    position: absolute;
+    width: 100vw !important;
     z-index: 0;
-    }
+    } */
+
+  #particles-js { 
+  /* position: absolute;
+  background-size: cover;
+  top: 0; 
+  bottom: 0; 
+  left: 0;
+  right: 0; 
+  overflow-y: hidden; 
+  z-index: 0; */
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
 
 </style>
