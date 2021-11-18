@@ -4,8 +4,10 @@ from . import views
 urlpatterns = [
     path('movie/',views.movie_list), # main page
     path('movie/<int:movie_pk>/', views.movie_detail),
-    path('create_movie/', views.movie_get),
+
+    # 데이터 들고오기
     path('create_genre/', views.genre_get),
+    path('create_movie/', views.movie_get),
 
 
 ]
