@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import NavToggle from './components/NavToggle.vue'
+import NavToggle from '@/components/NavToggle.vue'
 export default {
   name: 'App',
   components: {

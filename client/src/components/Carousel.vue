@@ -56,6 +56,7 @@ export default {
     Carousel3d,
     Slide,
   },
+  
   data: function() {
     return {
       movies: 7,

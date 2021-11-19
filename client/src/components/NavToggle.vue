@@ -69,6 +69,7 @@
           { title: 'Main', icon: 'mdi-forum', to: '/Main'},
           { title: 'Login', icon: 'mdi-forum', to: '/Login'},
           { title: 'Signup', icon: 'mdi-forum', to: '/Signup'},
+          { title: 'MovieDetail', icon: 'mdi-forum', to: '/MovieDetail'},
         ],
       }
     },
