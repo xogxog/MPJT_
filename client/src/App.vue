@@ -3,17 +3,15 @@
   <!-- vuetify는 dark: "true" 넣기 -->
   
   <div id="app">
-    <div class="container-fluid back-img"></div>
     <!-- 로고 -->
     <v-app>
       <div class="logo-bar d-flex justify-center justify-space-between">
         <div class="nav-in-box"></div>
         <v-img max-height="250px" max-width="250px" src="@/assets/logo.png"></v-img>
-        <nav-toggle class="nav-toggle nav-in-box" style="z-index: 99" />
+        <nav-toggle class="nav-toggle nav-in-box" style="z-index: 2" />
       </div>
-      <router-view style="z-index: 3"/>
+      <router-view style="z-index: 1"/>
     </v-app>
-
 
 
     <!-- particles 배경 -->
@@ -52,21 +50,6 @@ export default {
 </script>
 
 <style>
-  .back-img {
-    z-index: 1;
-    position: fixed;
-    background-image: linear-gradient(
-    rgba(0, 0, 0, 0.199), 
-    rgba(245, 174, 174, 0.158));
-    background-position: center;
-    background-size: cover;
-    /* background-repeat: repeat; */
-    top: 0; 
-    bottom: 0; 
-    left: 0;
-    right: 0; 
-  }
-
   .main-img {
     margin-top: 5%;
     margin-bottom: 5%;
@@ -87,7 +70,6 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-
   }
 /* 
   #particles-js{
@@ -120,7 +102,6 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 0;
-  
 }
 
 </style>
