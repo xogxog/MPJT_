@@ -6,13 +6,16 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    # followers = serializers.
 
     class Meta :
         model = User
-        fields = ('username', 'nickname','password',)
+        fields = ('username', 'nickname','password','profile_path')
 
 class UserInfoSerializer(serializers.ModelSerializer):
 
     class Meta :
         model = User
         fields = ('nickname','profile_path',)
+
+
