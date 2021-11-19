@@ -30,7 +30,7 @@ export default {
   rgba(0, 0, 0, 0.7), 
   rgba(0, 0, 0, 0.7)
   ), url('../assets/main_test.jpg');
-  /* background-position: center; */
+  /* background-position: center;; */
   background-size: cover;
   top: 0; 
   bottom: 0; 
