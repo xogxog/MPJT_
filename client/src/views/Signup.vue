@@ -4,30 +4,29 @@
       <h1>Signup</h1>
       <form action="">
         <div class="user-box">
-          <input type="text" name="" required="">
-          <label>ID</label>
+          <input type="text" id="username" required="" v-model="credentials.username">
+          <label for="username">ID</label>
         </div>
         <div class="user-box">
-          <input type="text" required="">
-          <label for="">Nick Name</label>
+          <input type="text" id="nickname" required="" v-model="credentials.nickname">
+          <label for="nickname">Nick Name</label>
         </div>
         <div class="user-box">
-          <input type="password" required="">
-          <label for="">Password</label>
+          <input type="password" id="password" required="" v-model="credentials.password">
+          <label for="password">Password</label>
         </div>
         <div class="user-box">
-          <input type="password-confirm" required="">
-          <label for="">Password Confirm</label>
+          <input type="password" id="pwConfirmation" required="" v-model="credentials.pwConfirmation">
+          <label for="pwConfirmation">Password Confirm</label>
         </div>
         <form>
           <div class="form-group">
-            <label for="my-file">Select Image</label>
-            <input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="my-file">
-
+            <label for="profile_path">Select Image</label>
+            <input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="profile_path">
             <div class="border p-2 mt-3">
               <p>Preview Here</p>
-              <template v-if="preview">
-                <img :src="preview" class="img-fluid" />
+              <template v-if="credentials.profile_path">
+                <img :src="credentials.profile_path" class="img-fluid" />
                 <p class="mb-0">file name: {{ image.name }}</p>
                 <p class="mb-0">size: {{ image.size/1024 }}KB</p>
               </template>
@@ -37,11 +36,12 @@
 
         <v-row align="center">
           <v-col>
-            <v-select v-model="e6" :items="states" :menu-props="{ maxHeight: '400' }" label="Select" multiple
-              hint="Pick your favorite states" persistent-hint></v-select>
+            <v-select v-model="credentials.genres_name" chips :items="genres" :menu-props="{ maxHeight: '400' }" label="Select" multiple
+              hint="Pick your favorite Genres" persistent-hint>
+            </v-select>
           </v-col>
         </v-row>
-        <a href="">
+        <a href="" @click='signup'>
           <span></span>
           <span></span>
           <span></span>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
   export default {
     name: 'Signup',
     components: {
@@ -70,8 +72,17 @@
 
     data() {
       return {
-        preview: null,
+       // profile_path: null,
         image: null,
+        genres: ['모험','판타지','애니메이션','드라마','공포','액션','코미디','역사','서부','스릴러','범죄','다큐멘터리','SF','미스터리','음악','로맨스','가족','전쟁','TV 영화'],
+        credentials: {
+          username: null,
+          password: null,
+          pwConfirmation: null,
+          nickname: null,
+          profile_path: "",
+          genres_name: [], 
+        }
       }
     },
 
@@ -81,14 +92,31 @@
         if (input.files) {
           var reader = new FileReader();
           reader.onload = (e) => {
-            this.preview = e.target.result;
+            this.credentials.profile_path = e.target.result;
           }
           this.image = input.files[0];
           reader.readAsDataURL(input.files[0]);
-        }
+          }
+        },
+      signup : function(event){
+        
+        event.preventDefault()
+        console.log(this.credentials)
+
+        axios({
+          method: 'post',
+          url : 'http://127.0.0.1:8000/accounts/signup/',
+          data : this.credentials,
+        })
+          .then(()=>{
+            this.$router.push({ name:'Main'})
+          })
+          .catch(err =>{
+            alert(err)
+          })
+        },
       },
-    },
-  }
+    }
 </script>
 
 <style>

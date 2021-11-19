@@ -33,23 +33,17 @@ def movie_detail(request,movie_pk) :
 
     return Response(serializers)
 
-# 영화 찜
+# 영화 찜 - 버튼 바뀌는건 vue에서 할일. 여기선 db에 반영만
 @api_view(['POST'])
 def movie_like(request, movie_pk):
     movie = get_object_or_404(Movie, movie_id=movie_pk)
     # 좋아요 있으면
     if movie.like_users.filter(user_id=request.data.get("user_id")):
         movie.like_users.remove(request.user)
-        serializers = {
-            'like' : False,
-        }
         return Response({'unlike': '영화 찜 취소'})
     else :
         movie.like_users.add(request.user)
-        serializers = {
-            'like' : True,
-        }
-        return Response(serializers.data)
+        return Response({'like' : '영화 찜'})
 
 # 리뷰생성
 @api_view(['POST'])

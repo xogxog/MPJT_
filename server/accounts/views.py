@@ -12,6 +12,7 @@ from movie.models import Genre
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def signup(request):
+    print(request.data)
     password = request.data.get('password')
     pw_confirmation = request.data.get('pwConfirmation')
 
@@ -21,8 +22,8 @@ def signup(request):
     elif User.objects.filter(nickname=request.data.get('nickname')).exists():
         return Response({'error': '이미 존재하는 닉네임입니다.'}, status=status.HTTP_403_FORBIDDEN)
     
-    elif request.data.get('profile_path') == '':
-        return Response({'error': '프로필사진을 지정해주세요'}, status=status.HTTP_403_FORBIDDEN)
+    # elif request.data.get('profile_path') == '':
+    #     return Response({'error': '프로필사진을 지정해주세요'}, status=status.HTTP_403_FORBIDDEN)
 
     elif request.data.get('genres_name') == None :
         return Response({'error': '좋아하는 영화장르를 선택해주세요.'}, status=status.HTTP_403_FORBIDDEN)
