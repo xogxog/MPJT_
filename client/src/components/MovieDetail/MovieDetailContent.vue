@@ -12,12 +12,14 @@
       <div class="title-detail container">
         <div class="content-box">
           <div class="Title">
+            <v-banner class="text-white justify-center text-h5 font-weight-light"
+              style="background: rgba(255, 255, 255, 0.5)" sticky>
+              Title
+            </v-banner>
+            <v-divider></v-divider>
             <v-card style="background: rgba(255, 255, 255, 0.5);">
-              <v-banner class="text-white justify-center text-h5 font-weight-light" sticky>
-                Title
-              </v-banner>
             </v-card>
-            <v-card v-scroll.self="onScroll" class="overflow-y-auto" height="300px"
+            <v-card v-scroll.self="onScroll" class="overflow-y-auto" height="268px"
               style="background: rgba(255, 255, 255, 0.5);">
 
               <v-card-text>
@@ -32,7 +34,8 @@
             </v-card>
           </div>
           <v-divider></v-divider>
-          <v-card class="d-flex justify-content-evenly text-white" style="background: rgba(255, 255, 255, 0.5); padding-bottom: 4px;">
+          <v-card class="d-flex justify-content-evenly text-white"
+            style="background: rgba(255, 255, 255, 0.5); padding-bottom: 4px;">
             <div class="actor">배우
               <v-divider></v-divider>
               <p>나는 배우</p>
@@ -43,10 +46,10 @@
               <p>나는 감독</p>
             </div>
           </v-card>
-        <v-divider></v-divider>
-        <v-card class="d-flex" style="background: rgba(255, 255, 255, 0.5);">
-          
-        </v-card>
+          <v-divider></v-divider>
+          <v-card class="d-flex" style="background: rgba(255, 255, 255, 0.5);">
+
+          </v-card>
 
         </div>
       </div>
