@@ -1,3 +1,4 @@
+from django.db.models.fields import IntegerField
 from .models import Genre, Movie, Director, Actor, Review, Comment
 from rest_framework import serializers
 from accounts.serializers import UserInfoSerializer
@@ -26,7 +27,11 @@ class MovieSerializer(serializers.ModelSerializer) :
     
     movie_director=DirectorSerializer(many=True, read_only=True)
     movie_actor=ActorSerializer(many=True, read_only=True)
-
+    like_users = UserInfoSerializer(many=True, read_only=True)
+    like_users_count = serializers.IntegerField(
+        source='like_users.count',
+        read_only=True
+        )
 
     class Meta :
         model = Movie
@@ -38,6 +43,7 @@ class MovieSerializer(serializers.ModelSerializer) :
             'release_date',
             'vote_average',
             'like_users',
+            'like_users_count',
             'movie_actor',
             'movie_director',
             )

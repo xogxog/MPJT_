@@ -24,8 +24,8 @@ def signup(request):
     elif request.data.get('profile_path') == '':
         return Response({'error': '프로필사진을 지정해주세요'}, status=status.HTTP_403_FORBIDDEN)
 
-    elif request.data.get('genre_name') == None :
-        return Response({'error': '좋아하는 영화장를 선택해주세요.'}, status=status.HTTP_403_FORBIDDEN)
+    elif request.data.get('genres_name') == None :
+        return Response({'error': '좋아하는 영화장르를 선택해주세요.'}, status=status.HTTP_403_FORBIDDEN)
     serializer = UserSerializer(data=request.data)
 
     if serializer.is_valid(raise_exception=True):
