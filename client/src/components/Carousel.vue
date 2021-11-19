@@ -24,25 +24,6 @@
           </figcaption>
         </figure>
       </slide>
-      <!-- <slide :index="1">
-        Slide 2 Content
-      </slide>
-      <slide :index="2">
-        Slide 3 Content
-      </slide>
-      <slide :index="3">
-        Slide 4 Content
-      </slide>
-      <slide :index="4">
-        Slide 4 Content
-      </slide>
-      <slide :index="5">
-        Slide 4 Content
-      </slide>
-      <slide :index="6">
-        Slide 4 Content
-      </slide> -->
-      
     </carousel-3d>
   </div>
 </template>

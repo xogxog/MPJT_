@@ -13,7 +13,7 @@ import requests
 #main page 전체영화 - 추천영화 알고리즘 짜기(5개만 보내기)
 @api_view(['GET'])
 def movie_list(request):
-    movies = get_list_or_404(Movie)[:5]
+    movies = get_list_or_404(Movie)[:10]
     serializers = MovieListSerializer(movies,many=True)
     return Response(serializers.data)
 

@@ -36,22 +36,80 @@
         ></v-autocomplete>
       </v-list-item>
 
+      <!-- 항상보임 -->
       <v-list>
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+        <span>
+          <v-list-item to="/" router exact>
+              <v-list-item-icon>
+                <v-icon>mdi-view-dashboard</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Index</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          <v-list-item to="/test" router exact>
+              <v-list-item-icon>
+                <v-icon>mdi-forum</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>test</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item to="/Main" router exact>
+              <v-list-item-icon>
+                <v-icon>mdi-forum</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Main</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item to="/MovieDetail" router exact>
+              <v-list-item-icon>
+                <v-icon>mdi-forum</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>MovieDetail</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
+        </span>
+
+        <!-- 로그인 해야 보임 -->
+        <span v-if="isLogin">
+          <v-list-item to="/#" router exact @click.native="logout">
+            <v-list-item-icon>
+              <v-icon>mdi-forum</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Log Out</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </span>
+
+        <!-- 로그인하면 안보임 -->
+        <span v-else>
+          <v-list-item to="/Login" router exact>
+              <v-list-item-icon>
+                <v-icon>mdi-forum</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Login</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
+          
+
+          <v-list-item to="/Signup" router exact>
+              <v-list-item-icon>
+                <v-icon>mdi-forum</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Signup</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
+        </span>
+        
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -60,19 +118,29 @@
 <script>
   export default {
     name: 'NavToggle',
+    // props:{
+    //   isLogin: Boolean
+    // },
     data () {
       return {
         drawer: null,
-        items: [
-          { title: 'Index', icon: 'mdi-view-dashboard', to: '/', },
-          { title: 'test', icon: 'mdi-forum', to: '/test'},
-          { title: 'Main', icon: 'mdi-forum', to: '/Main'},
-          { title: 'Login', icon: 'mdi-forum', to: '/Login'},
-          { title: 'Signup', icon: 'mdi-forum', to: '/Signup'},
-          { title: 'MovieDetail', icon: 'mdi-forum', to: '/MovieDetail'},
-        ],
+        isLogin: false,
       }
     },
+    methods:{
+      logout:function(){
+        this.isLogin = false
+        localStorage.removeItem('jwt')
+        this.$router.push({name : 'Main'})
+      }
+    },
+    
+    created:function(){
+      const token = localStorage.getItem('jwt')
+      if (token) {
+        this.isLogin = true
+      }
+    }
   }
 </script>
 

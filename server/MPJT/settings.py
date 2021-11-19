@@ -148,20 +148,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='accounts.User'
 
 # 인증된 user
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticated',
-#     ),
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-#     ),
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
 
 # 토큰 유효기간
-# import datetime
-# JWT_AUTH ={
-#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
-# }
+import datetime
+JWT_AUTH ={
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+}
 
 
 

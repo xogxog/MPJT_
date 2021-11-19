@@ -19,10 +19,16 @@
           <input type="password" id="pwConfirmation" required="" v-model="credentials.pwConfirmation">
           <label for="pwConfirmation">Password Confirm</label>
         </div>
-        <form>
-          <div class="form-group">
+
+        <!-- <form>
             <label for="profile_path">Select Image</label>
+            <v-file-input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="profile_path"></v-file-input>
             <input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="profile_path">
+                    <v-file-input
+          show-size
+          label="File input"
+          @change="selectFile"
+        ></v-file-input>
             <div class="border p-2 mt-3">
               <p>Preview Here</p>
               <template v-if="credentials.profile_path">
@@ -30,9 +36,8 @@
                 <p class="mb-0">file name: {{ image.name }}</p>
                 <p class="mb-0">size: {{ image.size/1024 }}KB</p>
               </template>
-            </div>
           </div>
-        </form>
+        </form> -->
 
         <v-row align="center">
           <v-col>
@@ -80,7 +85,7 @@ import axios from 'axios'
           password: null,
           pwConfirmation: null,
           nickname: null,
-          profile_path: "",
+          // profile_path: null,
           genres_name: [], 
         }
       }
@@ -89,10 +94,11 @@ import axios from 'axios'
     methods: {
       previewImage: function (event) {
         var input = event.target;
+        // const frm = new FormData();
         if (input.files) {
           var reader = new FileReader();
-          reader.onload = (e) => {
-            this.credentials.profile_path = e.target.result;
+          reader.onload = (event) => {
+            this.credentials.profile_path = event.target.result;
           }
           this.image = input.files[0];
           reader.readAsDataURL(input.files[0]);
@@ -101,18 +107,30 @@ import axios from 'axios'
       signup : function(event){
         
         event.preventDefault()
-        console.log(this.credentials)
+        // const frm = new FormData();
+        // frm.append("username", this.credentials.username)
+        // frm.append("password", this.credentials.password)
+        // frm.append("pwConfirmation", this.credentials.pwConfirmation)
+        // frm.append("nickname", this.credentials.nickname)
+        // frm.append("profile_path", this.credentials.profile_path)
+        // frm.append("genres_name", this.credentials.genres_name)
+        // console.log(frm)
 
         axios({
           method: 'post',
           url : 'http://127.0.0.1:8000/accounts/signup/',
           data : this.credentials,
+          // headers: {
+          //   "Content-type": "multipart/form-data"
+          // },
         })
+        
           .then(()=>{
             this.$router.push({ name:'Main'})
           })
-          .catch(err =>{
-            alert(err)
+          .catch(error =>{
+            alert(error.message)
+            console.log(error.message)
           })
         },
       },
