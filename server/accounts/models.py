@@ -8,6 +8,7 @@ from movie.models import Genre
 class User(AbstractUser):
     nickname = models.CharField(max_length=10)
     profile_path = ProcessedImageField(
+        default= 'default_profile/KakaoTalk_20210721_200742580.jpg',
         blank = True,
         upload_to = 'profiles/%Y/%m/%d/',
         processors=[ResizeToFill(100,100)],

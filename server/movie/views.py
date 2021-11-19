@@ -2,8 +2,9 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework.decorators import api_view 
 from rest_framework.response import Response 
 from rest_framework import serializers, status 
-from .models import Director, Genre, Movie, Actor, Review
-from .serializers import ActorSerializer,DirectorSerializer, MovieListSerializer,MovieSerializer,ReviewListSerializer,ReviewSerializer
+from .models import Director, Genre, Movie, Actor, Review, Comment
+from accounts.models import User
+from .serializers import ActorSerializer, Commentserializer,DirectorSerializer, MovieListSerializer,MovieSerializer,ReviewListSerializer,ReviewSerializer
 import requests
 
 
@@ -12,7 +13,7 @@ import requests
 #main page 전체영화 - 추천영화 알고리즘 짜기(5개만 보내기)
 @api_view(['GET'])
 def movie_list(request):
-    movies = get_list_or_404(Movie)
+    movies = get_list_or_404(Movie)[:5]
     serializers = MovieListSerializer(movies,many=True)
     return Response(serializers.data)
 
@@ -32,6 +33,24 @@ def movie_detail(request,movie_pk) :
 
     return Response(serializers)
 
+# 영화 찜
+@api_view(['POST'])
+def movie_like(request, movie_pk):
+    movie = get_object_or_404(Movie, movie_id=movie_pk)
+    # 좋아요 있으면
+    if movie.like_users.filter(user_id=request.data.get("user_id")):
+        movie.like_users.remove(request.user)
+        serializers = {
+            'like' : False,
+        }
+        return Response({'unlike': '영화 찜 취소'})
+    else :
+        movie.like_users.add(request.user)
+        serializers = {
+            'like' : True,
+        }
+        return Response(serializers.data)
+
 # 리뷰생성
 @api_view(['POST'])
 def create_review(request, movie_pk):
@@ -43,15 +62,15 @@ def create_review(request, movie_pk):
             serializer.save(user=request.user,movie=movie)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-# 리뷰상세 - 가져오기, 삭제, 수정
+# 리뷰상세 - 조회, 삭제, 수정
 @api_view(['GET', 'DELETE', 'PUT'])
 def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
-    # 리뷰 상세 부르기
+    # 리뷰 조회
     if request.method == 'GET' :
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
-    # 본인만 수정 삭제 가능함.
+    # 본인만 수정 삭제
     if request.user == review.user :
         # 삭제
         if request.method == 'DELETE' :
@@ -65,6 +84,31 @@ def review_detail(request, review_pk):
 
                 return Response(serializer.data)
 
+#댓글 조회,생성
+@api_view(['GET','POST'])
+def create_comment(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'GET' : 
+        comments = Comment.objects.filter(review=review_pk)
+        serializers = Commentserializer(comments, many=True)
+        return Response(serializers.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST' :
+        serializer = Commentserializer(data=request.data)
+        if serializer.is_valid(raise_exception=True) :
+            serializer.save( user=request.user,review=review)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+# 댓글 삭제
+@api_view(['DELETE'])
+def delete_comment(request, comment_pk) :
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.user == comment.user :
+        if request.method == 'DELETE':        
+            comment.delete()
+            data={
+                'delete' : '댓글이 삭제되었습니다.'
+            }
+            return Response(data, status=status.HTTP_204_NO_CONTENT)
 
 
 
@@ -109,11 +153,13 @@ def movie_get(request) :
         movies = movie_list.get('results')
         # 받아오는 리스트가 20개 
         for i in range(0,20):
+            print(movies[i].get('title'), movies[i].get('release_date'))
             # 원래 있는 데이터면 패스
-            if Movie.objects.filter(movie_id=movies[i].get('id')).exists():
+            if Movie.objects.filter(movie_id=movies[i].get('id')).exists() or movies[i].get('release_date') == '' or movies[i].get('release_date') == None:
                 pass
             else :
                 # 영화테이블 넣기
+                
                 movie = Movie.objects.create(
                     movie_id = movies[i].get('id'),
                     title = movies[i].get('title'),
