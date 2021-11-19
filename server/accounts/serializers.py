@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta :
         model = User
         fields = ('username', 'nickname','password','profile_path')
+        read_only_field=('followings')
 
 class UserInfoSerializer(serializers.ModelSerializer):
 
