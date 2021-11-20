@@ -1,18 +1,21 @@
 from django.shortcuts import get_list_or_404, get_object_or_404
-from rest_framework.decorators import api_view 
+from rest_framework.decorators import api_view ,authentication_classes, permission_classes
 from rest_framework.response import Response 
 from rest_framework import serializers, status 
 from .models import Director, Genre, Movie, Actor, Review, Comment
 from accounts.models import User
 from .serializers import ActorSerializer, Commentserializer,DirectorSerializer, MovieListSerializer,MovieSerializer,ReviewListSerializer,ReviewSerializer
 import requests
-
+from rest_framework.permissions import AllowAny
+import random
 
 # Create your views here.
 
 #main page 전체영화 - 추천영화 알고리즘 짜기(5개만 보내기)
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def movie_list(request):
+    #랜덤하게 보내기 - isLogin 확인해서 값 다르게 보내기
     movies = get_list_or_404(Movie)[:10]
     serializers = MovieListSerializer(movies,many=True)
     return Response(serializers.data)
@@ -113,7 +116,9 @@ def delete_comment(request, comment_pk) :
 
 ################################################ 데이터 들고오기 ##########################################################
 # 장르
+
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def genre_get(request) :
     API_KEY = '33e4ef19e015d915281ddd6881f93178'
     url = f'https://api.themoviedb.org/3/genre/movie/list?api_key={API_KEY}&language=ko-KR' #장르
@@ -135,6 +140,7 @@ def genre_get(request) :
 
 # 영화데이터 api요청 - 오래걸림
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def movie_get(request) :
     API_KEY = '33e4ef19e015d915281ddd6881f93178' # 환경변수로 나중에 숨기기
 

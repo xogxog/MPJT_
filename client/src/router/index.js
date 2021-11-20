@@ -38,7 +38,8 @@ const routes = [
   {
     path: '/movieDetail',
     name: 'MovieDetail',
-    component: MovieDetail
+    component: MovieDetail,
+    props :true,
   },
 ]
 

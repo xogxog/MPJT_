@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import token from './modules/token'
+import login from './modules/login'
+import getMovies from './modules/getMovies'
+import createPersistedState from "vuex-persistedstate";
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
   },
   mutations: {
@@ -13,6 +16,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    token
+    login,
+    getMovies,
   },
 })

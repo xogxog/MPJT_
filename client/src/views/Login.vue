@@ -47,9 +47,10 @@ import axios from 'axios'
 				})
 					.then(res =>{
 						localStorage.setItem('jwt', res.data.token)
-						// this.$emit('login')
+						const isLogin = true
+						
+						this.$store.dispatch('login/loginCheck', isLogin)
 						this.$router.push({name : 'Main'})
-						location.reload()
 					})
 					.catch(err =>{
 						alert(err)

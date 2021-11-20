@@ -16,13 +16,18 @@
       <!-- <slide v-for="(movie, i) in movieList" :key="i" :index="i">
         
       </slide> -->
-      <slide v-for="(movie, index) in movies" :key="index" :index="index">
+
+      <slide v-for="(movieItem, index) in movieItems" :key="index" :index="index">
+        <a src="" @click="movieDetail">
         <figure>
-          <img src="@/assets/dune_poster.jpg" alt="movie-poster">
+          <img :src="movieItem.poster_path" alt="movie-poster">
           <figcaption>
-            Dune Overview
+            {{ movieItem.movie_id }}
+            {{ movieItem.title }}
+            
           </figcaption>
         </figure>
+      </a>
       </slide>
     </carousel-3d>
   </div>
@@ -30,7 +35,7 @@
 
 <script>
 import { Carousel3d, Slide } from 'vue-carousel-3d';
-
+import { mapState } from 'vuex'
 export default {
   name: 'Carousel',
   components: {
@@ -40,13 +45,38 @@ export default {
   
   data: function() {
     return {
-      movies: 7,
+      
     }
   },
 
-  created() {
-    
-  }
+  methods: {
+    movieDetail : function(event, movieItem){
+      event.preventDefault()
+      // console.log(event.target)
+      // console.log(this.movieItems)
+      console.log(movieItem.movie_id)
+
+      // for(let idx; this.movieDetail.length;idx++){
+      //   console.log(idx)
+      // }
+
+      // this.$router.push({name : 'MovieDetail', movie_id=movie_id})
+    }
+
+  },
+  
+  computed: {
+    ...mapState('login', ['isLogin']),
+    ...mapState('getMovies',['movieItems'])
+  },
+
+  created: function() {
+    const isLogin = this.isLogin
+    // console.log(isLogin)
+    this.$store.dispatch('getMovies/getMovie', isLogin)
+    // console.log(this.movieItems)
+  },
+
 }
 </script>
 
