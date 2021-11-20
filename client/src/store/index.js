@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import login from './modules/login'
 import getMovies from './modules/getMovies'
+import getMovieDetail from './modules/getMovieDetail'
 import createPersistedState from "vuex-persistedstate";
 
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
   modules: {
     login,
     getMovies,
+    getMovieDetail,
   },
 })

@@ -8,15 +8,12 @@
         
       </slide> -->
 
-      <slide v-for="(movieItem, index) in movieItems" :key="movieItem.movie_id" :index="index">
-        <a src="" @click.prevent="movieDetail(movieItem.movie_id)">
+      <slide v-for="(movieItem, index) in movieItems" :key="movieItem.id" :index="index">
+        <a src="" @click.prevent="movieDetail(movieItem.id)">
           <figure>
             <img :src="movieItem.poster_path" alt="movie-poster">
             <figcaption>
-              {{ index }}
-              {{ movieItem.movie_id }}
               {{ movieItem.title }}
-
             </figcaption>
           </figure>
         </a>
@@ -26,13 +23,8 @@
 </template>
 
 <script>
-  import {
-    Carousel3d,
-    Slide
-  } from 'vue-carousel-3d';
-  import {
-    mapState
-  } from 'vuex'
+  import {Carousel3d,Slide} from 'vue-carousel-3d';
+  import {mapState} from 'vuex'
   export default {
     name: 'Carousel',
     components: {
@@ -47,20 +39,13 @@
     },
 
     methods: {
-      movieDetail: function (movie_id) {
-        console.log(movie_id)
-        // console.log(movieItem.movie_id)
-
-
-
+      movieDetail: function (id) {
+        let moviePk = id
+        this.$store.dispatch('getMovieDetail/setMovieId', moviePk)
         this.$router.push({
           name: 'MovieDetail'
         })
       },
-
-      // getMovieId: function (movie_id){
-      //   console.log(movie_id)
-      // }
 
     },
 
