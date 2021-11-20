@@ -18,6 +18,9 @@ Vue.use(Carousel3d);
 
 export default new Vuetify({
   theme: { dark: true },
+  icons: {
+    iconfont: 'mdi' // 'mdiSvg',   || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+  },
 })
 
 new Vue({

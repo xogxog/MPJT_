@@ -19,10 +19,10 @@
         <img class="main-img" src="@/assets/main_test.jpg" alt="">
         <img class="main-img" src="@/assets/main_test.jpg" alt="">
       </div>
-      <div>
+      <!--<div>
         <img class="main-img" src="@/assets/main_test.jpg" alt="">
         <img class="main-img" src="@/assets/main_test.jpg" alt="">
-      </div>
+      </div>-->
     </div>
   </div>
 </template>

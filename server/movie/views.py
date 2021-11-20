@@ -22,11 +22,12 @@ def movie_list(request):
 
 # 영화상세 가지고오기
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def movie_detail(request,movie_pk) :
     movie = get_object_or_404(Movie,pk=movie_pk)
     movie_serializer = MovieSerializer(movie)
 
-    reviews = Review.objects.filter(movie=movie_pk)
+    reviews = Review.objects.filter(pk=movie_pk)
     reviews_serializers = ReviewListSerializer(reviews, many=True)
 
     serializers = {
@@ -39,7 +40,7 @@ def movie_detail(request,movie_pk) :
 # 영화 찜 - 버튼 바뀌는건 vue에서 할일. 여기선 db에 반영만
 @api_view(['POST'])
 def movie_like(request, movie_pk):
-    movie = get_object_or_404(Movie, movie_id=movie_pk)
+    movie = get_object_or_404(Movie, pk=movie_pk)
     # 좋아요 있으면
     if movie.like_users.filter(user_id=request.data.get("user_id")):
         movie.like_users.remove(request.user)
@@ -53,7 +54,7 @@ def movie_like(request, movie_pk):
 def create_review(request, movie_pk):
     # 리뷰생성
     if request.method =='POST' :
-        movie = get_object_or_404(Movie, movie_id=movie_pk)
+        movie = get_object_or_404(Movie, pk=movie_pk)
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user,movie=movie)

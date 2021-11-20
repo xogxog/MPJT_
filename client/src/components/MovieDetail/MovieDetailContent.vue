@@ -2,19 +2,19 @@
   <article id="movie-detail-content" class="container">
     <div class="d-flex">
       <div class="">
-        <v-img height="500px" contain src="@/assets/dune_poster.jpg" alt="poster"></v-img>
+        <v-img width="350px" height="500px" contain :src="movieDetail.movie.poster_path" alt="poster"></v-img>
         <v-divider></v-divider>
         <v-card class="d-flex" style="background: rgba(255, 255, 255, 0.5); margin: 0 15%;">
-          <v-card-text style="color: white;">평균 점수: 10.00</v-card-text>
-          <v-card-text style="color: white;">개봉일 : 2021.11.11</v-card-text>
+          <v-card-text style="color: white;">평균 점수<br>{{movieDetail.movie.vote_average}}</v-card-text>
+          <v-card-text style="color: white;">개봉일<br>{{movieDetail.movie.release_date}}</v-card-text>
         </v-card>
       </div>
       <div class="title-detail container">
         <div class="content-box">
           <div class="Title">
-            <v-banner class="text-white justify-center text-h5 font-weight-light"
+            <v-banner class="text-white justify-center text-h6 font-weight-light"
               style="background: rgba(255, 255, 255, 0.5)" sticky>
-              Title
+              {{movieDetail.movie.title}}
             </v-banner>
             <v-divider></v-divider>
             <v-card style="background: rgba(255, 255, 255, 0.5);">
@@ -24,11 +24,9 @@
 
               <v-card-text>
                 <div class="mb-4 text-white">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi commodi earum tenetur. Asperiores
-                  dolorem placeat ab nobis iusto culpa, autem molestias molestiae quidem pariatur. Debitis beatae
-                  expedita nam facere perspiciatis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-                  ducimus cupiditate rerum officiis consequuntur laborum doloremque quaerat ipsa voluptates, nobis nam
-                  quis nulla ullam at corporis, similique ratione quasi illo!
+                  <div>
+                  {{movieDetail.movie.overview}}
+                  </div>
                 </div>
               </v-card-text>
             </v-card>
@@ -38,19 +36,25 @@
             style="background: rgba(255, 255, 255, 0.5); padding-bottom: 4px;">
             <div class="actor">배우
               <v-divider></v-divider>
-              <p>나는 배우</p>
+              <div v-for="(actor, i) in movieDetail.movie.movie_actor" :key="i">
+              <p>{{actor.name}}</p>
+              </div>
             </div>
             <v-divider vertical></v-divider>
             <div class="director">감독
               <v-divider></v-divider>
-              <p>나는 감독</p>
+              <div v-for="(director, i) in movieDetail.movie.movie_director" :key="i">
+                <p>{{director.name}}</p>
+              </div>
             </div>
           </v-card>
+          <button></button>
           <v-divider></v-divider>
           <v-card class="d-flex" style="background: rgba(255, 255, 255, 0.5);">
 
           </v-card>
-
+        
+          
         </div>
       </div>
     </div>
@@ -59,9 +63,16 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
   export default {
     name: 'MovieDetailContent',
-
+    created : function(){
+      this.$store.dispatch('getMovieDetail/movieDetail')
+      console.log(this.MovieDetail)
+    },
+    computed :{
+      ...mapState('getMovieDetail', ['movieDetail']),
+    }
   }
 </script>
 

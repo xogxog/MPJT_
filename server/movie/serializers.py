@@ -8,7 +8,7 @@ class MovieListSerializer(serializers.ModelSerializer) :
 
     class Meta :
         model = Movie
-        fields =('movie_id','title','poster_path',)
+        fields =('id','movie_id','title','poster_path',)
 
 # 배우
 class ActorSerializer(serializers.ModelSerializer):
@@ -36,6 +36,7 @@ class MovieSerializer(serializers.ModelSerializer) :
     class Meta :
         model = Movie
         fields = (
+            'id',
             'movie_id',
             'title',
             'overview',
@@ -61,7 +62,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 # 리뷰 리스트
 class ReviewListSerializer(serializers.ModelSerializer):
-    
+    user = UserInfoSerializer(read_only=True)
     like_users = UserInfoSerializer(many=True, read_only=True)
     like_users_count = serializers.IntegerField(
         source='like_users.count',

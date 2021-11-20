@@ -17,7 +17,7 @@ const getMovies ={
   actions: {
     getMovie:function({commit}, isLogin){
       axios({
-        mathod : 'get',
+        method : 'get',
         url : 'http://127.0.0.1:8000/movie/movie/',
         data : isLogin
       })
