@@ -116,30 +116,32 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
   export default {
     name: 'NavToggle',
-    // props:{
-    //   isLogin: Boolean
-    // },
     data () {
       return {
         drawer: null,
-        isLogin: false,
+        // isLogin: false,
       }
     },
     methods:{
       logout:function(){
-        this.isLogin = false
+        // this.isLogin = false
         localStorage.removeItem('jwt')
+        const isLogin = false
+        this.$store.dispatch('login/loginCheck', isLogin)
         this.$router.push({name : 'Main'})
       }
     },
-    
-    created:function(){
-      const token = localStorage.getItem('jwt')
-      if (token) {
-        this.isLogin = true
-      }
+    // created:function(){
+    //   const token = localStorage.getItem('jwt')
+    //   if (token) {
+    //     this.isLogin = true
+    //   }
+    // },
+    computed :{
+      ...mapState('login', ['isLogin'])
     }
   }
 </script>
