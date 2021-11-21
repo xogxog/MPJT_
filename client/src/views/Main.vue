@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="main" class="container">
     <carousel id="carousel-slide"></carousel>
 
     <!-- <v-container>
@@ -48,9 +48,11 @@ export default {
   }
 
   .main-img {
-    width: 35%;
+    width: 45%;
     margin: 20px;
 
   }
+
+  
 
 </style>

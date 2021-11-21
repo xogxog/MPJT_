@@ -1,5 +1,8 @@
 <template>
 <div class="container">
+	<div class="welcome">
+		<p>Moive Project SangJune & TaeHyun</p>
+	</div>
 	<div class="login-box">
 		<h1>Login</h1>
 		<form action="">
@@ -23,7 +26,7 @@
 </div>
 </template>
 
-<script>
+<script scoped>
 import axios from 'axios'
 
   export default {
@@ -61,10 +64,47 @@ import axios from 'axios'
   }
 </script>
 
-<style>
+<style scoped>
+
+.welcome {
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .welcome p {
+    position: relative;
+    font-family: sans-serif;
+    /* color: white; */
+    text-transform: uppercase;
+    font-size: 2em;
+    letter-spacing: 4px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #000, #fff, #000);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    animation: animate 4s linear infinite;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    -webkit-background-clip: text;
+  }
+
+  @keyframes animate
+  {
+    0%
+    {
+      background-position: -400%;
+    }
+    100%
+    {
+      background-position: 300%;
+    }
+  }
 
 .login-box {
-	position: absolute;
+	position: relative;
 	top: 50%;
 	left: 50%;
 	width: 400px;

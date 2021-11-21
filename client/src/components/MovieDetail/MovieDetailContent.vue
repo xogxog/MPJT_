@@ -1,4 +1,7 @@
+
+
 <template>
+  <!-- 전체 -->
   <article id="movie-detail-content" class="container">
     <div class="d-flex">
       <div class="">
@@ -25,19 +28,20 @@
               <v-card-text>
                 <div class="mb-4 text-white">
                   <div>
-                  {{movieDetail.movie.overview}}
+                    {{movieDetail.movie.overview}}
                   </div>
                 </div>
               </v-card-text>
             </v-card>
           </div>
           <v-divider></v-divider>
-          <v-card class="d-flex justify-content-evenly text-white"
-            style="background: rgba(255, 255, 255, 0.5); padding-bottom: 4px;">
+          <v-card v-scroll.self="onScroll" height="101px"
+            class="d-flex overflow-y-auto justify-content-evenly text-white"
+            style="background: rgba(255, 255, 255, 0.5);">
             <div class="actor">배우
               <v-divider></v-divider>
               <div v-for="(actor, i) in movieDetail.movie.movie_actor" :key="i">
-              <p>{{actor.name}}</p>
+                <p>{{actor.name}}</p>
               </div>
             </div>
             <v-divider vertical></v-divider>
@@ -48,29 +52,101 @@
               </div>
             </div>
           </v-card>
-          <button></button>
           <v-divider></v-divider>
-          <v-card class="d-flex" style="background: rgba(255, 255, 255, 0.5);">
-
-          </v-card>
-        
-          
+          <div class="d-flex justify-content-around" style="background-color: rgba(255, 255, 255, 0.0)f">
+            <div>
+              <v-btn color="primary" fab x-large dark>
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+              <div>123</div>
+            </div>
+            <div>
+              <v-btn color="primary" fab x-large dark>
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+              <div>123</div>
+            </div>
+            <div>
+              <v-btn color="primary" fab x-large dark @click.stop="reviewWriteOpen=true">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+              <div>리뷰 쓰기</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <v-divider></v-divider>
+      <div class="reviews container">
+        <v-data-table class="elevation-1" no-data-text="No Review" style="background: rgba(255, 255, 255, 0.5);" dark
+          click:row :headers="headers" :items="movieDetail.reviews" multi-sort>
+          <template v-slot:item.title="{ item }">
+            <a href="" @click="cancelA" @click.stop="reviewDetailOpen=true">{{item.title}}</a>
+          </template>
+        </v-data-table>
+      </div>
+        <!-- 테이블 끝 -->
+      <MovieReviewCreate v-model="reviewWriteOpen"></MovieReviewCreate>
+      <MovieDetailReview v-model="reviewDetailOpen"></MovieDetailReview>
 
+    
   </article>
+  <!-- 전체 -->
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import MovieDetailReview from '@/components/MovieDetail/MovieDetailReview.vue'
+import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
+
+  import { mapState } from 'vuex'
   export default {
     name: 'MovieDetailContent',
-    created : function(){
+    data: function () {
+      return {
+        reviewDetailOpen: false,
+        reviewWriteOpen: false,
+
+        headers: [{
+            text: 'nickname1',
+            align: 'center',
+            sortable: false,
+            divider: 1,
+            value: 'nickname',
+          },
+
+          {
+            text: "title",
+            value: "title"
+          },
+          {
+            text: "like_users_count",
+            value: "like_users_count"
+          },
+          {
+            text: "updated_at",
+            value: "updated_at"
+          },
+
+        ],
+      }
+    },
+    components: {
+      MovieDetailReview,
+      MovieReviewCreate
+    },
+
+    methods: {
+      cancelA: function (event) {
+        event.preventDefault()
+      }
+    },
+
+    created: function () {
       this.$store.dispatch('getMovieDetail/movieDetail')
       console.log(this.MovieDetail)
     },
-    computed :{
+
+    computed: {
       ...mapState('getMovieDetail', ['movieDetail']),
     }
   }
@@ -80,6 +156,8 @@ import {mapState} from 'vuex'
   #movie-detail-content {
     color: white;
   }
+
+
 
   .text-white {
     color: white;

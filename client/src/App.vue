@@ -3,7 +3,7 @@
   <!-- vuetify는 dark: "true" 넣기 -->
   
   <div id="app">
-    <div class="container-fluid back-img"></div>
+    <!-- <div class="container-fluid back-img"></div> -->
     <!-- 로고 -->
     <v-app>
       <div class="logo-bar d-flex justify-center justify-space-between">
@@ -13,8 +13,6 @@
       </div>
       <router-view style="z-index: 3"/>
     </v-app>
-
-
 
     <!-- particles 배경 -->
     <vue-particles
@@ -52,20 +50,21 @@ export default {
 </script>
 
 <style>
-  .back-img {
+  /* .back-img {
     z-index: 1;
-    position: fixed;
+    position: absolute;
     background-image: linear-gradient(
     rgba(0, 0, 0, 0.199), 
     rgba(245, 174, 174, 0.158));
     background-position: center;
     background-size: cover;
-    /* background-repeat: repeat; */
+    background-repeat: repeat;
     top: 0; 
     bottom: 0; 
     left: 0;
     right: 0; 
-  }
+    height: 100vh;
+  } */
 
   .main-img {
     margin-top: 5%;
@@ -87,7 +86,6 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-
   }
 /* 
   #particles-js{
@@ -112,15 +110,20 @@ export default {
   right: 0; 
   overflow-y: hidden; 
   z-index: 0; */
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 0;
-  
+  z-index: 1;
+  background-image: linear-gradient(
+  rgba(0, 0, 0, 0.199), 
+  rgba(245, 174, 174, 0.158));
 }
 
 </style>
