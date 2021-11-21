@@ -21,7 +21,12 @@
     >
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title>Sang June</v-list-item-title>
+          <span v-if="isLogin">
+          <v-list-item-title>{{nickname}}</v-list-item-title>
+          </span>
+          <span v-else>
+          <v-list-item-title>로그인 하세요.</v-list-item-title>
+          </span>
         </v-list-item-content>
       </v-list-item>
 
@@ -141,7 +146,8 @@ import {mapState} from 'vuex'
     //   }
     // },
     computed :{
-      ...mapState('login', ['isLogin'])
+      ...mapState('login', ['isLogin','nickname']),
+ 
     }
   }
 </script>

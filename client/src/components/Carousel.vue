@@ -50,14 +50,14 @@
     },
 
     computed: {
-      ...mapState('login', ['isLogin']),
+      // ...mapState('login', ['isLogin']),
       ...mapState('getMovies', ['movieItems'])
     },
 
     created: function () {
-      const isLogin = this.isLogin
+      // const isLogin = this.isLogin
       // console.log(isLogin)
-      this.$store.dispatch('getMovies/getMovie', isLogin)
+      this.$store.dispatch('getMovies/getMovie')
       // console.log(this.movieItems)
     },
 

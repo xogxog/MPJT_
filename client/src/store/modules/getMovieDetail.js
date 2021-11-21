@@ -21,13 +21,14 @@ const getMovieDetail ={
     setMovieId : function({commit}, moviePk){
       commit('SET_MOVIE_ID',moviePk)
     },
-    movieDetail : function({commit,state}){
+    movieDetail : function({rootState,commit,state}){
       axios({
         method : 'get',
-        url : `http://127.0.0.1:8000/movie/movie/${state.moviePk}`
+        url : `http://127.0.0.1:8000/movie/movie/${state.moviePk}`,
+        headers : rootState.login.token,
       })
       .then((res)=>{
-        console.log(res.data)
+        // console.log(res.data)
         commit('MOVIE_DETAIL',res.data)
       })
     }

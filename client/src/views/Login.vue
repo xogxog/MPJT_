@@ -39,6 +39,13 @@ import axios from 'axios'
 			}
 		},
 		methods:{
+			setToken : function(){
+				const token = localStorage.getItem('jwt')
+				const config = {
+					Authorization: `JWT ${token}`
+				}
+				return config
+			},
 			login : function(){
 				axios({
 					method : 'post',
@@ -48,14 +55,18 @@ import axios from 'axios'
 					.then(res =>{
 						localStorage.setItem('jwt', res.data.token)
 						const isLogin = true
-						
+						const token = this.setToken()
+						const nickname = this.credentials.username
 						this.$store.dispatch('login/loginCheck', isLogin)
+						this.$store.dispatch('login/setToken', token)
+						this.$store.dispatch('login/setUserNickname', nickname)
 						this.$router.push({name : 'Main'})
 					})
 					.catch(err =>{
 						alert(err)
 						console.log(err)
 					})
+				
 			}
 		}
   }
