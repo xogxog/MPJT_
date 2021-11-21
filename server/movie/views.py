@@ -8,16 +8,33 @@ from .serializers import ActorSerializer, Commentserializer,DirectorSerializer, 
 import requests
 from rest_framework.permissions import AllowAny
 import random
-
+from django.db.models import Count
 # Create your views here.
 
-#main page 전체영화 - 추천영화 알고리즘 짜기(5개만 보내기)
+#main page 전체영화 - 추천영화 알고리즘 짜기(10개만 보내기)
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def movie_list(request):
-    #랜덤하게 보내기 - isLogin 확인해서 값 다르게 보내기
-    movies = get_list_or_404(Movie)[:10]
-    serializers = MovieListSerializer(movies,many=True)
+    # 랜덤하게 보내기 - isLogin 확인해서 값 다르게 보내기
+    # print(request.GET.get('isLogin'))
+    if request.GET.get('isLogin') == 'true' :
+        get_user_like_genre = Genre.objects.filter(user__id=request.user.id)
+        # 좋아하는 장르 가장 많이 가진 영화 -> vote_average 순으로 정렬해서 20개 추천
+        movies = Movie.objects.filter(
+            genres__genre_id__in=get_user_like_genre
+            ).annotate(
+                count_movies=Count('movie_id')
+            ).order_by(
+                '-count_movies','-vote_average'
+            )[:20]
+        # print(movies)
+        serializers = MovieListSerializer(movies,many=True)
+        return Response(serializers.data)
+    else :
+        movies = get_list_or_404(Movie)[:20]
+        # test_movies = Movie.objects.order_by('-vote_average','-release_date').values('id','vote_average','release_date')
+        # print(movies)
+        serializers = MovieListSerializer(movies,many=True)
     return Response(serializers.data)
 
 # 영화상세 가지고오기
@@ -156,7 +173,7 @@ def movie_get(request) :
         for i in range(0,20):
             print(movies[i].get('title'), movies[i].get('release_date'))
             # 원래 있는 데이터면 패스
-            if Movie.objects.filter(movie_id=movies[i].get('id')).exists() or movies[i].get('release_date') == '' or movies[i].get('release_date') == None:
+            if Movie.objects.filter(movie_id=movies[i].get('id')).exists() or movies[i].get('release_date') == '' or movies[i].get('release_date') == None or movies[i].get('vote_average') == 0.0:
                 pass
             else :
                 # 영화테이블 넣기
