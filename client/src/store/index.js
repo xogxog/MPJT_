@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import login from './modules/login'
+
 import getMovies from './modules/getMovies'
 import getMovieDetail from './modules/getMovieDetail'
+
+import review from './modules/review'
 import createPersistedState from "vuex-persistedstate";
 
 
@@ -20,6 +23,7 @@ export default new Vuex.Store({
     login,
     getMovies,
     getMovieDetail,
+    review,
   },
 })
 
