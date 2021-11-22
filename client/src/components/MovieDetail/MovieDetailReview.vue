@@ -63,31 +63,44 @@
       <v-card-actions>
         <div class="d-flex">
           <v-btn flat text @click.stop="show=false">Close</v-btn>
-          <v-btn flat text>Edit</v-btn>
+          <v-btn flat text @click.stop="reviewEditOpen=true">Edit</v-btn>
           <v-btn flat text>Delete</v-btn>
         </div>
       </v-card-actions>
 
     </v-card>
+    <MovieReviewEdit
+      v-model="reviewEditOpen"
+    ></MovieReviewEdit>
   </v-dialog>
 </template>
 
 <script>
 import {mapState} from 'vuex'
+import MovieReviewEdit from './MovieReviewEdit.vue'
   export default {
-    props: {
-      value: Boolean,
-    },
-    computed: {
-      ...mapState('review', ['reviewDetail']),
-      show: {
-        get() {
-          return this.value
-        },
-        set(value) {
-          this.$emit('input', value)
-        }
+  name: 'MovieDetailReview',
+  data : function(){
+    return{
+      reviewEditOpen:false,
+    }
+  },
+  components: { 
+    MovieReviewEdit 
+  },
+  props: {
+    value: Boolean,
+  },
+  computed: {
+    ...mapState('review', ['reviewDetail']),
+    show: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit('input', value)
       }
     }
+  }
   }
 </script>
