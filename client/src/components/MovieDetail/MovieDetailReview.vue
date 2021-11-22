@@ -22,9 +22,10 @@
         {{reviewDetail.content}}
       </v-card-text>
       <v-divider></v-divider>
-      <v-form @submit.prevent ref="form" class="container align-self-end">
+      <!-- comment 다는 곳 -->
+      <v-form ref="form" class="container align-self-end" @submit.prevent="createComment">
         <div class="d-flex">
-        <v-text-field label="comment"></v-text-field>
+        <v-text-field label="comment" v-model="comment"></v-text-field>
             <v-btn
               class="mx-1"
               fab
@@ -32,7 +33,7 @@
               color="indigo"
               small
               >
-          <v-icon dark>
+          <v-icon dark @click="createComment">
             mdi-plus
           </v-icon>
         </v-btn>
@@ -47,15 +48,16 @@
                 NickName
               </th>
               <th class="text-left">
-                content
+                comment
               </th>
             </tr>
           </thead>
           <tbody>
             <!-- 이거뭐야,,,,? -->
-            <tr v-for="item in desserts" :key="item.name">
-              <td>{{ item.name }}</td>
-              <td>{{ item.calories }}</td>
+            <!-- comment 자리 -->
+            <tr v-for="comment in comments" :key="comment.id">
+              <td>{{ comment.user.nickname }}</td>
+              <td>{{ comment.comment }}</td>
             </tr>
           </tbody>
         </template>
@@ -63,10 +65,10 @@
 
       <v-card-actions>
         <div class="d-flex">
-          <v-btn flat text @click.stop="show=false">Close</v-btn>
+          <v-btn text @click.stop="show=false">Close</v-btn>
           <div v-if="reviewDetail.user.nickname==nickname">
-            <v-btn flat text @click.stop="reviewEditOpen=true">Edit</v-btn>
-            <v-btn flat text @click="deleteReview">Delete</v-btn>
+            <v-btn text @click.stop="reviewEditOpen=true">Edit</v-btn>
+            <v-btn text @click="deleteReview">Delete</v-btn>
           </div>
         </div>
       </v-card-actions>
@@ -85,6 +87,7 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
   name: 'MovieDetailReview',
   data : function(){
     return{
+      comment:null,
       reviewEditOpen:false,
     }
   },
@@ -99,11 +102,21 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
       let reviewPk = this.reviewDetail.id
       this.$store.dispatch('review/deleteReview',reviewPk)
       location.reload()
+    },
+    createComment : function(event){
+      event.preventDefault()
+      let commentData = {
+        'reviewPk' :this.reviewDetail.id,
+        'comment' : this.comment
+      }
+      this.$store.dispatch('comment/createComment',commentData)
+      this.comment = null
     }
   },
   computed: {
     ...mapState('review', ['reviewDetail']),
     ...mapState('login', ['nickname']),
+    ...mapState('comment', ['comments']),
     show: {
       get() {
         return this.value
