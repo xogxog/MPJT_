@@ -14,6 +14,7 @@
 
         <v-card-actions>
           <v-btn flat text @click="createReview">Write</v-btn>
+
           <v-btn text flat @click="resetForm">Reset</v-btn>
           <v-btn flat text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+
   export default {
     props: {
       value: Boolean,
@@ -45,7 +47,7 @@
           'rank' : this.rank,
         }
         this.$store.dispatch('review/createReview',reviewData)
-        // location.reload()
+        location.reload()
       },
       resetForm : function () {
         this.form = Object.assign({}, this.defaultForm)

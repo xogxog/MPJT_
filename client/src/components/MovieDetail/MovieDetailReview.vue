@@ -66,7 +66,7 @@
           <v-btn flat text @click.stop="show=false">Close</v-btn>
           <div v-if="reviewDetail.user.nickname==nickname">
             <v-btn flat text @click.stop="reviewEditOpen=true">Edit</v-btn>
-            <v-btn flat text>Delete</v-btn>
+            <v-btn flat text @click="deleteReview">Delete</v-btn>
           </div>
         </div>
       </v-card-actions>
@@ -93,6 +93,13 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
   },
   props: {
     value: Boolean,
+  },
+  methods: {
+    deleteReview:function(){
+      let reviewPk = this.reviewDetail.id
+      this.$store.dispatch('review/deleteReview',reviewPk)
+      location.reload()
+    }
   },
   computed: {
     ...mapState('review', ['reviewDetail']),

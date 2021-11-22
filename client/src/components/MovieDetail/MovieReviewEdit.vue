@@ -47,6 +47,10 @@ import {mapState} from 'vuex'
         }
         this.$store.dispatch('review/editReview',reviewData)
         location.reload()
+        this.title = this.reviewDetail.title
+        this.content = this.reviewDetail.content
+        this.rank = this.reviewDetail.rank
+        this.reviewPk = this.reviewDetail.id
         // location.reload()
       },
       resetForm : function () {
@@ -56,6 +60,7 @@ import {mapState} from 'vuex'
     },
     computed: {
       ...mapState('review', ['reviewDetail']),
+      
       // 상준상코드 
       show: {
         get() {

@@ -15,6 +15,10 @@ const review ={
     },
     EDIT_REVIEW : function(state, reviewData){
       state.reviewDetail=reviewData
+      // console.log(state.reviewDetail)
+    },
+    DELETEREVIEW : function(state){
+      state.reviewDetail=[]
     }
   },
   actions: {
@@ -62,6 +66,16 @@ const review ={
       })
       .then((res)=>{
         commit('EDIT_REVIEW', res.data)
+      })
+    },
+    deleteReview : function({rootState,commit},reviewPk){
+      axios({
+        method : 'delete',
+        url : `http://127.0.0.1:8000/movie/movie/review/${reviewPk}/`,
+        headers : rootState.login.token,
+      })
+      .then(()=>{
+        commit('DELETEREVIEW')
       })
     }
   },
