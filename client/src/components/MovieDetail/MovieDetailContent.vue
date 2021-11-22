@@ -16,7 +16,7 @@
         <div class="content-box">
           <div class="Title">
             <v-banner class="text-white justify-center text-h6 font-weight-light"
-              style="background: rgba(255, 255, 255, 0.5)" sticky>
+              style="background: rgba(255, 255, 255, 0.5)">
               {{movieDetail.movie.title}}
             </v-banner>
             <v-divider></v-divider>
@@ -103,8 +103,7 @@
 <script>
 import MovieDetailReview from '@/components/MovieDetail/MovieDetailReview.vue'
 import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
-
-  import { mapState } from 'vuex'
+import { mapState } from 'vuex'
   export default {
     name: 'MovieDetailContent',
     components: {
@@ -145,7 +144,7 @@ import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
       openReviewDetail: function (reviewPk,event) {
         event.preventDefault()
         this.$store.dispatch('review/getReviewDetail', reviewPk)
-        this.reviewPk
+        // this.reviewPk
       },
     },
 
