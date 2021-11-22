@@ -9,11 +9,11 @@
       <div class="container">
         <v-form ref="form">
           <v-text-field label="Title" required v-model="title"></v-text-field>
-          <v-textarea label="Content" v-model="content"></v-textarea>
+          <v-textarea label="Content" v-model="content" @keyup.enter="editReview"></v-textarea>
         </v-form>
 
         <v-card-actions>
-          <v-btn flat text @click="createReview">Write {{title}}</v-btn>
+          <v-btn flat text @click="editReview">Edit</v-btn>
           <v-btn text flat @click="resetForm">Reset</v-btn>
           <v-btn flat text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
@@ -31,19 +31,22 @@ import {mapState} from 'vuex'
     },
     data :function(){
       return{
-        title : this.reviewDetail.title,
-        content :this.reviewDetail.content,
-        rank : this.reviewDetail.rank,
+        reviewPk:null,
+        title : null,
+        content :null,
+        rank : null,
       }
     },
     methods: {
-      createReview : function (){
+      editReview : function (){
         let reviewData = {
+          'reviewPk' : this.reviewPk,
           'title' : this.title,
           'content' : this.content,
           'rank' : this.rank,
         }
-        this.$store.dispatch('review/createReview',reviewData)
+        this.$store.dispatch('review/editReview',reviewData)
+        location.reload()
         // location.reload()
       },
       resetForm : function () {
@@ -62,6 +65,13 @@ import {mapState} from 'vuex'
           this.$emit('input', value)
         }
       }
+    },
+    created :function(){
+      //default로 값 넣어주기
+      this.title = this.reviewDetail.title
+      this.content = this.reviewDetail.content
+      this.rank = this.reviewDetail.rank
+      this.reviewPk = this.reviewDetail.id
     }
   }
 </script>

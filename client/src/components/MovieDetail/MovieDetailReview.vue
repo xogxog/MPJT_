@@ -52,6 +52,7 @@
             </tr>
           </thead>
           <tbody>
+            <!-- 이거뭐야,,,,? -->
             <tr v-for="item in desserts" :key="item.name">
               <td>{{ item.name }}</td>
               <td>{{ item.calories }}</td>
@@ -63,8 +64,10 @@
       <v-card-actions>
         <div class="d-flex">
           <v-btn flat text @click.stop="show=false">Close</v-btn>
-          <v-btn flat text @click.stop="reviewEditOpen=true">Edit</v-btn>
-          <v-btn flat text>Delete</v-btn>
+          <div v-if="reviewDetail.user.nickname==nickname">
+            <v-btn flat text @click.stop="reviewEditOpen=true">Edit</v-btn>
+            <v-btn flat text>Delete</v-btn>
+          </div>
         </div>
       </v-card-actions>
 
@@ -93,6 +96,7 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
   },
   computed: {
     ...mapState('review', ['reviewDetail']),
+    ...mapState('login', ['nickname']),
     show: {
       get() {
         return this.value
