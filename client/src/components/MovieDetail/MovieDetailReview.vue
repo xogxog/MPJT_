@@ -3,39 +3,42 @@
     <v-card class="container">
 
       <v-card-title class="">
-        <span class="text-h5">리뷰 title</span>
+        <span class="text-h5">{{reviewDetail.title}} <br></span>
       </v-card-title>
       <v-card-subtitle class="float-left">
-        (영화 제목)
+        {{reviewDetail.movie.title}}
       </v-card-subtitle>
       <v-divider></v-divider>
       <div class="container d-flex justify-content-between">
-        <div class="grey--text">글쓴이 : 내다</div>
-        <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+        <div class="grey--text">글쓴이 : {{reviewDetail.user.nickname}}</div>
+        <v-rating :value="reviewDetail.rank" color="amber" dense half-increments readonly size="14"></v-rating>
+      </div>
+      <!-- 오른쪽으로 보내줘요............................ -->
+      <div class="container align-self-end">
+        <div class="d-flex grey--text">{{reviewDetail.updated_at}}</div>
       </div>
       <v-divider></v-divider>
       <v-card-text>
-        review content 123123
+        {{reviewDetail.content}}
       </v-card-text>
       <v-divider></v-divider>
-
       <v-form ref="form" class="container align-self-end">
         <div class="d-flex">
         <v-text-field label="comment"></v-text-field>
             <v-btn
-      class="mx-1"
-      fab
-      dark
-      color="indigo"
-      small
-    >
-      <v-icon dark>
-        mdi-plus
-      </v-icon>
-    </v-btn>
-    </div>
+              class="mx-1"
+              fab
+              dark
+              color="indigo"
+              small
+              >
+          <v-icon dark>
+            mdi-plus
+          </v-icon>
+        </v-btn>
+        </div>
       </v-form>
-
+      
       <v-simple-table>
         <template v-slot:default>
           <thead>
@@ -70,11 +73,13 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
   export default {
     props: {
-      value: Boolean
+      value: Boolean,
     },
     computed: {
+      ...mapState('review', ['reviewDetail']),
       show: {
         get() {
           return this.value

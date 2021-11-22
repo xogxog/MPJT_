@@ -81,7 +81,7 @@
         <v-data-table class="elevation-1" no-data-text="No Review" style="background: rgba(255, 255, 255, 0.5);" dark
           click:row :headers="headers" :items="movieDetail.reviews" multi-sort>
           <template v-slot:item.title="{ item }">
-            <a href="" @click="cancelA" @click.stop="reviewDetailOpen=true">{{item.title}}</a>
+            <a href="" @click="openReviewDetail(item.id, $event)" @click.stop="reviewDetailOpen=true" >{{item.title}}</a>
           </template>
         </v-data-table>
       </div>
@@ -90,7 +90,10 @@
         v-model="reviewWriteOpen"
         :movie-pk="movieDetail.movie.id"
       ></MovieReviewCreate>
-      <MovieDetailReview v-model="reviewDetailOpen"></MovieDetailReview>
+      <MovieDetailReview 
+        v-model="reviewDetailOpen"
+        :review-pk="reviewPk"
+      ></MovieDetailReview>
 
     
   </article>
@@ -112,13 +115,12 @@ import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
       return {
         reviewDetailOpen: false,
         reviewWriteOpen: false,
-
         headers: [{
             text: 'nickname1',
             align: 'center',
             sortable: false,
             divider: 1,
-            value: 'nickname',
+            value: 'user.nickname',
           },
 
           {
@@ -140,14 +142,16 @@ import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
     
 
     methods: {
-      cancelA: function (event) {
+      openReviewDetail: function (reviewPk,event) {
         event.preventDefault()
+        this.$store.dispatch('review/getReviewDetail', reviewPk)
+        this.reviewPk
       },
     },
 
     created: function () {
       this.$store.dispatch('getMovieDetail/movieDetail')
-      // console.log(this.MovieDetail)
+      // console.log(this.movieDetail)
     },
 
     computed: {

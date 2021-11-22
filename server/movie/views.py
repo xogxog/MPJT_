@@ -44,9 +44,8 @@ def movie_detail(request,movie_pk) :
     movie = get_object_or_404(Movie,pk=movie_pk)
     movie_serializer = MovieSerializer(movie)
 
-    reviews = Review.objects.filter(pk=movie_pk)
+    reviews = Review.objects.filter(movie=movie_pk)
     reviews_serializers = ReviewListSerializer(reviews, many=True)
-
     serializers = {
         'movie' : movie_serializer.data,
         'reviews' : reviews_serializers.data,
