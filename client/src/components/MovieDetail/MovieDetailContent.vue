@@ -112,6 +112,8 @@ import { mapState } from 'vuex'
     },
     data: function () {
       return {
+        reviewPk : null,
+        onScroll : null,
         reviewDetailOpen: false,
         reviewWriteOpen: false,
         headers: [{
@@ -144,13 +146,13 @@ import { mapState } from 'vuex'
       openReviewDetail: function (reviewPk,event) {
         event.preventDefault()
         this.$store.dispatch('review/getReviewDetail', reviewPk)
-        // this.reviewPk
+  
       },
     },
 
     created: function () {
       this.$store.dispatch('getMovieDetail/movieDetail')
-      // console.log(this.movieDetail)
+      // console.log(this.movieDetail.title)
     },
 
     computed: {
