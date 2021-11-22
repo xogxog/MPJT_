@@ -7,15 +7,15 @@
       </v-card-title>
       <v-rating color="warning" background-color="grey" hover length="5" size="40" v-model="rank"></v-rating>
       <div class="container">
-        <v-form ref="form">
+        <v-form ref="form" @submit.prevent>
           <v-text-field label="Title" required v-model="title"></v-text-field>
           <v-textarea label="Content" v-model="content" @keyup.enter="editReview"></v-textarea>
         </v-form>
 
         <v-card-actions>
-          <v-btn flat text @click="editReview">Edit</v-btn>
-          <v-btn text flat @click="resetForm">Reset</v-btn>
-          <v-btn flat text @click.stop="show=false">Close</v-btn>
+          <v-btn text @click="editReview">Edit</v-btn>
+          <v-btn text @click="resetForm">Reset</v-btn>
+          <v-btn text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
       </div>
     </v-card>
@@ -47,11 +47,7 @@ import {mapState} from 'vuex'
         }
         this.$store.dispatch('review/editReview',reviewData)
         location.reload()
-        this.title = this.reviewDetail.title
-        this.content = this.reviewDetail.content
-        this.rank = this.reviewDetail.rank
-        this.reviewPk = this.reviewDetail.id
-        // location.reload()
+        
       },
       resetForm : function () {
         this.form = Object.assign({}, this.defaultForm)
@@ -60,7 +56,6 @@ import {mapState} from 'vuex'
     },
     computed: {
       ...mapState('review', ['reviewDetail']),
-      
       // 상준상코드 
       show: {
         get() {
@@ -72,11 +67,14 @@ import {mapState} from 'vuex'
       }
     },
     created :function(){
+      // console.log('새로생성되었어쇼~!')
       //default로 값 넣어주기
       this.title = this.reviewDetail.title
       this.content = this.reviewDetail.content
       this.rank = this.reviewDetail.rank
       this.reviewPk = this.reviewDetail.id
-    }
+      // console.log(this.title)
+      // console.log(this.content)
+    },
   }
 </script>

@@ -17,7 +17,7 @@ const review ={
       state.reviewDetail=reviewData
       // console.log(state.reviewDetail)
     },
-    DELETEREVIEW : function(state){
+    DELETE_REVIEW : function(state){
       state.reviewDetail=[]
     }
   },
@@ -48,7 +48,7 @@ const review ={
         headers : rootState.login.token,
       })
       .then((res)=>{
-        console.log(res.data)
+        // console.log(res.data)
         commit('GET_REVIEW_DETAIL',res.data)
       })
     },
@@ -65,7 +65,9 @@ const review ={
         headers : rootState.login.token,
       })
       .then((res)=>{
+        console.log(res.data)
         commit('EDIT_REVIEW', res.data)
+        // this.getReviewDetail({rootState,commit},reviewData.reviewPk)
       })
     },
     deleteReview : function({rootState,commit},reviewPk){
@@ -75,7 +77,7 @@ const review ={
         headers : rootState.login.token,
       })
       .then(()=>{
-        commit('DELETEREVIEW')
+        commit('DELETE_REVIEW')
       })
     }
   },

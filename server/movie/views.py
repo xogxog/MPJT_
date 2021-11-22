@@ -73,10 +73,7 @@ def create_review(request, movie_pk):
     
     # 리뷰생성
     if request.method =='POST' :
-        print(f'왜 요청이 안오는거지.,,?')
         movie = get_object_or_404(Movie, pk=movie_pk)
-        print(f'어디서 에러가 나는거야')
-        print(movie)
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user,movie=movie)
@@ -84,6 +81,7 @@ def create_review(request, movie_pk):
 
 # 리뷰상세 - 조회, 삭제, 수정
 @api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([AllowAny])
 def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     # 리뷰 조회
@@ -101,21 +99,22 @@ def review_detail(request, review_pk):
             serializer = ReviewSerializer(review, data=request.data)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
-
                 return Response(serializer.data)
 
 #댓글 조회,생성
 @api_view(['GET','POST'])
 def create_comment(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
+    #댓글 조회
     if request.method == 'GET' : 
         comments = Comment.objects.filter(review=review_pk)
         serializers = Commentserializer(comments, many=True)
         return Response(serializers.data, status=status.HTTP_200_OK)
+    #댓글 생성
     elif request.method == 'POST' :
         serializer = Commentserializer(data=request.data)
         if serializer.is_valid(raise_exception=True) :
-            serializer.save( user=request.user,review=review)
+            serializer.save(user=request.user,review=review)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # 댓글 삭제
