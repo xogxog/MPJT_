@@ -208,7 +208,7 @@ import axios from 'axios'
   0% {
     left: -100%;
   }
-  50%,100% {
+  50%, 100% {
     left: 100%;
   }
 }
