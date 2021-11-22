@@ -79,6 +79,15 @@
                 <v-list-item-title>MovieDetail</v-list-item-title>
               </v-list-item-content>
           </v-list-item>
+          
+          <v-list-item to="/MovieBoxOffice" router exact>
+              <v-list-item-icon>
+                <v-icon>mdi-forum</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>MovieBoxOffice</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
         </span>
 
         <!-- 로그인 해야 보임 -->
