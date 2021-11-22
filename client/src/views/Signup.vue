@@ -44,7 +44,7 @@
 
         <v-row align="center">
           <v-col>
-            <v-select v-model="credentials.genres_name" chips :items="genres" :menu-props="{ maxHeight: '400' }" label="Select" multiple
+            <v-select v-model="credentials.genres_name" :items="genres" :menu-props="{ maxHeight: '400' }" label="Select" multiple
               hint="Pick your favorite Genres" persistent-hint>
             </v-select>
           </v-col>
