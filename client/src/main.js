@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify'
 import Vuetify from 'vuetify/lib'
 import VueParticles from 'vue-particles'
 import Carousel3d from 'vue-carousel-3d';
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 
@@ -17,9 +18,8 @@ Vue.use(Carousel3d);
 
 
 export default new Vuetify({
-  theme: { dark: true },
   icons: {
-    iconfont: 'mdi' // 'mdiSvg',   || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+    iconfont: 'mdi', // default - only for display purposes
   },
 })
 
