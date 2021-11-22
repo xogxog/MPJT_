@@ -8,15 +8,15 @@
         
       </slide> -->
 
-      <slide v-for="(movieItem, index) in movieItems" :key="movieItem.id" :index="index">
-        <a src="" @click.prevent="movieDetail(movieItem.id)">
+      <slide v-for="(movieItem, index) in movieItems" :key="index" :index="index">
           <figure>
+        <a src="" @click.prevent="movieDetail(movieItem.id)">
             <img :src="movieItem.poster_path" alt="movie-poster">
+        </a>
             <figcaption>
               {{ movieItem.title }}
             </figcaption>
           </figure>
-        </a>
       </slide>
     </carousel-3d>
   </div>
@@ -64,7 +64,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .carousel {
     z-index: 99;
     width: 100%;
