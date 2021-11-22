@@ -17,6 +17,6 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
     class Meta :
         model = User
-        fields = ('nickname','profile_path',)
+        fields = ('id','nickname','profile_path',)
 
 

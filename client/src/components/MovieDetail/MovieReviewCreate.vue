@@ -44,6 +44,7 @@
           'rank' : this.rank,
         }
         this.$store.dispatch('review/createReview',reviewData)
+        // location.reload()
       },
       resetForm : function () {
         this.form = Object.assign({}, this.defaultForm)

@@ -6,13 +6,16 @@ const review ={
   plugins: [createPersistedState()],
   namespaced : true,
   state: {  
-
+    reviewDetail:[]
   },
   mutations: {
-
+    GET_REVIEW_DETAIL : function(state, ReviewDetail){
+      state.reviewDetail = ReviewDetail
+      console.log(state.reviewDetail)
+    }
   },
   actions: {
-    createReview:function({rootState,commit},reviewData){
+    createReview:function({rootState},reviewData){
       let data = {
         'title' : reviewData.title,
         'content' : reviewData.content,
@@ -24,12 +27,22 @@ const review ={
         data : data,
         headers : rootState.login.token,
       })
-      .then((res)=>{
-        console.log(res.data)
-        commit()
+      .then(()=>{
+        // console.log(res.data)
       })
       .catch((err)=>{
         console.log(err)
+      })
+    },
+    getReviewDetail : function({rootState,commit}, reviewPk){
+      axios({
+        method : 'get',
+        url : `http://127.0.0.1:8000/movie/movie/review/${reviewPk}`,
+        headers : rootState.login.token,
+      })
+      .then((res)=>{
+        console.log(res.data)
+        commit('GET_REVIEW_DETAIL',res.data)
       })
     }
   },
