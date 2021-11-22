@@ -86,7 +86,10 @@
         </v-data-table>
       </div>
         <!-- 테이블 끝 -->
-      <MovieReviewCreate v-model="reviewWriteOpen"></MovieReviewCreate>
+      <MovieReviewCreate 
+        v-model="reviewWriteOpen"
+        :movie-pk="movieDetail.movie.id"
+      ></MovieReviewCreate>
       <MovieDetailReview v-model="reviewDetailOpen"></MovieDetailReview>
 
     
@@ -101,6 +104,10 @@ import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
   import { mapState } from 'vuex'
   export default {
     name: 'MovieDetailContent',
+    components: {
+      MovieDetailReview,
+      MovieReviewCreate
+    },
     data: function () {
       return {
         reviewDetailOpen: false,
@@ -130,20 +137,17 @@ import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
         ],
       }
     },
-    components: {
-      MovieDetailReview,
-      MovieReviewCreate
-    },
+    
 
     methods: {
       cancelA: function (event) {
         event.preventDefault()
-      }
+      },
     },
 
     created: function () {
       this.$store.dispatch('getMovieDetail/movieDetail')
-      console.log(this.MovieDetail)
+      // console.log(this.MovieDetail)
     },
 
     computed: {

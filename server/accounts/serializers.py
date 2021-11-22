@@ -8,10 +8,10 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     # followers = serializers.
 
-    class Meta :
+    class Meta : 
         model = User
         fields = ('username', 'nickname','password','profile_path')
-        read_only_field=('followings')
+        read_only_field=('followings') 
 
 class UserInfoSerializer(serializers.ModelSerializer):
 

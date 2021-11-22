@@ -5,15 +5,15 @@
       <v-card-title>
         <span class="text-h5">리뷰 작성</span>
       </v-card-title>
-      <v-rating color="grey" background-color="grey" hover length="5" size="40"></v-rating>
+      <v-rating color="warning" background-color="grey" hover length="5" size="40" v-model="rank"></v-rating>
       <div class="container">
         <v-form ref="form">
-          <v-text-field label="Title" required></v-text-field>
-          <v-textarea label="Content"></v-textarea>
+          <v-text-field label="Title" required v-model="title"></v-text-field>
+          <v-textarea label="Content" v-model="content"></v-textarea>
         </v-form>
 
         <v-card-actions>
-          <v-btn flat text>Write</v-btn>
+          <v-btn flat text @click="createReview">Write</v-btn>
           <v-btn text flat @click="resetForm">Reset</v-btn>
           <v-btn flat text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
@@ -25,10 +25,27 @@
 <script>
   export default {
     props: {
-      value: Boolean
+      value: Boolean,
+      moviePk: Number,
+    },
+    data :function(){
+      return{
+        title : null,
+        content :null,
+        rank : null,
+      }
     },
     methods: {
-      resetForm () {
+      createReview : function (){
+        let reviewData = {
+          'moviePk' : this.moviePk,
+          'title' : this.title,
+          'content' : this.content,
+          'rank' : this.rank,
+        }
+        this.$store.dispatch('review/createReview',reviewData)
+      },
+      resetForm : function () {
         this.form = Object.assign({}, this.defaultForm)
         this.$refs.form.reset()
       },
