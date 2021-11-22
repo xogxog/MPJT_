@@ -22,7 +22,7 @@
         {{reviewDetail.content}}
       </v-card-text>
       <v-divider></v-divider>
-      <v-form ref="form" class="container align-self-end">
+      <v-form @submit.prevent ref="form" class="container align-self-end">
         <div class="d-flex">
         <v-text-field label="comment"></v-text-field>
             <v-btn

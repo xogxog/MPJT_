@@ -53,15 +53,6 @@
               </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/test" router exact>
-              <v-list-item-icon>
-                <v-icon>mdi-forum</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>test</v-list-item-title>
-              </v-list-item-content>
-          </v-list-item>
-
           <v-list-item to="/Main" router exact>
               <v-list-item-icon>
                 <v-icon>mdi-forum</v-icon>
@@ -87,6 +78,15 @@
               <v-list-item-content>
                 <v-list-item-title>MovieBoxOffice</v-list-item-title>
               </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item to="/MovieSearch" router exact>
+                <v-list-item-icon>
+                  <v-icon>mdi-forum</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>MovieSearch</v-list-item-title>
+                </v-list-item-content>
           </v-list-item>
         </span>
 
