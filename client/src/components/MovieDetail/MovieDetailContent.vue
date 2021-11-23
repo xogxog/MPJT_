@@ -157,7 +157,6 @@ import { mapState } from 'vuex'
       },
       likeUnlikeMovie : function(){
         const moviePk = this.movieDetail.movie.id
-        console.log(this.movieDetail.movie.id)
         this.$store.dispatch('getMovieDetail/likeUnlikeMovie', moviePk)
         // console.log(this.movieDetail.movie.like_users)
         // for(let like_user of this.movieDetail.movie.like_users){

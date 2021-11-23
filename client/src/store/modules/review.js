@@ -1,5 +1,5 @@
 // import _ from 'lodash'
-import axios from "axios";
+import axios from "axios"
 import createPersistedState from "vuex-persistedstate";
 
 const review ={

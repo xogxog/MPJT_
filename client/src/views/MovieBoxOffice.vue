@@ -1,22 +1,61 @@
 <template>
   <div class="img-box">
     <div class="real-box">
-    <span style="--i:1"><a href=""><img src="@/assets/dune_poster.jpg"></a></span>
-    <span style="--i:2"><a href=""><img src="@/assets/dune_poster.jpg"></a></span>
-    <span style="--i:3"><a href=""><img src="@/assets/dune_poster.jpg"></a></span>
-    <span style="--i:4"><a href=""><img src="@/assets/dune_poster.jpg"></a></span>
-    <span style="--i:5"><a href=""><img src="@/assets/dune_poster.jpg"></a></span>
-    <span style="--i:6"><a href=""><img src="@/assets/dune_poster.jpg"></a></span>
-    <span style="--i:7"><a href=""><img src="@/assets/dune_poster.jpg"></a></span>
-    <span style="--i:8"><a href=""><img src="@/assets/dune_poster.jpg"></a></span>
+    <span style="--i:1"><a href=""><img :src="trend_1"></a></span>
+    <span style="--i:2"><a href=""><img :src="trend_2"></a></span>
+    <span style="--i:3"><a href=""><img :src="trend_3"></a></span>
+    <span style="--i:4"><a href=""><img :src="trend_4"></a></span>
+    <span style="--i:5"><a href=""><img :src="trend_5"></a></span>
+    <span style="--i:6"><a href=""><img :src="trend_6"></a></span>
+    <span style="--i:7"><a href=""><img :src="trend_7"></a></span>
+    <span style="--i:8"><a href=""><img :src="trend_8"></a></span>
   </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+// import axios from "axios";
 export default {
-  name: 'MovieBoxOffice'
+  name: 'MovieBoxOffice',
+  data : function(){
+    return{
+      trend_1 : null,
+      trend_2 : null,
+      trend_3 : null,
+      trend_4 : null,
+      trend_5 : null,
+      trend_6 : null,
+      trend_7 : null,
+      trend_8 : null,
+      // trend_9 : null,
+      // trend_10 : null,
+    }
+  },
+  created :function(){
+    // 환경변수로 숨기기
+    const API_KEY='33e4ef19e015d915281ddd6881f93178'
+    axios({
+      method : 'get',
+      url : `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
+    })
+      .then((res)=>{
+        console.log(res.data.results)
+        // this.trendMovies=res.data.results.slice(0,10)
+        this.trend_1 = "https://image.tmdb.org/t/p/original"+res.data.results[0].poster_path
+        this.trend_2 = "https://image.tmdb.org/t/p/original"+res.data.results[1].poster_path
+        this.trend_3 = "https://image.tmdb.org/t/p/original"+res.data.results[2].poster_path
+        this.trend_4 = "https://image.tmdb.org/t/p/original"+res.data.results[3].poster_path
+        this.trend_5 = "https://image.tmdb.org/t/p/original"+res.data.results[4].poster_path
+        this.trend_6 = "https://image.tmdb.org/t/p/original"+res.data.results[5].poster_path
+        this.trend_7 = "https://image.tmdb.org/t/p/original"+res.data.results[6].poster_path
+        this.trend_8 = "https://image.tmdb.org/t/p/original"+res.data.results[7].poster_path
+        // this.trend_9 = "https://image.tmdb.org/t/p/original"+res.data.results[8].poster_path
+        // this.trend_10 = "https://image.tmdb.org/t/p/original"+res.data.results[9].poster_path
+        console.log(this.trend_1)
+      })
 
+  }
 }
 </script>
 

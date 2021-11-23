@@ -80,11 +80,12 @@
         </template>
       </v-simple-table>
       <div class="text-center">
-        <v-pagination
+        <!-- 댓글 페이지네이션 구현하기 -->
+        <!-- <v-pagination
           v-model="page"
           :length="4"
           circle
-        ></v-pagination>
+        ></v-pagination> -->
       </div>
       <v-card-actions>
         <div class="d-flex">
