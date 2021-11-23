@@ -8,6 +8,7 @@ const getMovieDetail ={
   state: {  
     moviePk : null,
     movieDetail : [],
+    likeMovie : null,
   },
   mutations: {
     SET_MOVIE_ID : function(state, moviePk){
@@ -15,6 +16,11 @@ const getMovieDetail ={
     },
     MOVIE_DETAIL : function(state, movieDetail){
       state.movieDetail=movieDetail
+      // console.log(state.movieDetail)
+    },
+    MOVIE_LIKE_UNLIKE : function(state,likeMovie){
+      state.likeMovie=likeMovie
+      // console.log(state.likeMovie)
     }
   },
   actions: {
@@ -28,20 +34,38 @@ const getMovieDetail ={
         headers : rootState.login.token,
       })
       .then((res)=>{
-        // console.log(res.data)
         commit('MOVIE_DETAIL',res.data)
+        // 좋아요 상태 바꿔주기
+        if(state.movieDetail.movie.like_users.length===0){
+          let likeMovie=false
+            commit('MOVIE_LIKE_UNLIKE',likeMovie)
+        }else{
+          for(let like_user of state.movieDetail.movie.like_users){
+            if(like_user.id===rootState.login.userInfo.id){
+              let likeMovie=true
+              commit('MOVIE_LIKE_UNLIKE',likeMovie)
+              break
+            }else{
+              let likeMovie=false
+              commit('MOVIE_LIKE_UNLIKE',likeMovie)
+              break
+            }
+          }
+        }
       })
     },
-    likeUnlikeMovie : function({rootState,commit,state}, moviePk){
-      console.log('들어왓어?')
+    likeUnlikeMovie : function({rootState,dispatch}, moviePk){
+      const data ={
+        'userid': rootState.login.userInfo.id
+      }
       axios({
         method : 'post',
         url : `http://127.0.0.1:8000/movie/movie/${moviePk}/like/`,
+        data : data,
         headers : rootState.login.token,
       })
       .then(()=>{
-        console.log('성공..?')
-        this.movieDetail({rootState,commit,state})
+        dispatch('movieDetail')
       })
     }
   },

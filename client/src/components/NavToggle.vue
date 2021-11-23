@@ -22,7 +22,7 @@
       <v-list-item>
         <v-list-item-content>
           <span v-if="isLogin">
-          <v-list-item-title>{{nickname}}</v-list-item-title>
+          <v-list-item-title>{{userInfo.nickname}}</v-list-item-title>
           </span>
           <span v-else>
           <v-list-item-title>로그인 하세요.</v-list-item-title>
@@ -61,15 +61,15 @@
                 <v-list-item-title>Main</v-list-item-title>
               </v-list-item-content>
           </v-list-item>
-
-          <v-list-item to="/MovieDetail" router exact>
+          <!-- 작업 수월용 -->
+          <!-- <v-list-item to="/MovieDetail" router exact>
               <v-list-item-icon>
                 <v-icon>mdi-forum</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>MovieDetail</v-list-item-title>
               </v-list-item-content>
-          </v-list-item>
+          </v-list-item> -->
           
           <v-list-item to="/MovieBoxOffice" router exact>
               <v-list-item-icon>
@@ -155,8 +155,7 @@ import {mapState} from 'vuex'
     //   }
     // },
     computed :{
-      ...mapState('login', ['isLogin','nickname']),
-
+      ...mapState('login', ['isLogin','userInfo']),
     }
   }
 </script>

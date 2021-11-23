@@ -1,5 +1,5 @@
 // import _ from 'lodash'
-import axios from "axios";
+import axios from "axios"
 import createPersistedState from "vuex-persistedstate";
 
 const review ={
@@ -65,7 +65,7 @@ const review ={
         headers : rootState.login.token,
       })
       .then((res)=>{
-        console.log(res.data)
+        // console.log(res.data)
         commit('EDIT_REVIEW', res.data)
         // this.getReviewDetail({rootState,commit},reviewData.reviewPk)
       })

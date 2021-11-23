@@ -64,7 +64,7 @@
               <td>{{ comment.comment }}</td>
               <!-- 삭제버튼 -->
               <td>
-                <div v-if="comment.user.nickname==nickname" @click="deleteComment(comment)">
+                <div v-if="comment.user.nickname==userInfo.nickname" @click="deleteComment(comment)">
                   <v-btn
                     elevation="2"
                     x-small
@@ -80,17 +80,18 @@
         </template>
       </v-simple-table>
       <div class="text-center">
-        <v-pagination
+        <!-- 댓글 페이지네이션 구현하기 -->
+        <!-- <v-pagination
           v-model="page"
           :length="4"
           circle
-        ></v-pagination>
+        ></v-pagination> -->
       </div>
       <v-card-actions>
         <div class="d-flex">
-          <v-btn text @click.stop="show=false">Close</v-btn>
-          <div v-if="reviewDetail.user.nickname==nickname">
-            <v-btn text @click.stop="reviewEditOpen=true">Edit</v-btn>
+          <v-btn text @click="show=false">Close</v-btn>
+          <div v-if="reviewDetail.user.id==userInfo.id">
+            <v-btn text @click="reviewEditOpen=true">Edit</v-btn>
             <v-btn text @click="deleteReview">Delete</v-btn>
           </div>
         </div>
@@ -141,8 +142,8 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
   },
   computed: {
     ...mapState('review', ['reviewDetail']),
-    ...mapState('login', ['nickname']),
     ...mapState('comment', ['comments']),
+    ...mapState('login', ['userInfo']),
     show: {
       get() {
         return this.value

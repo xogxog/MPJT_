@@ -31,13 +31,6 @@
       Carousel3d,
       Slide,
     },
-
-    data: function () {
-      return {
-
-      }
-    },
-
     methods: {
       movieDetail: function (id) {
         let moviePk = id
@@ -50,15 +43,11 @@
     },
 
     computed: {
-      // ...mapState('login', ['isLogin']),
       ...mapState('getMovies', ['movieItems'])
     },
 
     created: function () {
-      // const isLogin = this.isLogin
-      // console.log(isLogin)
       this.$store.dispatch('getMovies/getMovie')
-      // console.log(this.movieItems)
     },
 
   }
