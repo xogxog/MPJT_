@@ -7,6 +7,7 @@ import Signup from '../views/Signup.vue'
 import MovieDetail from '../views/MovieDetail.vue'
 import MovieBoxOffice from '../views/MovieBoxOffice.vue'
 import MovieSearch from '../views/MovieSearch.vue'
+import Profile from '../views/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,11 @@ const routes = [
     path: '/movieSearch',
     name: 'MovieSearch',
     component: MovieSearch,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
 ]
 
