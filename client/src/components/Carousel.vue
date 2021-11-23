@@ -9,13 +9,12 @@
       </slide> -->
 
       <slide v-for="(movieItem, index) in movieItems" :key="index" :index="index">
-        <figure>
-          <a src="" @click.prevent="movieDetail(movieItem.id)">
-            <img :src="movieItem.poster_path" alt="movie-poster">
-          </a>
+        <figure class="snip1504">
+          <img :src="movieItem.poster_path" alt="movie-poster">
           <figcaption>
             <h5>{{ movieItem.title }}</h5>
           </figcaption>
+          <a src="" @click.prevent="movieDetail(movieItem.id)"></a>
         </figure>
       </slide>
     </carousel-3d>
@@ -54,18 +53,106 @@
 </script>
 
 <style scoped>
-  .carousel {
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+.snip1504 {
+  font-family: 'Source Sans Pro', sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  min-width: 230px;
+  max-width: 315px;
+  width: 100%;
+  color: #000000;
+  text-align: left;
+  font-size: 16px;
+  background: linear-gradient(
+  rgba(0, 0, 0, 0.199), 
+  rgba(245, 174, 174, 0.829));
+  /* background-color: rgba(32, 32, 32, 0.7); */
+}
+
+.snip1504 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.45s ease;
+  transition: all 0.45s ease;
+}
+
+.snip1504 img {
+  vertical-align: top;
+  max-width: 100%;
+  backface-visibility: hidden;
+}
+
+.snip1504 figcaption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.snip1504 h3,
+.snip1504 h5 {
+  margin: 0;
+  opacity: 0;
+  letter-spacing: 1px;
+}
+
+.snip1504 h3 {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.snip1504 h5 {
+  font-weight: normal;
+  font-style: italic;
+  color: rgb(255, 255, 255);
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.snip1504 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.snip1504:hover > img,
+.snip1504.hover > img {
+  opacity: 0.1;
+}
+
+.snip1504:hover h3,
+.snip1504.hover h3,
+.snip1504:hover h5,
+.snip1504.hover h5 {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+  /* .carousel {
     z-index: 99;
     width: 100%;
-  }
+  } */
 
   .carousel-3d-container figure {
     margin: 0;
   }
 
-  .carousel-3d-container figcaption {
+  /* .carousel-3d-container figcaption {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     bottom: 0;
     position: absolute;
@@ -74,5 +161,5 @@
     font-size: 12px;
     min-width: 100%;
     box-sizing: border-box;
-  }
+  } */
 </style>

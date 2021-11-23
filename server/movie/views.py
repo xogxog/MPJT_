@@ -131,8 +131,9 @@ def delete_comment(request, comment_pk) :
 @api_view(['POST'])
 def save_movies(request) :
     # print(request.data)
+    API_KEY = '33e4ef19e015d915281ddd6881f93178'
     for _movie in request.data :
-        if Movie.objects.filter(movie_id=movie.get('id')).exists() :
+        if Movie.objects.filter(movie_id=_movie.get('id')).exists() :
             pass
         else :
             movie = Movie.objects.create(
