@@ -27,7 +27,6 @@ export default {
   },
   methods :{
     movieDetail: function (movieid) {
-      console.log('반응반응')
         let movieId = movieid
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
         this.$router.push({

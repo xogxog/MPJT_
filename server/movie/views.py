@@ -140,7 +140,7 @@ def save_movies(request) :
                 movie_id = _movie.get('id'),
                 title = _movie.get('title'),
                 overview = _movie.get('overview'),
-                poster_path = 'https://image.tmdb.org/t/p/original'+ _movie.get('poster_path'),
+                poster_path = ('https://image.tmdb.org/t/p/original'+ _movie.get('poster_path') if _movie.get('poster_path') else ''),
                 release_date = _movie.get('release_date'),
                 vote_average = _movie.get('vote_average'),
             )
@@ -161,7 +161,7 @@ def save_movies(request) :
                         actor_id = _actor.get('id'),
                         name = _actor.get('name'),
                         original_name = _actor.get('original_name'),
-                        profile_path = 'https://image.tmdb.org/t/p/original'+ (_actor.get('profile_path') if _actor.get('profile_path') else ''),
+                        profile_path = ('https://image.tmdb.org/t/p/original'+ _actor.get('profile_path') if _actor.get('profile_path') else ''),
                     )
                     actor.movie_act.add(movie)
                 # 배우리스트에 있으면 mtm 관계에만 넣어주기
@@ -178,7 +178,7 @@ def save_movies(request) :
                         name = _director.get('name'),
                         original_name = _director.get('original_name'),
                         # 프로필이 없는 경우가 있다.
-                        profile_path = 'https://image.tmdb.org/t/p/original'+ (_director.get('profile_path') if _director.get('profile_path') else ''),
+                        profile_path = ('https://image.tmdb.org/t/p/original'+_director.get('profile_path') if _director.get('profile_path') else ''),
                     )
                     director.movie_direct.add(movie)
                 # 감독 리스트에 있으면 mtm 관계에만 넣어주기
@@ -242,7 +242,7 @@ def movie_get(request) :
                     movie_id = movies[i].get('id'),
                     title = movies[i].get('title'),
                     overview = movies[i].get('overview'),
-                    poster_path = 'https://image.tmdb.org/t/p/original'+ movies[i].get('poster_path'),
+                    poster_path =('https://image.tmdb.org/t/p/original'+movies[i].get('poster_path') if movies[i].get('poster_path') else ''),
                     release_date = movies[i].get('release_date'),
                     vote_average = movies[i].get('vote_average'),
                 )
@@ -264,7 +264,7 @@ def movie_get(request) :
                             actor_id = _actor.get('id'),
                             name = _actor.get('name'),
                             original_name = _actor.get('original_name'),
-                            profile_path = 'https://image.tmdb.org/t/p/original'+ (_actor.get('profile_path') if _actor.get('profile_path') else ''),
+                            profile_path = ('https://image.tmdb.org/t/p/original'+_actor.get('profile_path') if _actor.get('profile_path') else ''),
                         )
                         actor.movie_act.add(movie)
                     # 배우리스트에 있으면 mtm 관계에만 넣어주기
@@ -281,7 +281,7 @@ def movie_get(request) :
                             name = _director.get('name'),
                             original_name = _director.get('original_name'),
                             # 프로필이 없는 경우가 있다.
-                            profile_path = 'https://image.tmdb.org/t/p/original'+ (_director.get('profile_path') if _director.get('profile_path') else ''),
+                            profile_path =('https://image.tmdb.org/t/p/original'+_director.get('profile_path') if _director.get('profile_path') else ''),
                         )
                         director.movie_direct.add(movie)
                     # 감독 리스트에 있으면 mtm 관계에만 넣어주기

@@ -12,6 +12,7 @@
         <nav-toggle class="nav-toggle nav-in-box" style="z-index: 99" />
       </div>
       <router-view style="z-index: 2"/>
+      <br><br><br><br>
     </v-app>
 
     <!-- particles 배경 -->

@@ -14,7 +14,7 @@
           <figcaption>
             <h5>{{ movieItem.title }}</h5>
           </figcaption>
-          <a src="" @click.prevent="movieDetail(movieItem.id)"></a>
+          <a src="" @click.prevent="movieDetail(movieItem.movie_id)"></a>
         </figure>
       </slide>
     </carousel-3d>
@@ -33,6 +33,7 @@
     methods: {
       movieDetail: function (movieid) {
         let movieId = movieid
+        console.log(movieId)
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
         this.$router.push({
           name: 'MovieDetail'
@@ -42,7 +43,8 @@
     },
 
     computed: {
-      ...mapState('getMovies', ['movieItems'])
+      ...mapState('getMovies', ['movieItems']),
+      ...mapState('login', ['userInfo'])
     },
 
     created: function () {
