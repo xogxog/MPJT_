@@ -31,6 +31,18 @@ const getMovieDetail ={
         // console.log(res.data)
         commit('MOVIE_DETAIL',res.data)
       })
+    },
+    likeUnlikeMovie : function({rootState,commit,state}, moviePk){
+      console.log('들어왓어?')
+      axios({
+        method : 'post',
+        url : `http://127.0.0.1:8000/movie/movie/${moviePk}/like/`,
+        headers : rootState.login.token,
+      })
+      .then(()=>{
+        console.log('성공..?')
+        this.movieDetail({rootState,commit,state})
+      })
     }
   },
   getters:{

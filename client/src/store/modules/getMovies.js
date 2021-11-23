@@ -11,17 +11,17 @@ const getMovies ={
   mutations: {
     GET_MOVIE : function(state, MovieItems){
       state.movieItems = MovieItems
-      console.log(MovieItems)
+      // console.log(MovieItems)
     }
   },
   actions: {
     getMovie:function({rootState,commit}){
       // console.log(rootState.login.token)
-      console.log(rootState.login.isLogin)
+      // console.log(rootState.login.isLogin)
       let isLogin={
         'isLogin' : rootState.login.isLogin
       }
-      console.log(isLogin)
+      // console.log(isLogin)
       axios({
         method : 'get',
         url : 'http://127.0.0.1:8000/movie/movie/',
