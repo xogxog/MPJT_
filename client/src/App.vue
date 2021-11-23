@@ -19,7 +19,7 @@
       id="particles-js"
       color="#fff"
       :particleOpacity="0.7"
-      :particlesNumber="60"
+      :particlesNumber="100"
       shapeType="circle"
       :particleSize="4"
       linesColor="#fff"

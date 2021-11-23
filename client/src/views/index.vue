@@ -19,7 +19,7 @@
     </div> -->
     <a @click="enterMain" style="z-index: 1;">
     <div class="wrapper d-flex">
-      <div class="container">
+      <div class="container d-flex justify-content-center">
         <div class="box">
           <div class="imgBx">
             <img src="@/assets/index_test.jpg">
@@ -108,6 +108,7 @@ export default {
     flex-wrap: wrap;
   } */
   .container .box {
+    max-width: 800px;
     width: 100%;
     height: 400px;
     position: relative;
