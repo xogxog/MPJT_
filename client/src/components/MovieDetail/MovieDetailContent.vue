@@ -53,6 +53,7 @@
             </div>
           </v-card>
           <v-divider></v-divider>
+
           <div class="d-flex justify-content-around" style="background-color: rgba(255, 255, 255, 0.0)f">
             <div v-if="likeMovie">
               <v-btn color="red" fab small dark @click="likeUnlikeMovie">

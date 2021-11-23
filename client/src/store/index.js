@@ -10,6 +10,8 @@ import review from './modules/review'
 import comment from './modules/comment'
 import createPersistedState from "vuex-persistedstate";
 
+
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
