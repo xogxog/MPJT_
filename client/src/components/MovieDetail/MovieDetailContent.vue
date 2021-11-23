@@ -95,7 +95,7 @@
         <!-- 테이블 끝 -->
       <MovieReviewCreate 
         v-model="reviewWriteOpen"
-        :movie-pk="movieDetail.movie.id"
+        :movie-id="movieDetail.movie.movie_id"
       ></MovieReviewCreate>
       <MovieDetailReview 
         v-model="reviewDetailOpen"
@@ -157,8 +157,8 @@ import { mapState } from 'vuex'
         this.$store.dispatch('comment/getComments',reviewPk)
       },
       likeUnlikeMovie : function(){
-        const moviePk = this.movieDetail.movie.id
-        this.$store.dispatch('getMovieDetail/likeUnlikeMovie', moviePk)
+        const movieId = this.movieDetail.movie.movie_id
+        this.$store.dispatch('getMovieDetail/likeUnlikeMovie', movieId)
         // console.log(this.movieDetail.movie.like_users)
         // for(let like_user of this.movieDetail.movie.like_users){
         //   console.log(like_user)
