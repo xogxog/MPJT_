@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="mv-detail container">
     <div class="back-img">
     <MovieDetailContent></MovieDetailContent>
     <!-- <v-divider></v-divider> -->
@@ -23,6 +23,11 @@ export default {
 </script>
 
 <style scoped>
+  .mv-detail {
+    width: 70%;
+    max-width: 900px;
+  }
+  
   .back-img {
     position: relative;
     background-image: linear-gradient(
@@ -42,6 +47,7 @@ export default {
     height: 100%;
     padding-bottom: 40px;
     border-radius: 40px 80px / 80px 40px;
+    border-radius: 1px;
   }
 
 </style>

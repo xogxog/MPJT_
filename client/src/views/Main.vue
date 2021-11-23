@@ -15,7 +15,7 @@
       </v-row>
     </v-container> -->
     <div>
-      <div>
+      <div class="d-flex justify-content-around">
         <img class="main-img" src="@/assets/main_test.jpg" alt="">
         <img class="main-img" src="@/assets/main_test.jpg" alt="">
       </div>
@@ -48,6 +48,7 @@ export default {
   }
 
   .main-img {
+    max-width: 400px;
     width: 45%;
     margin: 20px;
 

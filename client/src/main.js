@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify'
 import Vuetify from 'vuetify/lib'
 import VueParticles from 'vue-particles'
 import Carousel3d from 'vue-carousel-3d';
-// import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 
