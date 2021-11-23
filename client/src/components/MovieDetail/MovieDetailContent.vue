@@ -147,7 +147,7 @@ import { mapState } from 'vuex'
       openReviewDetail: function (reviewPk,event) {
         event.preventDefault()
         this.$store.dispatch('review/getReviewDetail', reviewPk)
-  
+        this.$store.dispatch('comment/getComments',reviewPk)
       },
     },
 
