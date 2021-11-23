@@ -9,14 +9,14 @@
       </slide> -->
 
       <slide v-for="(movieItem, index) in movieItems" :key="index" :index="index">
-          <figure>
-        <a src="" @click.prevent="movieDetail(movieItem.id)">
+        <figure>
+          <a src="" @click.prevent="movieDetail(movieItem.id)">
             <img :src="movieItem.poster_path" alt="movie-poster">
-        </a>
-            <figcaption>
-              {{ movieItem.title }}
-            </figcaption>
-          </figure>
+          </a>
+          <figcaption>
+            <h5>{{ movieItem.title }}</h5>
+          </figcaption>
+        </figure>
       </slide>
     </carousel-3d>
   </div>
