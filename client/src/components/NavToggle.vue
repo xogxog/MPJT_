@@ -44,6 +44,19 @@
       <!-- 항상보임 -->
       <v-list>
         <span>
+          <!-- 관리자만 보이는 관리자페이지 -->
+          <span v-if="userInfo.nickname='admin'">
+            <!-- <a href="http://127.0.0.1:8000/admin/" style="text-decoration:none"> -->
+              <v-list-item href="http://127.0.0.1:8000/admin/" router exact>
+                <v-list-item-icon>
+                  <v-icon>mdi-view-dashboard</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>관리자페이지</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            <!-- </a> -->
+          </span>
           <v-list-item to="/" router exact>
               <v-list-item-icon>
                 <v-icon>mdi-view-dashboard</v-icon>

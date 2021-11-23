@@ -22,6 +22,7 @@ const login ={
     },
     SET_USER_INFO : function(state, userInfo){
       state.userInfo = userInfo
+      console.log(state.userInfo)
     },
   },
   actions: {

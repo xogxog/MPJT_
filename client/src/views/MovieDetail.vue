@@ -1,23 +1,27 @@
 <template>
   <div class="mv-detail container">
     <div class="back-img">
-    <MovieDetailContent></MovieDetailContent>
-    <!-- <v-divider></v-divider> -->
+      <!-- <v-img class="back-img" :src="movieDetail.movie.poster_path" alt=""> -->
+      <MovieDetailContent></MovieDetailContent>
+      <!-- <v-divider></v-divider> -->
+      <!-- </v-img> -->
     </div>
-
   </div>
 </template>
 
 <script>
 // import MovieDetailReview from '@/components/MovieDetail/MovieDetailReview.vue'
 import MovieDetailContent from '@/components/MovieDetail/MovieDetailContent.vue'
-
+import {mapState} from 'vuex'
 export default {
   name: "MovieDetail",
   components: {
     // MovieDetailReview,
     MovieDetailContent
-    },
+  },
+  computed: {
+    ...mapState('getMovieDetail', ['movieDetail'])
+  },
 
 }
 </script>
@@ -30,12 +34,13 @@ export default {
   
   .back-img {
     position: relative;
-    background-image: linear-gradient(
-    rgba(0, 0, 0, 0.8), 
-    rgba(0, 0, 0, 0.8)
-    ), 
-    url('../assets/main_test.jpg');
-    /* background-position: center;; */
+    background-color: rgba(65, 65, 65, 0.5);
+    background: linear-gradient(
+      rgba(65, 65, 65, 0.5), 
+      rgba(65, 65, 65, 0.5)
+    ),;
+    /* url({{movieDetail.movie.poster_path}}); */
+    /* background-position: center; */
     background-size: cover;
     top: 0; 
     bottom: 0; 
@@ -43,9 +48,8 @@ export default {
     right: 0; 
     /* border: 50px solid rgba(65, 65, 65, 0.5); */
     /* border: 50px solid rgba(65, 65, 65, 0.5); */
-    outline : 50px solid rgba(65, 65, 65, 0.5);
+    outline : 30px solid rgba(65, 65, 65, 0.5);
     height: 100%;
-    padding-bottom: 40px;
     border-radius: 40px 80px / 80px 40px;
     border-radius: 1px;
   }
