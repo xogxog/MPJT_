@@ -42,7 +42,6 @@ const review ={
       })
     },
     getReviewDetail : function({rootState,commit}, reviewPk){
-      console.log('둘어와...')
       axios({
         method : 'get',
         url : `http://127.0.0.1:8000/movie/movie/review/${reviewPk}/`,
@@ -83,7 +82,7 @@ const review ={
     }
   },
   getters:{
-
+    
   }
 }
 
