@@ -14,9 +14,9 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_field=('followings') 
 
 class UserInfoSerializer(serializers.ModelSerializer):
-
+    # 프로필 조회하면 user가 좋아하는 영화리스트 보내야함.
     class Meta :
         model = User
-        fields = ('id','nickname','profile_path',)
+        fields = ('id','username','nickname','profile_path',)
 
 

@@ -55,22 +55,22 @@
           <v-divider></v-divider>
           <div class="d-flex justify-content-around" style="background-color: rgba(255, 255, 255, 0.0)f">
             <div>
-              <v-btn color="primary" fab x-large dark>
+              <v-btn color="secondary" fab small dark @click="likeUnlikeMovie">
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+              <div style="margin-top:10px">찜</div>
+            </div>
+            <!-- <div>
+              <v-btn color="primary" fab small dark>
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <div>123</div>
-            </div>
+            </div> -->
             <div>
-              <v-btn color="primary" fab x-large dark>
+              <v-btn color="primary" fab small dark @click.stop="reviewWriteOpen=true">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
-              <div>123</div>
-            </div>
-            <div>
-              <v-btn color="primary" fab x-large dark @click.stop="reviewWriteOpen=true">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
-              <div>리뷰 쓰기</div>
+              <div style="margin-top:10px">리뷰 쓰기</div>
             </div>
           </div>
         </div>
@@ -112,6 +112,7 @@ import { mapState } from 'vuex'
     },
     data: function () {
       return {
+        // like_movie : false,
         reviewPk : null,
         onScroll : null,
         reviewDetailOpen: false,
@@ -143,21 +144,26 @@ import { mapState } from 'vuex'
     
 
     methods: {
-      // 여기서 댓글 가져와~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~~!~!????????????맞나???????????????????????????
       openReviewDetail: function (reviewPk,event) {
         event.preventDefault()
         this.$store.dispatch('review/getReviewDetail', reviewPk)
         this.$store.dispatch('comment/getComments',reviewPk)
       },
+      likeUnlikeMovie : function(){
+        const moviePk = this.movieDetail.movie.id
+        console.log(this.movieDetail.movie.id)
+        this.$store.dispatch('getMovieDetail/likeUnlikeMovie', moviePk)
+      }
     },
 
     created: function () {
       this.$store.dispatch('getMovieDetail/movieDetail')
-      // console.log(this.movieDetail.title)
+      console.log(this.movieDetail)
     },
 
     computed: {
       ...mapState('getMovieDetail', ['movieDetail']),
+      ...mapState('login', ['nickname']),
     }
   }
 </script>

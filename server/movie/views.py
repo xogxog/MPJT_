@@ -56,10 +56,10 @@ def movie_detail(request,movie_pk) :
 # 영화 찜 - 버튼 바뀌는건 vue에서 할일. 여기선 db에 반영만
 @api_view(['POST'])
 def movie_like(request, movie_pk):
-    
     movie = get_object_or_404(Movie, pk=movie_pk)
     # 좋아요 있으면
-    if movie.like_users.filter(user_id=request.data.get("user_id")):
+    print(request.data)
+    if movie.like_users.filter(id=request.data.get("user_id")):
         movie.like_users.remove(request.user)
         return Response({'unlike': '영화 찜 취소'})
     else :

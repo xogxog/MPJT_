@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework import serializers, status
 from rest_framework import authentication
 from rest_framework import permissions
@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer,UserInfoSerializer
 from movie.models import Genre
 
 @api_view(['POST'])
@@ -22,6 +22,9 @@ def signup(request):
     elif User.objects.filter(nickname=request.data.get('nickname')).exists():
         return Response({'err': '이미 존재하는 닉네임입니다.'}, status=status.HTTP_403_FORBIDDEN)
     
+    elif User.objects.filter(username=request.data.get('username')).exists():
+        return Response({'err': '이미 존재하는 아이디입니다.'}, status=status.HTTP_403_FORBIDDEN)
+
     # elif request.data.get('profile_path') == '':
     #     return Response({'err': '프로필사진을 지정해주세요'}, status=status.HTTP_403_FORBIDDEN)
     
@@ -43,6 +46,15 @@ def signup(request):
             created_user.like_genres.add(genre)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def login(request):
+    user = get_object_or_404(User, username=request.GET.get('username'))
+    # user = User.objects.filter(username=request.GET.get('username')) // 이거뭐임....
+    serializer= UserInfoSerializer(user)
+    return Response(serializer.data)
+
 
 # def profile(request, user_pk):
 #     profile = get_object_or_404()

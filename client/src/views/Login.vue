@@ -57,9 +57,22 @@ import axios from 'axios'
 				})
 					.then(res =>{
 						localStorage.setItem('jwt', res.data.token)
+						//유저 id 가지고 오기
 						const isLogin = true
 						const token = this.setToken()
-						const nickname = this.credentials.username
+						const nickname = this.credentials.username //로그인 id임......
+						const data = {
+							'username' : nickname,
+						}
+						axios({
+							method : 'get',
+							url : 'http://127.0.0.1:8000/accounts/login/',
+							params : data,
+							headers : this.setToken(),
+						})
+						.then((res)=>{
+							console.log(res.data)
+						})
 						this.$store.dispatch('login/loginCheck', isLogin)
 						this.$store.dispatch('login/setToken', token)
 						this.$store.dispatch('login/setUserNickname', nickname)
