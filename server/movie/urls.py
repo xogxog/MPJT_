@@ -6,6 +6,7 @@ urlpatterns = [
     path('movie/',views.movie_list), # main page
     path('movie/<int:movie_pk>/', views.movie_detail),
     path('movie/<int:movie_pk>/like/', views.movie_like),
+    path('movie/save_movies/', views.save_movies),
     path('movie/<int:movie_pk>/review/', views.create_review), #리뷰생성
     path('movie/review/<int:review_pk>/', views.review_detail),
     path('movie/review/<int:review_pk>/comment/', views.create_comment), # 댓글 조회, 생성

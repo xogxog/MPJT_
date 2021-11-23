@@ -128,9 +128,65 @@ def delete_comment(request, comment_pk) :
             }
             return Response(data, status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['POST'])
+def save_movies(request) :
+    # print(request.data)
+    for _movie in request.data :
+        if Movie.objects.filter(movie_id=movie.get('id')).exists() :
+            pass
+        else :
+            movie = Movie.objects.create(
+                movie_id = _movie.get('id'),
+                title = _movie.get('title'),
+                overview = _movie.get('overview'),
+                poster_path = 'https://image.tmdb.org/t/p/original'+ _movie.get('poster_path'),
+                release_date = _movie.get('release_date'),
+                vote_average = _movie.get('vote_average'),
+            )
+                # may-to-many field 저장 add 해야함.
+            for genre_id in _movie.get("genre_ids") :
+                genre = Genre.objects.get(genre_id=genre_id)
+                movie.genres.add(genre)
+            
+            credit_url = f'https://api.themoviedb.org/3/movie/{movie.movie_id}/credits?api_key={API_KEY}&language=ko-KR'
+            credits = requests.get(credit_url).json()
+            
+            cast = credits.get('cast')
+
+            for _actor in cast[:5] :
+                # 배우리스트에 없고, 배우 dept이면
+                if not Actor.objects.filter(actor_id=_actor.get('id')).exists() and _actor.get('known_for_department') == 'Acting':
+                    actor = Actor.objects.create(
+                        actor_id = _actor.get('id'),
+                        name = _actor.get('name'),
+                        original_name = _actor.get('original_name'),
+                        profile_path = 'https://image.tmdb.org/t/p/original'+ (_actor.get('profile_path') if _actor.get('profile_path') else ''),
+                    )
+                    actor.movie_act.add(movie)
+                # 배우리스트에 있으면 mtm 관계에만 넣어주기
+                elif Actor.objects.filter(actor_id=_actor.get('id')).exists() :
+                    actor = Actor.objects.get(actor_id=_actor.get('id'))
+                    actor.movie_act.add(movie)
+            
+            crew = credits.get('crew')
+
+            for _director in crew :
+                if not Director.objects.filter(director_id=_director.get('id')).exists() and _director.get('job') == 'Director':
+                    director = Director.objects.create(
+                        director_id = _director.get('id'),
+                        name = _director.get('name'),
+                        original_name = _director.get('original_name'),
+                        # 프로필이 없는 경우가 있다.
+                        profile_path = 'https://image.tmdb.org/t/p/original'+ (_director.get('profile_path') if _director.get('profile_path') else ''),
+                    )
+                    director.movie_direct.add(movie)
+                # 감독 리스트에 있으면 mtm 관계에만 넣어주기
+                elif Director.objects.filter(director_id=_director.get('id')).exists() :
+                    director = Director.objects.get(director_id=_director.get('id'))
+                    director.movie_direct.add(movie)
 
 
-
+    return Response({'saved movie' : '영화저장 완료 및 배우, 감독 저장 완료'})
 
 
 

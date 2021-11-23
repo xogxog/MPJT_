@@ -4,6 +4,7 @@ import login from './modules/login'
 
 
 import getMovies from './modules/getMovies'
+import saveMovies from './modules/saveMovies'
 import getMovieDetail from './modules/getMovieDetail'
 
 import review from './modules/review'
@@ -25,6 +26,7 @@ export default new Vuex.Store({
   modules: {
     login,
     getMovies,
+    saveMovies,
     getMovieDetail,
     review,
     comment,
