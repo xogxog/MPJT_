@@ -70,7 +70,7 @@ def movie_like(request, movie_pk):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def create_review(request, movie_pk):
-    
+    print(f'dpfjd[fj')
     # 리뷰생성
     if request.method =='POST' :
         movie = get_object_or_404(Movie, pk=movie_pk)
@@ -107,7 +107,7 @@ def create_comment(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     #댓글 조회
     if request.method == 'GET' : 
-        comments = Comment.objects.filter(review=review_pk)
+        comments = Comment.objects.filter(review=review_pk).order_by('-pk')
         serializers = Commentserializer(comments, many=True)
         return Response(serializers.data, status=status.HTTP_200_OK)
     #댓글 생성

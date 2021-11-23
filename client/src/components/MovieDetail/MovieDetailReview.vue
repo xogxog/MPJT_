@@ -41,6 +41,7 @@
       </v-form>
       
       <v-simple-table>
+      <!-- <v-simple-table v-scroll.self="onScroll" height="268px"> -->
         <template v-slot:default>
           <thead>
             <tr>
@@ -50,6 +51,9 @@
               <th class="text-left">
                 comment
               </th>
+              <th class="text-left">
+                delete
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -58,11 +62,30 @@
             <tr v-for="comment in comments" :key="comment.id">
               <td>{{ comment.user.nickname }}</td>
               <td>{{ comment.comment }}</td>
+              <!-- 삭제버튼 -->
+              <td>
+                <div v-if="comment.user.nickname==nickname" @click="deleteComment(comment)">
+                  <v-btn
+                    elevation="2"
+                    x-small
+                    icon
+                    color="pink"
+                  >
+                    <v-icon>mdi-minus</v-icon>
+                  </v-btn>
+                </div>
+              </td>
             </tr>
           </tbody>
         </template>
       </v-simple-table>
-
+      <div class="text-center">
+        <v-pagination
+          v-model="page"
+          :length="4"
+          circle
+        ></v-pagination>
+      </div>
       <v-card-actions>
         <div class="d-flex">
           <v-btn text @click.stop="show=false">Close</v-btn>
@@ -111,6 +134,9 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
       }
       this.$store.dispatch('comment/createComment',commentData)
       this.comment = null
+    },
+    deleteComment : function(comment){
+      this.$store.dispatch('comment/deleteComment', comment)
     }
   },
   computed: {

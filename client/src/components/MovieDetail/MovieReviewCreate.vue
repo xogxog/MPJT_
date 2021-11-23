@@ -34,7 +34,7 @@
       return{
         title : null,
         content :null,
-        rank : null,
+        rank : 5,
       }
     },
     methods: {
