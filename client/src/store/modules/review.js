@@ -30,7 +30,7 @@ const review ={
       }
       axios({
         method : 'post',
-        url : `http://127.0.0.1:8000/movie/movie/${reviewData.moviePk}/review/`,
+        url : `http://127.0.0.1:8000/movie/movie/${reviewData.movieId}/review/`,
         data : data,
         headers : rootState.login.token,
       })

@@ -31,9 +31,9 @@
       Slide,
     },
     methods: {
-      movieDetail: function (id) {
-        let moviePk = id
-        this.$store.dispatch('getMovieDetail/setMovieId', moviePk)
+      movieDetail: function (movieid) {
+        let movieId = movieid
+        this.$store.dispatch('getMovieDetail/setMovieId', movieId)
         this.$router.push({
           name: 'MovieDetail'
         })

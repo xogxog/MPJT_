@@ -77,7 +77,9 @@ window.$ = $;
 
   export default {
     name: "MovieSearch",
-
+    created:function(){
+      
+    }
   }
 
   $(document).ready(function(x, y) {

@@ -8,7 +8,7 @@ class MovieListSerializer(serializers.ModelSerializer) :
 
     class Meta :
         model = Movie
-        fields =('id','movie_id','title','poster_path',)
+        fields =('movie_id','title','poster_path',)
 
 # 배우
 class ActorSerializer(serializers.ModelSerializer):
@@ -36,7 +36,6 @@ class MovieSerializer(serializers.ModelSerializer) :
     class Meta :
         model = Movie
         fields = (
-            'id',
             'movie_id',
             'title',
             'overview',
