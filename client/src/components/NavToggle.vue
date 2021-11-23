@@ -156,7 +156,7 @@ import {mapState} from 'vuex'
     // },
     computed :{
       ...mapState('login', ['isLogin','nickname']),
- 
+
     }
   }
 </script>
