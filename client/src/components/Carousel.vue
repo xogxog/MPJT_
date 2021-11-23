@@ -10,7 +10,7 @@
 
       <slide v-for="(movieItem, index) in movieItems" :key="index" :index="index">
         <figure>
-          <a src="" @click.prevent="movieDetail(movieItem.id)">
+          <a src="" @click.prevent="movieDetail(movieItem.movie_id)">
             <img :src="movieItem.poster_path" alt="movie-poster">
           </a>
           <figcaption>
@@ -32,9 +32,9 @@
       Slide,
     },
     methods: {
-      movieDetail: function (id) {
-        let moviePk = id
-        this.$store.dispatch('getMovieDetail/setMovieId', moviePk)
+      movieDetail: function (movieid) {
+        let movieId = movieid
+        this.$store.dispatch('getMovieDetail/setMovieId', movieId)
         this.$router.push({
           name: 'MovieDetail'
         })

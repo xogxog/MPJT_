@@ -1,96 +1,15 @@
 <template>
-  <!-- <div class="img-box">
-    <div class="real-box">
-      <span style="--i:1"><a href=""><img :src="trend_1"></a></span>
-      <span style="--i:2"><a href=""><img :src="trend_2"></a></span>
-      <span style="--i:3"><a href=""><img :src="trend_3"></a></span>
-      <span style="--i:4"><a href=""><img :src="trend_4"></a></span>
-      <span style="--i:5"><a href=""><img :src="trend_5"></a></span>
-      <span style="--i:6"><a href=""><img :src="trend_6"></a></span>
-      <span style="--i:7"><a href=""><img :src="trend_7"></a></span>
-      <span style="--i:8"><a href=""><img :src="trend_8"></a></span>
-    </div>
-  </div> -->
   <div class="img-box">
     <div class="real-box">
-      <span style="--i:1">
-        <figure class="hover-effect">
-          <img :src="trend_1">
+      <span :style="`--i:${index+1}`" v-for="(trendmovie,index) in trendMovies" :key="index">
+        <figure class="hover-effect" @click="movieDetail(trendmovie.id)">
+          <img :src="`https://image.tmdb.org/t/p/original${trendmovie.poster_path}`">
             <figcaption>
-              <h3>Title</h3>
-              <h5>OverView</h5>
+              <h3>{{index+1}}</h3>
+              <h5>{{trendmovie.title}}</h5>
+              <!-- <h5>{{trendmovie.overview}}</h5> -->
             </figcaption>
-          <a href="#"></a>
-        </figure>
-      </span>
-      <span style="--i:2">
-        <figure class="hover-effect">
-          <img :src="trend_2">
-            <figcaption>
-              <h3>Title</h3>
-              <h5>OverView</h5>
-            </figcaption>
-          <a href="#"></a>
-        </figure>
-      </span>
-      <span style="--i:3">
-        <figure class="hover-effect">
-          <img :src="trend_3">
-            <figcaption>
-              <h3>Title</h3>
-              <h5>OverView</h5>
-            </figcaption>
-          <a href="#"></a>
-        </figure>
-      </span>
-      <span style="--i:4">
-        <figure class="hover-effect">
-          <img :src="trend_4">
-            <figcaption>
-              <h3>Title</h3>
-              <h5>OverView</h5>
-            </figcaption>
-          <a href="#"></a>
-        </figure>
-      </span>
-      <span style="--i:5">
-        <figure class="hover-effect">
-          <img :src="trend_5">
-            <figcaption>
-              <h3>Title</h3>
-              <h5>OverView</h5>
-            </figcaption>
-          <a href="#"></a>
-        </figure>
-      </span>
-      <span style="--i:6">
-        <figure class="hover-effect">
-          <img :src="trend_6">
-            <figcaption>
-              <h3>Title</h3>
-              <h5>OverView</h5>
-            </figcaption>
-          <a href="#"></a>
-        </figure>
-      </span>
-      <span style="--i:7">
-        <figure class="hover-effect">
-          <img :src="trend_7">
-            <figcaption>
-              <h3>Title</h3>
-              <h5>OverView</h5>
-            </figcaption>
-          <a href="#"></a>
-        </figure>
-      </span>
-      <span style="--i:8">
-        <figure class="hover-effect">
-          <img :src="trend_8">
-            <figcaption>
-              <h3>Title</h3>
-              <h5>OverView</h5>
-            </figcaption>
-          <a href="#"></a>
+          
         </figure>
       </span>
     </div>
@@ -103,16 +22,17 @@ export default {
   name: 'MovieBoxOffice',
   data : function(){
     return{
-      trend_1 : null,
-      trend_2 : null,
-      trend_3 : null,
-      trend_4 : null,
-      trend_5 : null,
-      trend_6 : null,
-      trend_7 : null,
-      trend_8 : null,
-      // trend_9 : null,
-      // trend_10 : null,
+      trendMovies : null,
+    }
+  },
+  methods :{
+    movieDetail: function (movieid) {
+      console.log('반응반응')
+        let movieId = movieid
+        this.$store.dispatch('getMovieDetail/setMovieId', movieId)
+        this.$router.push({
+          name: 'MovieDetail'
+        })
     }
   },
   created :function(){
@@ -124,14 +44,7 @@ export default {
     })
       .then((res)=>{
         console.log(res.data.results)
-        this.trend_1 = "https://image.tmdb.org/t/p/original"+res.data.results[0].poster_path
-        this.trend_2 = "https://image.tmdb.org/t/p/original"+res.data.results[1].poster_path
-        this.trend_3 = "https://image.tmdb.org/t/p/original"+res.data.results[2].poster_path
-        this.trend_4 = "https://image.tmdb.org/t/p/original"+res.data.results[3].poster_path
-        this.trend_5 = "https://image.tmdb.org/t/p/original"+res.data.results[4].poster_path
-        this.trend_6 = "https://image.tmdb.org/t/p/original"+res.data.results[5].poster_path
-        this.trend_7 = "https://image.tmdb.org/t/p/original"+res.data.results[6].poster_path
-        this.trend_8 = "https://image.tmdb.org/t/p/original"+res.data.results[7].poster_path
+        this.trendMovies = res.data.results.slice(0,8)
         this.$store.dispatch('saveMovies/saveMovies',res.data.results)
       })
 

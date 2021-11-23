@@ -28,7 +28,7 @@
   export default {
     props: {
       value: Boolean,
-      moviePk: Number,
+      movieId: Number,
     },
     data :function(){
       return{
@@ -40,7 +40,7 @@
     methods: {
       createReview : function (){
         let reviewData = {
-          'moviePk' : this.moviePk,
+          'movieId' : this.movieId,
           'title' : this.title,
           'content' : this.content,
           'rank' : this.rank,

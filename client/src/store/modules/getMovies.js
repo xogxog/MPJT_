@@ -11,7 +11,7 @@ const getMovies ={
   mutations: {
     GET_MOVIE : function(state, MovieItems){
       state.movieItems = MovieItems
-      // console.log(MovieItems)
+      console.log(MovieItems)
     }
   },
   actions: {
