@@ -58,8 +58,7 @@ def movie_detail(request,movie_pk) :
 def movie_like(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     # 좋아요 있으면
-    print(request.data)
-    if movie.like_users.filter(id=request.data.get("user_id")):
+    if movie.like_users.filter(id=request.data.get("userid")):
         movie.like_users.remove(request.user)
         return Response({'unlike': '영화 찜 취소'})
     else :

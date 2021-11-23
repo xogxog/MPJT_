@@ -54,7 +54,13 @@
           </v-card>
           <v-divider></v-divider>
           <div class="d-flex justify-content-around" style="background-color: rgba(255, 255, 255, 0.0)f">
-            <div>
+            <div v-if="likeMovie">
+              <v-btn color="red" fab small dark @click="likeUnlikeMovie">
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+              <div style="margin-top:10px">찜</div>
+            </div>
+            <div v-else>
               <v-btn color="secondary" fab small dark @click="likeUnlikeMovie">
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
@@ -153,17 +159,21 @@ import { mapState } from 'vuex'
         const moviePk = this.movieDetail.movie.id
         console.log(this.movieDetail.movie.id)
         this.$store.dispatch('getMovieDetail/likeUnlikeMovie', moviePk)
+        // console.log(this.movieDetail.movie.like_users)
+        // for(let like_user of this.movieDetail.movie.like_users){
+        //   console.log(like_user)
+        // }
       }
     },
 
     created: function () {
       this.$store.dispatch('getMovieDetail/movieDetail')
-      console.log(this.movieDetail)
+      // console.log(this.movieDetail)
     },
 
     computed: {
-      ...mapState('getMovieDetail', ['movieDetail']),
-      ...mapState('login', ['nickname']),
+      ...mapState('getMovieDetail', ['movieDetail','likeMovie']),
+      ...mapState('login', ['userInfo']),
     }
   }
 </script>

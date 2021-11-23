@@ -60,9 +60,10 @@ import axios from 'axios'
 						//유저 id 가지고 오기
 						const isLogin = true
 						const token = this.setToken()
-						const nickname = this.credentials.username //로그인 id임......
+						this.$store.dispatch('login/loginCheck', isLogin)
+						this.$store.dispatch('login/setToken', token)
 						const data = {
-							'username' : nickname,
+							'username' : this.credentials.username,
 						}
 						axios({
 							method : 'get',
@@ -72,10 +73,9 @@ import axios from 'axios'
 						})
 						.then((res)=>{
 							console.log(res.data)
+							this.$store.dispatch('login/setUserInfo',res.data)
 						})
-						this.$store.dispatch('login/loginCheck', isLogin)
-						this.$store.dispatch('login/setToken', token)
-						this.$store.dispatch('login/setUserNickname', nickname)
+						
 						this.$router.push({name : 'Main'})
 					})
 					.catch(err =>{

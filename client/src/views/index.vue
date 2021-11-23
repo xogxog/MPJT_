@@ -26,7 +26,7 @@
           </div>
           <div class="content" style="color: white;">
             <div class="">
-              <h1>Welcom Enjoy with your Movie</h1>
+              <h1>Welcome! Enjoy with your Movie</h1>
             </div>
           </div>
         </div>

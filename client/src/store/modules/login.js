@@ -8,21 +8,21 @@ const login ={
   state: {  
     isLogin : false,
     token : null,
-    nickname : null,
+    // nickname : null,
+    userInfo : [], // user의 id,nickname,poster_path,username 
   },
   mutations: {
     LOGIN_CHECK : function(state, isLogin){
       state.isLogin = isLogin
-      console.log(state.isLogin)
+      // console.log(state.isLogin)
     },
     SET_TOKEN : function(state, token){
       state.token = token
       // console.log(state.token)
     },
-    SET_USER_NICK_NAME : function(state, nickname){
-      state.nickname = nickname
-      // console.log(state.token)
-    }
+    SET_USER_INFO : function(state, userInfo){
+      state.userInfo = userInfo
+    },
   },
   actions: {
     loginCheck : function({commit}, isLogin){
@@ -31,9 +31,9 @@ const login ={
     setToken : function({commit},token){
       commit('SET_TOKEN',token)
     },
-    setUserNickname : function({commit},nickname){
-      commit('SET_USER_NICK_NAME',nickname)
-    },
+    setUserInfo : function({commit}, userInfo){
+      commit('SET_USER_INFO',userInfo)
+    }
   },
   getters:{
 

@@ -22,7 +22,7 @@
       <v-list-item>
         <v-list-item-content>
           <span v-if="isLogin">
-          <v-list-item-title>{{nickname}}</v-list-item-title>
+          <v-list-item-title>{{userInfo.nickname}}</v-list-item-title>
           </span>
           <span v-else>
           <v-list-item-title>로그인 하세요.</v-list-item-title>
@@ -155,8 +155,7 @@ import {mapState} from 'vuex'
     //   }
     // },
     computed :{
-      ...mapState('login', ['isLogin','nickname']),
- 
+      ...mapState('login', ['isLogin','userInfo']),
     }
   }
 </script>
