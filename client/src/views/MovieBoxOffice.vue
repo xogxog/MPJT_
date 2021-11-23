@@ -15,7 +15,6 @@
 
 <script>
 import axios from 'axios'
-// import axios from "axios";
 export default {
   name: 'MovieBoxOffice',
   data : function(){
@@ -41,7 +40,6 @@ export default {
     })
       .then((res)=>{
         console.log(res.data.results)
-        // this.trendMovies=res.data.results.slice(0,10)
         this.trend_1 = "https://image.tmdb.org/t/p/original"+res.data.results[0].poster_path
         this.trend_2 = "https://image.tmdb.org/t/p/original"+res.data.results[1].poster_path
         this.trend_3 = "https://image.tmdb.org/t/p/original"+res.data.results[2].poster_path
@@ -50,9 +48,7 @@ export default {
         this.trend_6 = "https://image.tmdb.org/t/p/original"+res.data.results[5].poster_path
         this.trend_7 = "https://image.tmdb.org/t/p/original"+res.data.results[6].poster_path
         this.trend_8 = "https://image.tmdb.org/t/p/original"+res.data.results[7].poster_path
-        // this.trend_9 = "https://image.tmdb.org/t/p/original"+res.data.results[8].poster_path
-        // this.trend_10 = "https://image.tmdb.org/t/p/original"+res.data.results[9].poster_path
-        console.log(this.trend_1)
+        this.$store.dispatch('saveMovies/saveMovies',res.data.results)
       })
 
   }
