@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 import MovieDetailReview from '@/components/MovieDetail/MovieDetailReview.vue'
 import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
 import { mapState } from 'vuex'
@@ -147,7 +147,6 @@ window.$ = $;
         onScroll : null,
         reviewDetailOpen: false,
         reviewWriteOpen: false,
-        recommendMovies : null,
         headers: [{
             text: '작성자',
             align: 'center',
@@ -183,29 +182,10 @@ window.$ = $;
       likeUnlikeMovie : function(){
         const movieId = this.movieDetail.movie.movie_id
         this.$store.dispatch('getMovieDetail/likeUnlikeMovie', movieId)
-        // console.log(this.movieDetail.movie.like_users)
-        // for(let like_user of this.movieDetail.movie.like_users){
-        //   console.log(like_user)
-        // }
       }
     },
 
     created: function () {
-      this.$store.dispatch('getMovieDetail/movieDetail')
-      // console.log(this.movieDetail)
-      const API_KEY='33e4ef19e015d915281ddd6881f93178'
-        // console.log(this.movieDetail.movie.movie_id)
-
-      axios({
-        method : 'get',
-        // url : `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
-        url : `https://api.themoviedb.org/3/movie/${this.movieDetail.movie.movie_id}/recommendations?api_key=${API_KEY}&language=ko-KR&page=1/`,
-      })
-      .then((res)=>{
-        console.log(res.data.results)
-        this.recommendMovies = res.data.results.slice(0,6)
-        this.$store.dispatch('saveMovies/saveMovies',res.data.results)
-
         $(document).ready(function (x, y) {
           $('.card').on('mouseenter', function (e) {
             x = e.pageX - $(this).offset().left,
@@ -224,13 +204,13 @@ window.$ = $;
             })
           })
         })
-      })
         // console.log(this.recommendMovies)
     },
 
     computed: {
       ...mapState('getMovieDetail', ['movieDetail','likeMovie']),
       ...mapState('login', ['userInfo']),
+      ...mapState('saveMovies', ['recommendMovies']),
     }
   }
 </script>

@@ -24,6 +24,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import {Carousel3d,Slide} from 'vue-carousel-3d';
   import {mapState} from 'vuex'
   export default {
@@ -38,9 +39,25 @@
           let movieId = movieid
         // console.log(movieId)
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
-        this.$router.push({
-          name: 'MovieDetail'
-        })
+        const API_KEY='33e4ef19e015d915281ddd6881f93178'
+        // console.log(this.movieDetail.movie.movie_id)
+
+        axios({
+          method : 'get',
+          // url : `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
+          url : `https://api.themoviedb.org/3/movie/${movieid}/recommendations?api_key=${API_KEY}&language=ko-KR&page=1/`,
+          })
+          .then((res)=>{
+            console.log(res.data.results)
+            const recommendMovies = res.data.results.slice(0,6)
+            this.$store.dispatch('saveMovies/saveMovies',res.data.results)
+            this.$store.dispatch('saveMovies/saveRecommendMovies',recommendMovies)
+            this.$store.dispatch('getMovieDetail/movieDetail')
+          })
+          .then(()=>{
+            this.$router.push({name: 'MovieDetail'})
+          })
+        
         }else{
           alert('로그인 시 열람이 가능합니다.')
         }

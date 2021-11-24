@@ -5,10 +5,12 @@ const saveMovies ={
   plugins: [createPersistedState()],
   namespaced : true,
   state: {  
-
+    recommendMovies:null,
   },
   mutations: {
-
+    SAVE_RECOMMEND_MOVIES : function(state, recommendMovies){
+      state.recommendMovies=recommendMovies
+    }
   },
   actions: {
     saveMovies : function({rootState}, movies){
@@ -24,6 +26,9 @@ const saveMovies ={
       .catch(()=>{
         console.log('실패실패~!~!')
       })
+    },
+    saveRecommendMovies : function({commit}, recommendMovies){
+      commit('SAVE_RECOMMEND_MOVIES',recommendMovies)
     }
   },
   getters:{
