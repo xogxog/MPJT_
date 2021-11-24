@@ -32,19 +32,24 @@
     },
     methods: {
       movieDetail: function (movieid) {
-        let movieId = movieid
+        if(this.isLogin){
+          let movieId = movieid
         // console.log(movieId)
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
         this.$router.push({
           name: 'MovieDetail'
         })
+        }else{
+          alert('로그인 시 열람이 가능합니다.')
+        }
+        
       },
 
     },
 
     computed: {
       ...mapState('getMovies', ['movieItems']),
-      ...mapState('login', ['userInfo'])
+      ...mapState('login', ['userInfo','isLogin'])
     },
 
     created: function () {

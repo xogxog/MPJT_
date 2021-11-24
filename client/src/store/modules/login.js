@@ -25,12 +25,13 @@ const login ={
     },
     SET_USER_INFO : function(state, userInfo){ // 맨처음 로그인했을때
       state.userInfo = userInfo
-      console.log(state.userInfo)
+      // console.log(state.userInfo)
     },
-    GET_USER_INFO : function(state, userInfo){ // 프로필 조회할때
+    GET_USER_INFO : function(state, userInfo){ // 내 프로필조회
       state.userInfo = userInfo
       console.log(state.userInfo)
-    }
+    },
+    
   },
   actions: {
     loginCheck : function({commit}, isLogin){
@@ -42,7 +43,7 @@ const login ={
     setUserInfo : function({commit}, userInfo){
       commit('SET_USER_INFO',userInfo)
     },
-    getUserInfo : function({rootState,commit,state}){
+    getUserInfo : function({rootState,commit,state}){ // 내 프로필조회
       const username={
         'username': state.userInfo.username
       }
@@ -56,7 +57,7 @@ const login ={
         console.log(res.data)
         commit('GET_USER_INFO',res.data)
       })
-    }
+    },
   },
   getters:{
 

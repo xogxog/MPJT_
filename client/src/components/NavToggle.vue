@@ -57,15 +57,17 @@
               </v-list-item>
             </span>
           </span>
-          <v-list-item to="/profile" router exact @click="getUserInfo">
-              <v-list-item-icon>
-                <v-icon>mdi-view-dashboard</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>내 프로필</v-list-item-title>
-              </v-list-item-content>
-          </v-list-item>
-
+          
+          <span v-if="isLogin">
+            <v-list-item to="/profile" router exact @click="getUserInfo">
+                <v-list-item-icon>
+                  <v-icon>mdi-view-dashboard</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>내 프로필</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+          </span>
           <v-list-item to="/Main" router exact>
               <v-list-item-icon>
                 <v-icon>mdi-forum</v-icon>
@@ -84,8 +86,10 @@
               </v-list-item-content>
           </v-list-item> -->
           
-          <v-list-item to="/MovieBoxOffice" router exact>
+          <v-list-item to="/MovieBoxOffice" router exact :disabled="!isLogin">
               <v-list-item-icon>
+                <!-- 뭐깔라는데................................ -->
+                <!-- <v-icon color="green darken-2">fas fa-lock</v-icon> -->
                 <v-icon>mdi-forum</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
@@ -93,7 +97,7 @@
               </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/MovieSearch" router exact>
+          <v-list-item to="/MovieSearch" router exact :disabled="!isLogin">
                 <v-list-item-icon>
                   <v-icon>mdi-forum</v-icon>
                 </v-list-item-icon>

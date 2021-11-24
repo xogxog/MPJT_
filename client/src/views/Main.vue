@@ -1,7 +1,7 @@
 <template>
   <div id="main" class="container">
     <div class="welcome">
-      <p>Recommend for you</p>
+      <p>Recommendation for you</p>
     </div>
     <carousel id="carousel-slide"></carousel>
 

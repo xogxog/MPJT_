@@ -11,7 +11,7 @@ const review ={
   mutations: {
     GET_REVIEW_DETAIL : function(state, ReviewDetail){
       state.reviewDetail = ReviewDetail
-      // console.log(state.reviewDetail)
+      console.log(state.reviewDetail)
     },
     EDIT_REVIEW : function(state, reviewData){
       state.reviewDetail=reviewData
