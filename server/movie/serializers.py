@@ -54,10 +54,11 @@ class ReviewSerializer(serializers.ModelSerializer):
     
     user = UserInfoSerializer(read_only=True) # 작성자
     movie = MovieSerializer(read_only=True)
-
+    like_users = UserInfoSerializer(many=True, read_only=True)
+    
     class Meta :
         model = Review
-        fields = ('id','title','content','rank','created_at','updated_at','movie','user')
+        fields = ('id','title','content','rank','created_at','updated_at','movie','user','like_users')
 
 # 리뷰 리스트
 class ReviewListSerializer(serializers.ModelSerializer):
@@ -67,6 +68,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
         source='like_users.count',
         read_only =True
     )
+    # updated_at=serializers.DateTimeField(format=base.DATETIME_FORMAT, input_formats=None)
     class Meta :
         model = Review
         fields = ('id','title','user','updated_at','like_users', 'like_users_count') #user는 작성자

@@ -5,17 +5,29 @@
       <v-card-title class="">
         <span class="text-h5">{{reviewDetail.title}} <br></span>
       </v-card-title>
-      <v-card-subtitle class="float-left">
+      <v-card-subtitle class="float-left" style="margin-top:10px">
         {{reviewDetail.movie.title}}
       </v-card-subtitle>
+      <!-- 작성글 좋아요 버튼 -->
+      <div v-if="likeReview">
+        <v-btn class="ma-2" text icon color="blue lighten-2" @click="likeUnlikeReview">
+          <v-icon>mdi-thumb-up</v-icon>
+        </v-btn>
+      </div>
+      <div v-else>
+        <v-btn class="ma-2" text icon color="secondary" @click="likeUnlikeReview">
+          <v-icon>mdi-thumb-up</v-icon>
+        </v-btn>
+      </div>
       <v-divider></v-divider>
       <div class="container d-flex justify-content-between">
-        <div class="grey--text">글쓴이 : <a href="" style="text-decoration: none;">{{reviewDetail.user.nickname}}</a></div>
+
+        <div class="grey--text">글쓴이 : <a href="#" @click="openAnotherUserProfile(reviewDetail.user.id, $event)">{{reviewDetail.user.nickname}}</a></div>
         <v-rating :value="reviewDetail.rank" color="amber" dense half-increments readonly size="14"></v-rating>
       </div>
       <!-- 오른쪽으로 보내줘요............................ -->
       <div class="container align-self-end">
-        <div class="d-flex grey--text">{{reviewDetail.updated_at}}</div>
+        <div class="d-flex grey--text">작성일 : {{reviewDetail.updated_at.slice(0,10)}}</div>
       </div>
       <v-divider></v-divider>
       <v-card-text>
@@ -122,6 +134,15 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
     value: Boolean,
   },
   methods: {
+    likeUnlikeReview : function(){
+      const reviewPk = this.reviewDetail.id
+      this.$store.dispatch('review/likeUnlikeReview', reviewPk)
+    },
+    openAnotherUserProfile : function(otherUserPk, event){
+      event.preventDefault()
+      this.$store.dispatch('login/getOtherUserInfo',otherUserPk)
+      this.$router.push({name : 'Profile'})
+    },
     deleteReview:function(){
       let reviewPk = this.reviewDetail.id
       this.$store.dispatch('review/deleteReview',reviewPk)
@@ -141,7 +162,7 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
     }
   },
   computed: {
-    ...mapState('review', ['reviewDetail']),
+    ...mapState('review', ['reviewDetail','likeReview']),
     ...mapState('comment', ['comments']),
     ...mapState('login', ['userInfo']),
     show: {

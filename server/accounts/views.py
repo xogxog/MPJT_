@@ -19,26 +19,29 @@ def signup(request):
     if password != pw_confirmation :
         return Response({'error' : '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
     
+    elif not password  :
+        return Response({'error' : '비밀번호를 입력해주세요.'}, status=status.HTTP_400_BAD_REQUEST)
+
     elif User.objects.filter(nickname=request.data.get('nickname')).exists():
         return Response({'error' : '이미 존재하는 닉네임입니다.'}, status=status.HTTP_403_FORBIDDEN)
     
     elif User.objects.filter(username=request.data.get('username')).exists():
         return Response({'error': '이미 존재하는 아이디입니다.'}, status=status.HTTP_403_FORBIDDEN)
 
+    elif User.objects.filter(username=request.data.get('username')).exists():
+        return Response({'error': '이미 존재하는 아이디입니다.'}, status=status.HTTP_403_FORBIDDEN)
     # elif request.data.get('profile_path') == '':
     #     return Response({'error': '프로필사진을 지정해주세요'}, status=status.HTTP_403_FORBIDDEN)
     
     elif not request.data.get('genres_name') :
         return Response({'error': '좋아하는 영화장르를 선택해주세요.'}, status=status.HTTP_403_FORBIDDEN)
     serializer = UserSerializer(data=request.data)
-
-    if serializer.is_valid(raise_exception=True):
+    if serializer.is_valid():
         user=serializer.save()
         #비밀번호 해싱
         user.set_password(request.data.get('password'))
         user.save()
         # 좋아하는 장르
-        
         created_user = User.objects.get(username=request.data.get("username"))
         # postman에서는 리스트로 값을 못넣어줌
         for genre_name in request.data.get("genres_name"):
@@ -46,8 +49,9 @@ def signup(request):
             created_user.like_genres.add(genre)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response({'error': '문자+숫자로 아이디를 입력해주세요.'}, status=status.HTTP_400_BAD_REQUEST)
 
-
+# 나의 유저정보 보내주는것..함수명 바꿔야함........
 @api_view(['GET'])
 def login(request):
     user = get_object_or_404(User, username=request.GET.get('username'))
@@ -55,6 +59,11 @@ def login(request):
     serializer= UserInfoSerializer(user)
     return Response(serializer.data)
 
-
+@api_view(['POST'])
+def otherProfile(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
+    # user = User.objects.filter(username=request.GET.get('username')) // 이거뭐임....
+    serializer= UserInfoSerializer(user)
+    return Response(serializer.data)
 # def profile(request, user_pk):
 #     profile = get_object_or_404()

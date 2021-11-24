@@ -84,11 +84,15 @@
       </div>
     </div>
     <v-divider></v-divider>
+      <h3>Review</h3>
       <div class="reviews container">
         <v-data-table class="elevation-1" no-data-text="No Review" style="background: rgba(255, 255, 255, 0.5);" dark
           click:row :headers="headers" :items="movieDetail.reviews" multi-sort>
-          <template v-slot:item.title="{ item }">
+          <template v-slot:[`item.title`]="{item}">
             <a href="" @click="openReviewDetail(item.id, $event)" @click.stop="reviewDetailOpen=true" >{{item.title}}</a>
+          </template>
+          <template v-slot:[`item.updated_at`]="{item}">
+            {{item.updated_at.slice(0,10)}}
           </template>
         </v-data-table>
       </div>
@@ -125,7 +129,7 @@ import { mapState } from 'vuex'
         reviewDetailOpen: false,
         reviewWriteOpen: false,
         headers: [{
-            text: 'nickname1',
+            text: '작성자',
             align: 'center',
             sortable: false,
             divider: 1,
@@ -133,15 +137,15 @@ import { mapState } from 'vuex'
           },
 
           {
-            text: "title",
+            text: "제목",
             value: "title"
           },
           {
-            text: "like_users_count",
+            text: "좋아요 수",
             value: "like_users_count"
           },
           {
-            text: "updated_at",
+            text: "리뷰 작성일",
             value: "updated_at"
           },
 

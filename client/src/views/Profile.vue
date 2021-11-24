@@ -6,12 +6,12 @@
           style="overflow: visible; margin-top: 15px">
 
           <v-avatar size="100" style="top: 60%;" rounded>
-            <img alt="user" :src="`http://127.0.0.1:8000${userInfo.profile_path}`">
+            <img alt="user" :src="`http://127.0.0.1:8000${userProfile.profile_path}`">
           </v-avatar>
         </v-img>
         <br><br><br>
         <v-title>
-          <h2>{{userInfo.nickname}}</h2>
+          <h2>{{userProfile.nickname}}</h2>
         </v-title>
         <br>
 <v-btn text @click="EditProfileOpen=true">Edit</v-btn>
@@ -19,23 +19,23 @@
           <div class="d-flex justify-content-around">
               <div class="flex-column">
                 <h4>영화 찜</h4>
-                <h5>{{userInfo.like_movies.length}}</h5>
+                <h5>{{userProfile.like_movies.length}}</h5>
               </div>
 
               <div class="flex-column">
                 <h4>팔로우</h4>
-                <h5>{{userInfo.followings.length}}</h5>
+                <h5>{{userProfile.followings.length}}</h5>
               </div>
               <div class="flex-column">
                 <h4>팔로워</h4>
-                <h5>{{userInfo.followers.length}}</h5>
+                <h5>{{userProfile.followers.length}}</h5>
               </div>
           </div>
         <v-divider></v-divider>
 
         <br>
           <div class="warp container d-flex justify-content-around">
-            <div class="card" v-for="like_movie in userInfo.like_movies" :key="like_movie.movie_id" @click="movieDetail(like_movie.movie_id)">
+            <div class="card" v-for="like_movie in userProfile.like_movies" :key="like_movie.movie_id" @click="movieDetail(like_movie.movie_id)">
               <span></span>
               <div class="imgBx" ><img :src="like_movie.poster_path"></div>
               <div class="content">
@@ -75,7 +75,7 @@ import EditProfile from '@/components/EditProfile.vue'
     },
 
     computed:{
-      ...mapState('login', ['userInfo']),
+      ...mapState('login', ['userProfile']),
     },
     methods:{
       movieDetail: function (movieid) {
@@ -89,7 +89,7 @@ import EditProfile from '@/components/EditProfile.vue'
       }
     },
     created:function(){
-      console.log(this.userInfo)
+      // console.log(this.userProfile)
       $(document).ready(function(x, y) {
       $('.card').on('mouseenter', function(e){
         x = e.pageX - $(this).offset().left,
