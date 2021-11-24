@@ -14,10 +14,10 @@
       </div>
     </v-form>
 
-    <div class="warp container d-flex justify-content-around">
+    <div class="warp container">
       <div class="card" v-for="movie in searchedMovies" :key="movie.id">
         <span></span>
-        <div class="imgBx"><img :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" alt="포스터가 없습니다."></div>
+        <div class="imgBx"><img class="non-poster" :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" alt="포스터가 없습니다."></div>
         <div class="content" @click="movieDetail(movie.id)">
           <div class="content">
             <h4>{{movie.title}}</h4>
@@ -25,28 +25,31 @@
           </div>
         </div>
       </div>
-    <div><h3 style="color:gray">{{noSearhMovie}}</h3></div>
+      <div>
+        <h3 style="color:gray">{{noSearhMovie}}</h3>
+      </div>
     </div>
-    
+
+
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import jQuery from "jquery";
-const $ = jQuery;
-window.$ = $;
+  import axios from 'axios'
+  import jQuery from "jquery";
+  const $ = jQuery;
+  window.$ = $;
 
   export default {
     name: "MovieSearch",
-    data : function(){
-      return{
-        searchString : null, //서치검색어
-        searchedMovies : null, // 서치결과
-        noSearhMovie :'검색어를 입력해주세요.', // 검색한 영화가 없을 때를 위한 변수
+    data: function () {
+      return {
+        searchString: null, //서치검색어
+        searchedMovies: null, // 서치결과
+        noSearhMovie: '검색어를 입력해주세요.', // 검색한 영화가 없을 때를 위한 변수
       }
     },
-    methods :{
+    methods: {
       movieDetail: function (movieid) {
         let movieId = movieid
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
@@ -54,65 +57,99 @@ window.$ = $;
           name: 'MovieDetail'
         })
       },
-      searchMovies : function(){
+
+      searchMovies: function () {
         // console.log('일하기')
-        const API_KEY='33e4ef19e015d915281ddd6881f93178'
-        if(this.searchString){
+        const API_KEY = '33e4ef19e015d915281ddd6881f93178'
+        if (this.searchString) {
           axios({
-            method : 'get',
-            url : `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=ko-KR&query=${this.searchString}&page=1`
-          })
-            .then((res)=>{
+              method: 'get',
+              url: `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=ko-KR&query=${this.searchString}&page=1`
+            })
+            .then((res) => {
               console.log(res.data.results)
-              if(res.data.results.length >=1){
-                this.$store.dispatch('saveMovies/saveMovies',res.data.results)
-                this.searchedMovies= res.data.results
-                this.noSearhMovie=null
-              }
-              else{
-                this.noSearhMovie='검색결과가 없습니다.'
-                this.searchString=null
+              if (res.data.results.length >= 1) {
+                this.$store.dispatch('saveMovies/saveMovies', res.data.results)
+                this.searchedMovies = res.data.results
+                this.noSearhMovie = null
+
+                $(document).ready(function (x, y) {
+                  $('.card').on('mouseenter', function (e) {
+                    x = e.pageX - $(this).offset().left,
+                      y = e.pageY - $(this).offset().top;
+                    $(this).find('span').css({
+                      top: y,
+                      left: x
+                    })
+                  })
+                  $('.card').on('mouseout', function (e) {
+                    x = e.pageX - $(this).offset().left,
+                      y = e.pageY - $(this).offset().top;
+                    $(this).find('span').css({
+                      top: y,
+                      left: x
+                    })
+                  })
+                })
+              } else {
+                this.noSearhMovie = '검색결과가 없습니다.'
+                this.searchString = null
               }
             })
 
-        }else{
+        } else {
           alert('검색할 영화를 입력하세요.')
         }
       }
     },
-    created:function(){
-      $(document).ready(function(x, y) {
-      $('.card').on('mouseenter', function(e){
-        x = e.pageX - $(this).offset().left,
-        y = e.pageY - $(this).offset().top;
-        $(this).find('span').css({top:y, left:x})
+
+    Create: function () {
+      $(document).ready(function (x, y) {
+        $('.card').on('mouseenter', function (e) {
+          x = e.pageX - $(this).offset().left,
+            y = e.pageY - $(this).offset().top;
+          $(this).find('span').css({
+            top: y,
+            left: x
+          })
+        })
+        $('.card').on('mouseout', function (e) {
+          x = e.pageX - $(this).offset().left,
+            y = e.pageY - $(this).offset().top;
+          $(this).find('span').css({
+            top: y,
+            left: x
+          })
+        })
       })
-      $('.card').on('mouseout', function(e){
-        x = e.pageX - $(this).offset().left,
-        y = e.pageY - $(this).offset().top;
-        $(this).find('span').css({top:y, left:x})
-      })
-    })
     }
   }
   // export function imgHover (x, y) {
 
+
   // }
 </script>
 
-<style>
+<style scoped>
+  .non-poster {
+    background-color: rgba(58, 53, 53, 0.699);
+    
+  }
+
   .warp {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
   }
+    
   .warp .card {
     position: relative;
     width: 200px;
     height: 300px;
-    margin: 0px;
+    margin: 10px;
     overflow: hidden;
+    
   }
 
   .warp .card span {
@@ -128,18 +165,19 @@ window.$ = $;
     background: rgba(0, 0, 0, 0.7);
   }
 
-  .warp .card:hover span{
+  .warp .card:hover span {
     width: 2000px;
     height: 2000px;
   }
 
-  .warp .card .imgBx{
+  .warp .card .imgBx {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
   }
+
   .warp .card .imgBx img {
     position: absolute;
     top: 0;
@@ -169,6 +207,7 @@ window.$ = $;
     transform: translateY(50px);
     transition: 0.2s;
   }
+
   .warp .card:hover .content div {
     visibility: visible;
     opacity: 1;

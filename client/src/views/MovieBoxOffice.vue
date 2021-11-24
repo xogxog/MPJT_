@@ -61,10 +61,10 @@ export default {
   min-width: 160px;
   max-width: 100px;
   width: 100%;
-  color: #000000;
+  color: #ffffff;
   text-align: left;
   font-size: 16px;
-  background-color: #fff;
+  background-color: rgba(41, 41, 41, 0.803);
 }
 
 .hover-effect * {
@@ -110,7 +110,7 @@ export default {
 .hover-effect h5 {
   font-weight: normal;
   font-style: italic;
-  color: #888;
+  color: rgb(255, 255, 255);
   -webkit-transform: translateY(100%);
   transform: translateY(100%);
 }
