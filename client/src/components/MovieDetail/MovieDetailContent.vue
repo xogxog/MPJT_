@@ -188,24 +188,26 @@ window.$ = $;
     },
 
     created: function () {
-        $(document).ready(function (x, y) {
-          $('.card').on('mouseenter', function (e) {
-            x = e.pageX - $(this).offset().left,
-              y = e.pageY - $(this).offset().top;
-            $(this).find('span').css({
-              top: y,
-              left: x
-            })
-          })
-          $('.card').on('mouseout', function (e) {
-            x = e.pageX - $(this).offset().left,
-              y = e.pageY - $(this).offset().top;
-            $(this).find('span').css({
-              top: y,
-              left: x
-            })
+      this.$store.dispatch('getMovieDetail/movieDetail')
+
+      $(document).ready(function (x, y) {
+        $('.card').on('mouseenter', function (e) {
+          x = e.pageX - $(this).offset().left,
+            y = e.pageY - $(this).offset().top;
+          $(this).find('span').css({
+            top: y,
+            left: x
           })
         })
+        $('.card').on('mouseout', function (e) {
+          x = e.pageX - $(this).offset().left,
+            y = e.pageY - $(this).offset().top;
+          $(this).find('span').css({
+            top: y,
+            left: x
+          })
+        })
+      })
         // console.log(this.recommendMovies)
     },
 
