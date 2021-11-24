@@ -16,7 +16,7 @@ const getMovieDetail ={
     },
     MOVIE_DETAIL : function(state, movieDetail){
       state.movieDetail=movieDetail
-      console.log(state.movieDetail)
+      // console.log(state.movieDetail)
     },
     MOVIE_LIKE_UNLIKE : function(state,likeMovie){
       state.likeMovie=likeMovie
@@ -28,7 +28,7 @@ const getMovieDetail ={
       commit('SET_MOVIE_ID',movieId)
     },
     movieDetail : function({rootState,commit,state}){
-      console.log(state.movieId)
+      // console.log(state.movieId)
       axios({
         method : 'get',
         url : `http://127.0.0.1:8000/movie/movie/${state.movieId}`,
