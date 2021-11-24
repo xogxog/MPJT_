@@ -22,11 +22,11 @@
       <div class="container d-flex justify-content-center">
         <div class="box">
           <div class="imgBx">
-            <img src="@/assets/index_test.jpg">
+            <img src="@/assets/main.jpg">
           </div>
           <div class="content" style="color: white;">
             <div class="">
-              <h1>Welcome! Enjoy with your Movie</h1>
+              <h1>Welcome! Chill Out with your Movie</h1>
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@ export default {
   
   .welcome p {
     position: relative;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     /* color: white; */
     text-transform: uppercase;
     font-size: 2em;
@@ -168,14 +168,14 @@ export default {
     transition: 0.5s;
     text-transform: uppercase;
     margin-bottom: 5px;
-    font-size: 20px;
-    transform: translateX(200px) translateY(200px);
+    font-size: 30px;
+    transform: translateX(100px) translateY(200px);
   }
   .container .box:hover .content h1 {
-    transform: translateX(200px) translateY(-150px);
+    transform: translateX(100px) translateY(-150px);
     transition-delay: 0.6s;
   }
-  .container .box .content p {
+  /* .container .box .content p {
     color: #fff;
     transform: translateY(200px);
     transition: 0.5s;
@@ -185,7 +185,7 @@ export default {
     color: #fff;
     transform: translateY(0);
     transition: 0.7s;
-  }
+  } */
 
 
 </style>

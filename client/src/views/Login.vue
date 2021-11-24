@@ -101,7 +101,7 @@ import axios from 'axios'
   
   .welcome p {
     position: relative;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     /* color: white; */
     text-transform: uppercase;
     font-size: 2em;

@@ -96,6 +96,20 @@
           </template>
         </v-data-table>
       </div>
+    <v-divider></v-divider>
+      <h3>TMDBrecommed</h3>
+    <div class="TMDBrecommed warp d-flex justify-content-around">
+      <div class="card" v-for="rmovie in recommendMovies" :key="rmovie.id">
+        <span></span>
+        <div class="imgBx"><img class="non-poster" :src="`https://image.tmdb.org/t/p/original${rmovie.poster_path}`" alt="포스터가 없습니다."></div>
+        <div class="content" @click="movieDetail(rmovie.id)">
+          <div class="content">
+            <h4>{{rmovie.title}}</h4>
+            <p>{{rmovie.release_date}}</p>
+          </div>
+      </div>
+    </div>
+    </div>
         <!-- 테이블 끝 -->
       <MovieReviewCreate 
         v-model="reviewWriteOpen"
@@ -112,9 +126,14 @@
 </template>
 
 <script>
+import axios from 'axios'
 import MovieDetailReview from '@/components/MovieDetail/MovieDetailReview.vue'
 import MovieReviewCreate from '@/components/MovieDetail/MovieReviewCreate.vue'
 import { mapState } from 'vuex'
+import jQuery from "jquery";
+const $ = jQuery;
+window.$ = $;
+
   export default {
     name: 'MovieDetailContent',
     components: {
@@ -128,6 +147,7 @@ import { mapState } from 'vuex'
         onScroll : null,
         reviewDetailOpen: false,
         reviewWriteOpen: false,
+        recommendMovies : null,
         headers: [{
             text: '작성자',
             align: 'center',
@@ -173,6 +193,39 @@ import { mapState } from 'vuex'
     created: function () {
       this.$store.dispatch('getMovieDetail/movieDetail')
       // console.log(this.movieDetail)
+      const API_KEY='33e4ef19e015d915281ddd6881f93178'
+        // console.log(this.movieDetail.movie.movie_id)
+
+      axios({
+        method : 'get',
+        // url : `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
+        url : `https://api.themoviedb.org/3/movie/${this.movieDetail.movie.movie_id}/recommendations?api_key=${API_KEY}&language=ko-KR&page=1/`,
+      })
+      .then((res)=>{
+        console.log(res.data.results)
+        this.recommendMovies = res.data.results.slice(0,6)
+        this.$store.dispatch('saveMovies/saveMovies',res.data.results)
+
+        $(document).ready(function (x, y) {
+          $('.card').on('mouseenter', function (e) {
+            x = e.pageX - $(this).offset().left,
+              y = e.pageY - $(this).offset().top;
+            $(this).find('span').css({
+              top: y,
+              left: x
+            })
+          })
+          $('.card').on('mouseout', function (e) {
+            x = e.pageX - $(this).offset().left,
+              y = e.pageY - $(this).offset().top;
+            $(this).find('span').css({
+              top: y,
+              left: x
+            })
+          })
+        })
+      })
+        // console.log(this.recommendMovies)
     },
 
     computed: {
@@ -187,6 +240,83 @@ import { mapState } from 'vuex'
     color: white;
   }
 
+.warp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+    
+  .warp .card {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin: 10px;
+    overflow: hidden;
+    
+  }
+
+  .warp .card span {
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    transform: translate(-50%, -50%);
+    transition: width 0.8s, height 0.8s;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0.95;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .warp .card:hover span {
+    width: 2000px;
+    height: 2000px;
+  }
+
+  .warp .card .imgBx {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .warp .card .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .warp .card .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .warp .card .content div {
+    padding: 40px;
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.2s;
+  }
+
+  .warp .card:hover .content div {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0px);
+  }
 
 
   .text-white {
