@@ -65,6 +65,17 @@ def movie_like(request, movie_id):
         movie.like_users.add(request.user)
         return Response({'like' : '영화 찜'})
 
+# 리뷰따봉
+@api_view(['POST'])
+def review_like(request, review_pk):
+    review=get_object_or_404(Review, pk=review_pk)
+    if review.like_users.filter(id=request.data.get("userid")):
+        review.like_users.remove(request.user)
+        return Response({'unlike' : '리뷰 좋아요 취소'})
+    else :
+        review.like_users.add(request.user)
+        return Response({'like' : '리뷰 좋아요'})
+
 # 리뷰생성
 @api_view(['POST'])
 @permission_classes([AllowAny])

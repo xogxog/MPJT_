@@ -10,6 +10,7 @@ const login ={
     token : null,
     // nickname : null,
     userInfo : null, // user의 id,nickname,poster_path,username 
+    userProfile :null,
   },
   mutations: {
     LOGIN_CHECK : function(state, isLogin){
@@ -23,16 +24,16 @@ const login ={
       state.token = token
       // console.log(state.token)
     },
-    SET_USER_INFO : function(state, userInfo){ // 맨처음 로그인했을때
+    SET_USER_INFO : function(state, userInfo){ // 맨처음 로그인했을때 내 정보 저장
       state.userInfo = userInfo
       // console.log(state.userInfo)
     },
     GET_USER_INFO : function(state, userInfo){ // 내 프로필조회
-      state.userInfo = userInfo
+      state.userProfile = userInfo
       // console.log(state.userInfo)
     },
-    GET_OTHER_USER_INFO:function(state, otherUserProfile){ // 다른 사람 프로필 조회
-      state.userInfo=otherUserProfile
+    GET_OTHER_USER_INFO:function(state, userProfile){ // 다른 사람 프로필 조회
+      state.userProfile=userProfile
     }
     
   },
@@ -43,10 +44,10 @@ const login ={
     setToken : function({commit},token){
       commit('SET_TOKEN',token)
     },
-    setUserInfo : function({commit}, userInfo){
+    setUserInfo : function({commit}, userInfo){ // 현재 로그인한 사람의 정보
       commit('SET_USER_INFO',userInfo)
     },
-    getUserInfo : function({rootState,commit,state}){ // 내 프로필조회
+    getUserInfo : function({rootState,commit,state}){ // 내 프로필 가져오기
       const username={
         'username': state.userInfo.username
       }
@@ -57,11 +58,11 @@ const login ={
         headers : rootState.login.token,
       })
       .then((res)=>{
-        console.log(res.data)
+        // console.log(res.data)
         commit('GET_USER_INFO',res.data)
       })
     },
-    getOtherUserInfo : function({rootState, commit},otherUserPk){
+    getOtherUserInfo : function({rootState, commit},otherUserPk){ // 다른사람 프로필 가져오기
       axios({
         method : 'post',
         url : `http://127.0.0.1:8000/accounts/profile/${otherUserPk}/`,
