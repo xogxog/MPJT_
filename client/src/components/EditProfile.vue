@@ -7,7 +7,7 @@
       </v-card-title>
       <div class="container">
         <v-form ref="form" @submit.prevent>
-          <v-file-input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="profile_path"></v-file-input>
+          <v-file-input type="file" ref="file" accept="image/*" @change="handleFileUpload()" class="form-control-file" id="profile_path"></v-file-input>
           <!-- <div class="border p-2 mt-3">
               <p>Preview Here</p>
               <template v-if="credentials.profile_path">
@@ -19,7 +19,7 @@
         </v-form>
         
         <v-card-actions>
-          <v-btn flat text @click="createReview">Edit</v-btn>
+          <v-btn flat text @click="EditProfileImage">Edit</v-btn>
           <v-btn flat text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
         
@@ -51,28 +51,37 @@
 </template>
 
 <script>
-
+// import { mapState } from 'vuex'
   export default {
     name: "EditProfile",
 
     props: {
       value: Boolean,
     },
-
-    // methods: {
-    //   previewImage: function (event) {
-    //     var input = event.target;
-    //     // const frm = new FormData();
-    //     if (input.files) {
-    //       var reader = new FileReader();
-    //       reader.onload = (event) => {
-    //         this.credentials.profile_path = event.target.result;
-    //       }
-    //       this.image = input.files[0];
-    //       reader.readAsDataURL(input.files[0]);
-    //       }
-    //     },
-    // },
+    data:function(){
+      return{
+        file:null,
+      }
+    },
+    methods: {
+      handleFileUpload(){
+        this.file = this.$refs.file.files[0]
+        this.$store.dispatch('editProfile/editProfileImg')
+        
+      },
+      previewImage: function (event) {
+        var input = event.target;
+        // const frm = new FormData();
+        if (input.files) {
+          var reader = new FileReader();
+          reader.onload = (event) => {
+            this.credentials.profile_path = event.target.result;
+          }
+          this.image = input.files[0];
+          reader.readAsDataURL(input.files[0]);
+          }
+        },
+    },
 
     computed: {
       show: {
