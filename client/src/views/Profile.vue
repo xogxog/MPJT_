@@ -89,7 +89,7 @@ window.$ = $;
   }
 </script>
 
-<style>
+<style scoped>
   .cnt-box {
     width: 20%;
     padding-top: 6px;

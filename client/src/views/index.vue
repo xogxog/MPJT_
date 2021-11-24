@@ -169,10 +169,10 @@ export default {
     text-transform: uppercase;
     margin-bottom: 5px;
     font-size: 20px;
-    transform: translateY(200px);
+    transform: translateX(200px) translateY(200px);
   }
   .container .box:hover .content h1 {
-    transform: translateY(0);
+    transform: translateX(200px) translateY(-150px);
     transition-delay: 0.6s;
   }
   .container .box .content p {
