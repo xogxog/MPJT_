@@ -7,7 +7,7 @@
       </v-card-title>
       <div class="container">
         <v-form ref="form" @submit.prevent>
-          <v-file-input type="file" ref="file" accept="image/*" @change="handleFileUpload()" class="form-control-file" id="profile_path"></v-file-input>
+          <v-file-input type="file" accept="image/*" @change="selectFile" class="form-control-file" id="profile_path" enctype="multipart/form-data"></v-file-input>
           <!-- <div class="border p-2 mt-3">
               <p>Preview Here</p>
               <template v-if="credentials.profile_path">
@@ -60,27 +60,30 @@
     },
     data:function(){
       return{
-        file:null,
+        image:null,
       }
     },
     methods: {
-      handleFileUpload(){
-        this.file = this.$refs.file.files[0]
-        this.$store.dispatch('editProfile/editProfileImg')
+      selectFile:function(file){
+        this.image=file
+      },
+      EditProfileImage: function(){
+        console.log(this.image)
+        this.$store.dispatch('editProfile/editProfileImg', this.image)
         
       },
-      previewImage: function (event) {
-        var input = event.target;
-        // const frm = new FormData();
-        if (input.files) {
-          var reader = new FileReader();
-          reader.onload = (event) => {
-            this.credentials.profile_path = event.target.result;
-          }
-          this.image = input.files[0];
-          reader.readAsDataURL(input.files[0]);
-          }
-        },
+      // previewImage: function (event) {
+      //   var input = event.target;
+      //   // const frm = new FormData();
+      //   if (input.files) {
+      //     var reader = new FileReader();
+      //     reader.onload = (event) => {
+      //       this.credentials.profile_path = event.target.result;
+      //     }
+      //     this.image = input.files[0];
+      //     reader.readAsDataURL(input.files[0]);
+      //     }
+      //   },
     },
 
     computed: {

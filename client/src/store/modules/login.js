@@ -26,7 +26,7 @@ const login ={
     },
     SET_USER_INFO : function(state, userInfo){ // 맨처음 로그인했을때 내 정보 저장
       state.userInfo = userInfo
-      // console.log(state.userInfo)
+      console.log(state.userInfo)
     },
     GET_USER_INFO : function(state, userInfo){ // 내 프로필조회
       state.userProfile = userInfo
