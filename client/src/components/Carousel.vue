@@ -8,7 +8,7 @@
         
       </slide> -->
 
-      <slide v-for="(movieItem, index) in movieItems" :key="index" :index="index">
+      <slide class="sld" v-for="(movieItem, index) in movieItems" :key="index" :index="index">
         <figure class="snip1504">
           <img :src="movieItem.poster_path" alt="movie-poster">
           <figcaption>
@@ -61,6 +61,10 @@
 
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+.sld {
+  background: rgba(41, 41, 41, 0);
+}
+
 .snip1504 {
   font-family: 'Source Sans Pro', sans-serif;
   position: relative;
@@ -73,9 +77,9 @@
   text-align: left;
   font-size: 16px;
   background: linear-gradient(
-  rgba(0, 0, 0, 0.199), 
-  rgba(245, 174, 174, 0.829));
-  /* background-color: rgba(32, 32, 32, 0.7); */
+  rgba(143, 143, 143, 0.3), 
+  rgba(0, 0, 0, 0.9));
+  /* background: rgba(41, 41, 41, 0.803); */
 }
 
 .snip1504 * {
@@ -133,11 +137,13 @@
   left: 0;
   right: 0;
   z-index: 1;
+  
 }
 
 .snip1504:hover > img,
 .snip1504.hover > img {
   opacity: 0.1;
+  
 }
 
 .snip1504:hover h3,

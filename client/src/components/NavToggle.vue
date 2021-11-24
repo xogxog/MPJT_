@@ -5,7 +5,8 @@
       class="mx-2"
       fab
       dark
-      @click.stop="drawer = !drawer">
+      @click.stop="drawer = !drawer"
+      >
       <v-icon dark>
         mdi-format-list-bulleted-square
       </v-icon>
@@ -188,5 +189,6 @@ import {mapState} from 'vuex'
 </script>
 
 <style>
+
 
 </style>

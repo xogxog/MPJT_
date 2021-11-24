@@ -1,4 +1,9 @@
 <template>
+<div>
+  <div class="welcome">
+    <p>Box Office</p>
+  </div>
+
   <div class="img-box">
     <div class="real-box">
       <span :style="`--i:${index+1}`" v-for="(trendmovie,index) in trendMovies" :key="index">
@@ -14,6 +19,7 @@
       </span>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -53,6 +59,43 @@ export default {
 
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+.welcome {
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .welcome p {
+    position: relative;
+    font-family: sans-serif;
+    /* color: white; */
+    text-transform: uppercase;
+    font-size: 2em;
+    letter-spacing: 4px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #000, #fff, #000);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    animation: animate 2s linear infinite;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    -webkit-background-clip: text;
+  }
+
+  @keyframes animate
+  {
+    0%
+    {
+      background-position: -400%;
+    }
+    100%
+    {
+      background-position: 300%;
+    }
+  }
+
 .hover-effect {
   font-family: 'Source Sans Pro', sans-serif;
   position: relative;
@@ -64,7 +107,10 @@ export default {
   color: #ffffff;
   text-align: left;
   font-size: 16px;
-  background-color: rgba(41, 41, 41, 0.803);
+  background: linear-gradient(
+  rgba(143, 143, 143, 0.7), 
+  rgba(0, 0, 0, 0.9));
+  /* background-color: rgba(41, 41, 41, 0.803); */
 }
 
 .hover-effect * {
@@ -154,10 +200,10 @@ export default {
     width: 230px;
     height: 230px;
     transform-style: preserve-3d;
-    animation: animate 30s linear infinite;
+    animation: animate2 30s linear infinite;
   }
 
-  @keyframes animate
+  @keyframes animate2
   {
     0%
     {
