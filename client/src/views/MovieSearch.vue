@@ -18,12 +18,12 @@
       <div class="card" v-for="movie in searchedMovies" :key="movie.id">
         <span></span>
         <div class="imgBx"><img :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" alt="포스터가 없습니다."></div>
-        <div class="content" @click="movieDetail(movie.id)">
-          <div class="content">
-            <h4>{{movie.title}}</h4>
-            <p>{{movie.release_date}}</p>
+          <div class="content" @click="movieDetail(movie.id)">
+            <div class="content">
+              <h4>{{movie.title}}</h4>
+              <p>{{movie.release_date}}</p>
+            </div>
           </div>
-        </div>
       </div>
     <div><h3 style="color:gray">{{noSearhMovie}}</h3></div>
     </div>
@@ -63,11 +63,23 @@ window.$ = $;
             url : `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=ko-KR&query=${this.searchString}&page=1`
           })
             .then((res)=>{
-              console.log(res.data.results)
+              // console.log(res.data.results)
               if(res.data.results.length >=1){
                 this.$store.dispatch('saveMovies/saveMovies',res.data.results)
                 this.searchedMovies= res.data.results
                 this.noSearhMovie=null
+                $(document).ready(function(x, y) {
+                $('.card').on('mouseenter', function(e){
+                  x = e.pageX - $(this).offset().left,
+                  y = e.pageY - $(this).offset().top;
+                  $(this).find('span').css({top:y, left:x})
+                })
+                $('.card').on('mouseout', function(e){
+                  x = e.pageX - $(this).offset().left,
+                  y = e.pageY - $(this).offset().top;
+                  $(this).find('span').css({top:y, left:x})
+                })
+              })
               }
               else{
                 this.noSearhMovie='검색결과가 없습니다.'
@@ -81,18 +93,6 @@ window.$ = $;
       }
     },
     created:function(){
-      $(document).ready(function(x, y) {
-      $('.card').on('mouseenter', function(e){
-        x = e.pageX - $(this).offset().left,
-        y = e.pageY - $(this).offset().top;
-        $(this).find('span').css({top:y, left:x})
-      })
-      $('.card').on('mouseout', function(e){
-        x = e.pageX - $(this).offset().left,
-        y = e.pageY - $(this).offset().top;
-        $(this).find('span').css({top:y, left:x})
-      })
-    })
     }
   }
   // export function imgHover (x, y) {

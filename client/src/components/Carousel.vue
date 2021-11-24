@@ -33,7 +33,7 @@
     methods: {
       movieDetail: function (movieid) {
         let movieId = movieid
-        console.log(movieId)
+        // console.log(movieId)
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
         this.$router.push({
           name: 'MovieDetail'
