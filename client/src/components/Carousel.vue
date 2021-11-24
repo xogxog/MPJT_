@@ -14,7 +14,7 @@
           <figcaption>
             <h5>{{ movieItem.title }}</h5>
           </figcaption>
-          <a src="" @click.prevent="movieDetail(movieItem.id)"></a>
+          <a src="" @click.prevent="movieDetail(movieItem.movie_id)"></a>
         </figure>
       </slide>
     </carousel-3d>
