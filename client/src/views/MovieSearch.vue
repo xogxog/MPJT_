@@ -17,13 +17,13 @@
     <div class="warp container">
       <div class="card" v-for="movie in searchedMovies" :key="movie.id">
         <span></span>
+
         <div class="imgBx"><img class="non-poster" :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" alt="포스터가 없습니다."></div>
         <div class="content" @click="movieDetail(movie.id)">
           <div class="content">
             <h4>{{movie.title}}</h4>
             <p>{{movie.release_date}}</p>
           </div>
-        </div>
       </div>
       <div>
         <h3 style="color:gray">{{noSearhMovie}}</h3>
@@ -63,6 +63,7 @@
         const API_KEY = '33e4ef19e015d915281ddd6881f93178'
         if (this.searchString) {
           axios({
+
               method: 'get',
               url: `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=ko-KR&query=${this.searchString}&page=1`
             })
@@ -94,6 +95,7 @@
               } else {
                 this.noSearhMovie = '검색결과가 없습니다.'
                 this.searchString = null
+
               }
             })
 
@@ -103,25 +105,8 @@
       }
     },
 
-    Create: function () {
-      $(document).ready(function (x, y) {
-        $('.card').on('mouseenter', function (e) {
-          x = e.pageX - $(this).offset().left,
-            y = e.pageY - $(this).offset().top;
-          $(this).find('span').css({
-            top: y,
-            left: x
-          })
-        })
-        $('.card').on('mouseout', function (e) {
-          x = e.pageX - $(this).offset().left,
-            y = e.pageY - $(this).offset().top;
-          $(this).find('span').css({
-            top: y,
-            left: x
-          })
-        })
-      })
+    created:function(){
+
     }
   }
   // export function imgHover (x, y) {

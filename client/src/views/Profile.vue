@@ -6,72 +6,41 @@
           style="overflow: visible; margin-top: 15px">
 
           <v-avatar size="100" style="top: 60%;" rounded>
-            <img alt="user" src="@/assets/profile_test.jpg">
+            <img alt="user" :src="`http://127.0.0.1:8000${userInfo.profile_path}`">
           </v-avatar>
         </v-img>
         <br><br><br>
         <v-title>
-          <h2>User Name</h2>
+          <h2>{{userInfo.nickname}}</h2>
         </v-title>
         <br>
         <v-divider></v-divider>
           <div class="d-flex justify-content-around">
               <div class="flex-column">
                 <h4>영화 찜</h4>
-                <h5>123개</h5>
+                <h5>{{userInfo.like_movies.length}}</h5>
               </div>
 
               <div class="flex-column">
                 <h4>팔로우</h4>
-                <h5>123명</h5>
+                <h5>{{userInfo.followings.length}}</h5>
               </div>
               <div class="flex-column">
                 <h4>팔로워</h4>
-                <h5>123명</h5>
+                <h5>{{userInfo.followers.length}}</h5>
               </div>
           </div>
         <v-divider></v-divider>
 
         <br>
           <div class="warp container d-flex justify-content-around">
-            <div class="card">
+            <div class="card" v-for="like_movie in userInfo.like_movies" :key="like_movie.movie_id" @click="movieDetail(like_movie.movie_id)">
               <span></span>
-              <div class="imgBx"><img src="@/assets/dune_poster.jpg"></div>
+              <div class="imgBx" ><img :src="like_movie.poster_path"></div>
               <div class="content">
                 <div class="content">
-                  <h1>Title</h1>
-                  <p>Overview</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <span></span>
-              <div class="imgBx"><img src="@/assets/dune_poster.jpg"></div>
-              <div class="content">
-                <div class="content">
-                  <h1>Title</h1>
-                  <p>Overview</p>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <span></span>
-              <div class="imgBx"><img src="@/assets/dune_poster.jpg"></div>
-              <div class="content">
-                <div class="content">
-                  <h1>Title</h1>
-                  <p>Overview</p>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <span></span>
-              <div class="imgBx"><img src="@/assets/dune_poster.jpg"></div>
-              <div class="content">
-                <div class="content">
-                  <h1>Title</h1>
-                  <p>Overview</p>
+                  <h4>{{like_movie.title}}</h4>
+                  <!-- <p>Overview</p> -->
                 </div>
               </div>
             </div>
@@ -83,13 +52,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import jQuery from "jquery";
 const $ = jQuery;
 window.$ = $;
-
   export default {
     name: "Profile",
+    computed:{
+      ...mapState('login', ['userInfo']),
+    },
+    methods:{
+      movieDetail: function (movieid) {
+        let movieId = movieid
+        this.$store.dispatch('getMovieDetail/setMovieId', movieId)
+        this.$router.push({
+          name: 'MovieDetail'
+        })
+      }
+    },
     created:function(){
+      console.log(this.userInfo)
       $(document).ready(function(x, y) {
       $('.card').on('mouseenter', function(e){
         x = e.pageX - $(this).offset().left,

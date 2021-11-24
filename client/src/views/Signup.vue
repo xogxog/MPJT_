@@ -132,8 +132,8 @@ import axios from 'axios'
             this.$router.push({ name:'Main'})
           })
           .catch(error =>{
-            alert(error.message)
-            console.log(error.message)
+            alert(error.response.data.error)
+            console.log(error.response.data.error)
           })
         },
       },
