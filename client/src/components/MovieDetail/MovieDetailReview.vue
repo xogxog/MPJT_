@@ -22,7 +22,15 @@
       <v-divider></v-divider>
       <div class="container d-flex justify-content-between">
 
-        <div class="grey--text">글쓴이 : <a href="#" @click="openAnotherUserProfile(reviewDetail.user.id, $event)">{{reviewDetail.user.nickname}}</a></div>
+        <div class="grey--text">작성자
+          <v-avatar>
+            <img
+              :src="`http://127.0.0.1:8000${reviewDetail.user.profile_path}`"
+              alt="John"
+            >
+          </v-avatar>
+          <a href="#" @click="openAnotherUserProfile(reviewDetail.user.id, $event)">{{reviewDetail.user.nickname}}</a>
+        </div>
         <v-rating :value="reviewDetail.rank" color="amber" dense half-increments readonly size="14"></v-rating>
       </div>
       <!-- 오른쪽으로 보내줘요............................ -->
@@ -137,6 +145,7 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
     likeUnlikeReview : function(){
       const reviewPk = this.reviewDetail.id
       this.$store.dispatch('review/likeUnlikeReview', reviewPk)
+      console.log(this.reviewDetail)
     },
     openAnotherUserProfile : function(otherUserPk, event){
       event.preventDefault()

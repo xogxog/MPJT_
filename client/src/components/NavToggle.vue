@@ -23,6 +23,13 @@
       <v-list-item>
         <v-list-item-content>
           <span v-if="isLogin">
+            <v-avatar>
+            <img
+              :src="`http://127.0.0.1:8000${userInfo.profile_path}`"
+              alt="John"
+              size="36"
+            >
+          </v-avatar>
           <v-list-item-title>{{userInfo.nickname}}</v-list-item-title>
           </span>
           <span v-else>

@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer,UserInfoSerializer
 from movie.models import Genre
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -67,6 +69,11 @@ def otherProfile(request, user_pk):
     return Response(serializer.data)
 
 # 프로필사진 수정
-@api_view(['PUT'])
+@api_view(['POST'])
 def editProfileImage(request,user_pk):
-    print(request.FILE.get('file'))
+    user = get_object_or_404(User, pk=user_pk)
+    user.profile_path = request.FILES.get('file')
+    if request.user.id==user_pk :
+        user.save()
+        return Response(status=status.HTTP_201_CREATED)
+
