@@ -29,8 +29,11 @@ const login ={
     },
     GET_USER_INFO : function(state, userInfo){ // 내 프로필조회
       state.userInfo = userInfo
-      console.log(state.userInfo)
+      // console.log(state.userInfo)
     },
+    GET_OTHER_USER_INFO:function(state, otherUserProfile){ // 다른 사람 프로필 조회
+      state.userInfo=otherUserProfile
+    }
     
   },
   actions: {
@@ -56,6 +59,19 @@ const login ={
       .then((res)=>{
         console.log(res.data)
         commit('GET_USER_INFO',res.data)
+      })
+    },
+    getOtherUserInfo : function({rootState, commit},otherUserPk){
+      axios({
+        method : 'post',
+        url : `http://127.0.0.1:8000/accounts/profile/${otherUserPk}/`,
+        data : {
+          'user_pk' : otherUserPk
+        },
+        headers : rootState.login.token,
+      })
+      .then((res)=>{
+        commit('GET_OTHER_USER_INFO', res.data)
       })
     },
   },

@@ -124,8 +124,8 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
   methods: {
     openAnotherUserProfile : function(otherUserPk, event){
       event.preventDefault()
-      this.$store.dispatch('otherUserProfile/getOtherUserInfo',otherUserPk)
-
+      this.$store.dispatch('login/getOtherUserInfo',otherUserPk)
+      this.$router.push({name : 'Profile'})
     },
     deleteReview:function(){
       let reviewPk = this.reviewDetail.id

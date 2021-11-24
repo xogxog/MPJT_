@@ -90,10 +90,15 @@
               <v-list-item-icon>
                 <!-- 뭐깔라는데................................ -->
                 <!-- <v-icon color="green darken-2">fas fa-lock</v-icon> -->
+                
                 <v-icon>mdi-forum</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>MovieBoxOffice</v-list-item-title>
+                <v-list-item-title>MovieBoxOffice
+                  <v-icon v-if="!isLogin" class="material-icons-outlined" small disabled>lock</v-icon>
+                </v-list-item-title>
+                
+
               </v-list-item-content>
           </v-list-item>
 
@@ -102,7 +107,9 @@
                   <v-icon>mdi-forum</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title>MovieSearch</v-list-item-title>
+                  <v-list-item-title>MovieSearch
+                    <v-icon v-if="!isLogin" class="material-icons-outlined" small disabled>lock</v-icon>
+                  </v-list-item-title>
                 </v-list-item-content>
           </v-list-item>
         </span>
