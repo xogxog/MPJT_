@@ -1,23 +1,28 @@
 <template>
-  <v-dialog v-model="show" width="50%">
+  <v-dialog v-model="show" width="50%" max-width="400px">
     <v-card class="container">
 
-      <v-card-title class="">
-        <span class="text-h5">{{reviewDetail.title}} <br></span>
-      </v-card-title>
-      <v-card-subtitle class="float-left" style="margin-top:10px">
-        {{reviewDetail.movie.title}}
-      </v-card-subtitle>
-      <!-- 작성글 좋아요 버튼 -->
+      <v-card-title class="font-set align-center justify-content-between">
+        <span class="text-h4">{{reviewDetail.title}} <br></span>
       <div v-if="likeReview">
-        <v-btn class="ma-2" text icon color="blue lighten-2" @click="likeUnlikeReview">
+        <v-btn class="ma-3" text icon color="blue lighten-2" @click="likeUnlikeReview">
           <v-icon>mdi-thumb-up</v-icon>
         </v-btn>
       </div>
       <div v-else>
-        <v-btn class="ma-2" text icon color="secondary" @click="likeUnlikeReview">
+        <v-btn class="ma-3" text icon color="secondary" @click="likeUnlikeReview">
           <v-icon>mdi-thumb-up</v-icon>
         </v-btn>
+      </div>
+      </v-card-title>
+      <div class="d-flex justify-content-between">
+      <v-card-subtitle class="text-h5 float-left" style="margin-top:10px">
+        {{reviewDetail.movie.title}}
+      </v-card-subtitle>
+      <div class="ma-7">
+        <v-rating :value="reviewDetail.rank" color="amber" dense half-increments readonly size="20"></v-rating>
+      </div>
+      <!-- 작성글 좋아요 버튼 -->
       </div>
       <v-divider></v-divider>
       <div class="container d-flex justify-content-between">
@@ -31,14 +36,11 @@
           </v-avatar>
           <a href="#" @click="openAnotherUserProfile(reviewDetail.user.id, $event)">{{reviewDetail.user.nickname}}</a>
         </div>
-        <v-rating :value="reviewDetail.rank" color="amber" dense half-increments readonly size="14"></v-rating>
-      </div>
-      <!-- 오른쪽으로 보내줘요............................ -->
-      <div class="container align-self-end">
         <div class="d-flex grey--text">작성일 : {{reviewDetail.updated_at.slice(0,10)}}</div>
       </div>
+      <!-- 오른쪽으로 보내줘요............................ -->
       <v-divider></v-divider>
-      <v-card-text>
+      <v-card-text class="text-body-1" style="color: black">
         {{reviewDetail.content}}
       </v-card-text>
       <v-divider></v-divider>
@@ -185,3 +187,9 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
   }
   }
 </script>
+
+<style scoped>
+  .font-set {
+    font-family: 'IBM Plex Sans KR', sans-serif !important;
+  }
+</style>
