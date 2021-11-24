@@ -19,6 +19,7 @@ const getMovieDetail ={
     },
     MOVIE_LIKE_UNLIKE : function(state,likeMovie){ // 영화 찜 상태 토글용
       state.likeMovie=likeMovie
+      console.log(state.likeMovie)
     }
   },
   actions: {

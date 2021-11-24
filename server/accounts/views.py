@@ -65,5 +65,8 @@ def otherProfile(request, user_pk):
     # user = User.objects.filter(username=request.GET.get('username')) // 이거뭐임....
     serializer= UserInfoSerializer(user)
     return Response(serializer.data)
-# def profile(request, user_pk):
-#     profile = get_object_or_404()
+
+# 프로필사진 수정
+@api_view(['PUT'])
+def editProfileImage(request,user_pk):
+    print(request.FILE.get('file'))
