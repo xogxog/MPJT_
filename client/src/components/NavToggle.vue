@@ -23,14 +23,14 @@
       <v-list-item>
         <v-list-item-content>
           <span v-if="isLogin">
-            <v-avatar>
+          <v-avatar class="mt-6" size="70">
             <img
               :src="`http://127.0.0.1:8000${userInfo.profile_path}`"
               alt="John"
-              size="36"
             >
           </v-avatar>
-          <v-list-item-title>{{userInfo.nickname}}</v-list-item-title>
+          
+          <v-list-item-title class="mt-4">{{userInfo.nickname}}</v-list-item-title>
           </span>
           <span v-else>
           <v-list-item-title>로그인 하세요.</v-list-item-title>
@@ -39,16 +39,6 @@
       </v-list-item>
 
       <v-divider></v-divider>
-
-      <v-list-item>
-        <v-autocomplete
-          label="Search"
-          dense
-          filled
-          rounded
-        ></v-autocomplete>
-      </v-list-item>
-
       <!-- 항상보임 -->
       <v-list>
         <span>

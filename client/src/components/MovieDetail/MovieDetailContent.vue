@@ -7,7 +7,7 @@
       <div class="">
         <v-img width="350px" height="500px" contain :src="movieDetail.movie.poster_path" alt="poster"></v-img>
         <v-divider></v-divider>
-        <v-card class="d-flex" style="background: rgba(255, 255, 255, 0.5); margin: 0 15%;">
+        <v-card class="mt-7 d-flex" style="background: rgba(255, 255, 255, 0.5); margin: 0 15%;">
           <v-card-text style="color: white;">평균 점수<br>{{movieDetail.movie.vote_average}}</v-card-text>
           <v-card-text style="color: white;">개봉일<br>{{movieDetail.movie.release_date}}</v-card-text>
         </v-card>
@@ -35,6 +35,7 @@
             </v-card>
           </div>
           <v-divider></v-divider>
+
           <v-card v-scroll.self="onScroll" height="101px"
             class="d-flex overflow-y-auto justify-content-evenly text-white"
             style="background: rgba(255, 255, 255, 0.5);">
@@ -52,16 +53,17 @@
               </div>
             </div>
           </v-card>
+
           <v-divider></v-divider>
 
           <div class="d-flex justify-content-around" style="background-color: rgba(255, 255, 255, 0.0)f">
-            <div v-if="likeMovie">
+            <div v-if="likeMovie" class="pt-4">
               <v-btn color="red" fab small dark @click="likeUnlikeMovie">
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
               <div style="margin-top:10px">찜</div>
             </div>
-            <div v-else>
+            <div v-else class="pt-4">
               <v-btn color="secondary" fab small dark @click="likeUnlikeMovie">
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
@@ -73,7 +75,7 @@
               </v-btn>
               <div>123</div>
             </div> -->
-            <div>
+            <div class="pt-4">
               <v-btn color="primary" fab small dark @click.stop="reviewWriteOpen=true">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
@@ -97,7 +99,7 @@
         </v-data-table>
       </div>
     <v-divider></v-divider>
-      <h3>TMDBrecommed</h3>
+      <h3>추천 영화</h3>
     <div class="TMDBrecommed warp d-flex justify-content-around">
       <div class="card" v-for="rmovie in recommendMovies" :key="rmovie.id">
         <span></span>

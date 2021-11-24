@@ -27,17 +27,19 @@
       <v-divider></v-divider>
       <div class="container d-flex justify-content-between">
 
-        <div class="grey--text">작성자
+        <div class="grey--text">
           <v-avatar>
             <img
               :src="`http://127.0.0.1:8000${reviewDetail.user.profile_path}`"
               alt="John"
             >
           </v-avatar>
+          &nbsp;&nbsp;
           <a href="#" @click="openAnotherUserProfile(reviewDetail.user.id, $event)">{{reviewDetail.user.nickname}}</a>
         </div>
-        <div class="d-flex grey--text">작성일 : {{reviewDetail.updated_at.slice(0,10)}}</div>
+        <div class="d-flex grey--text pt-2">작성일 : {{reviewDetail.updated_at.slice(0,10)}}</div>
       </div>
+      
       <!-- 오른쪽으로 보내줘요............................ -->
       <v-divider></v-divider>
       <v-card-text class="text-body-1" style="color: black">
@@ -49,13 +51,13 @@
         <div class="d-flex">
         <v-text-field label="comment" v-model="comment"></v-text-field>
             <v-btn
-              class="mx-1"
+              class="mt-3"
               fab
               dark
               color="indigo"
               small
               >
-          <v-icon dark @click="createComment">
+          <v-icon class="" dark @click="createComment">
             mdi-plus
           </v-icon>
         </v-btn>
