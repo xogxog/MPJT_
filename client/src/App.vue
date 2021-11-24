@@ -51,6 +51,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
+
   .nav-in-box {
     width: 250px; height: 250px;
   }
@@ -62,9 +64,7 @@ export default {
 
   #app {
     background: black;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'IBM Plex Sans KR', sans-serif !important;
     text-align: center;
   }
 /* 

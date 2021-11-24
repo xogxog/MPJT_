@@ -14,22 +14,17 @@
       </div>
     </v-form>
 
-    <div class="warp container">
+    <div class="warp">
       <div class="card" v-for="movie in searchedMovies" :key="movie.id">
         <span></span>
-
         <div class="imgBx"><img class="non-poster" :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" alt="포스터가 없습니다."></div>
         <div class="content" @click="movieDetail(movie.id)">
           <div class="content">
             <h4>{{movie.title}}</h4>
             <p>{{movie.release_date}}</p>
           </div>
+        </div>
       </div>
-      <div>
-        <h3 style="color:gray">{{noSearhMovie}}</h3>
-      </div>
-    </div>
-
     </div>
   </div>
 </template>

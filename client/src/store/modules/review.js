@@ -67,7 +67,6 @@ const review ={
             }else{
               let likeReview=false
               commit('REVIEW_LIKE_UNLIKE', likeReview)
-              break
             }
           }
         }

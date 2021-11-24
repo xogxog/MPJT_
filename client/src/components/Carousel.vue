@@ -9,6 +9,7 @@
       </slide> -->
 
       <slide class="sld" v-for="(movieItem, index) in movieItems" :key="index" :index="index">
+        <span>
         <figure class="snip1504">
           <img :src="movieItem.poster_path" alt="movie-poster">
           <figcaption>
@@ -16,6 +17,7 @@
           </figcaption>
           <a src="" @click.prevent="movieDetail(movieItem.movie_id)"></a>
         </figure>
+        </span>
       </slide>
     </carousel-3d>
   </div>
@@ -63,10 +65,12 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 .sld {
   background: rgba(41, 41, 41, 0);
+  -webkit-box-reflect: below -5px linear-gradient(transparent, transparent, #0005);
+
 }
 
 .snip1504 {
-  font-family: 'Source Sans Pro', sans-serif;
+  /* font-family: 'Source Sans Pro', sans-serif; */
   position: relative;
   overflow: hidden;
   margin: 10px;
@@ -124,7 +128,7 @@
 
 .snip1504 h5 {
   font-weight: normal;
-  font-style: italic;
+  /* font-style: italic; */
   color: rgb(255, 255, 255);
   -webkit-transform: translateY(100%);
   transform: translateY(100%);

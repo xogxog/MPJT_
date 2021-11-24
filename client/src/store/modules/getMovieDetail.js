@@ -48,7 +48,6 @@ const getMovieDetail ={
             }else{
               let likeMovie=false
               commit('MOVIE_LIKE_UNLIKE',likeMovie)
-              break
             }
           }
         }

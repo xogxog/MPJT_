@@ -70,7 +70,7 @@ export default {
   
   .welcome p {
     position: relative;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     /* color: white; */
     text-transform: uppercase;
     font-size: 2em;
@@ -97,7 +97,7 @@ export default {
   }
 
 .hover-effect {
-  font-family: 'Source Sans Pro', sans-serif;
+  /* font-family: 'Source Sans Pro', sans-serif; */
   position: relative;
   overflow: hidden;
   margin: 10px;
