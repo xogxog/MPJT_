@@ -10,7 +10,7 @@
       </v-card-subtitle>
       <v-divider></v-divider>
       <div class="container d-flex justify-content-between">
-        <div class="grey--text">글쓴이 : {{reviewDetail.user.nickname}}</div>
+        <div class="grey--text">글쓴이 : <a href="" style="text-decoration: none;">{{reviewDetail.user.nickname}}</a></div>
         <v-rating :value="reviewDetail.rank" color="amber" dense half-increments readonly size="14"></v-rating>
       </div>
       <!-- 오른쪽으로 보내줘요............................ -->

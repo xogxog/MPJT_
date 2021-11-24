@@ -14,6 +14,7 @@
           <h2>{{userInfo.nickname}}</h2>
         </v-title>
         <br>
+<v-btn text @click="EditProfileOpen=true">Edit</v-btn>
         <v-divider></v-divider>
           <div class="d-flex justify-content-around">
               <div class="flex-column">
@@ -45,9 +46,11 @@
               </div>
             </div>
           </div>
-
       </v-card>
     </v-row>
+        <EditProfile
+      v-model="EditProfileOpen"
+    ></EditProfile>
   </div>
 </template>
 
@@ -56,8 +59,21 @@ import { mapState } from 'vuex'
 import jQuery from "jquery";
 const $ = jQuery;
 window.$ = $;
+
+import EditProfile from '@/components/EditProfile.vue'
+
   export default {
     name: "Profile",
+    data: function () {
+      return {
+        EditProfileOpen: false,
+      }
+    },
+
+    components: {
+      EditProfile,
+    },
+
     computed:{
       ...mapState('login', ['userInfo']),
     },
@@ -67,6 +83,8 @@ window.$ = $;
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
         this.$router.push({
           name: 'MovieDetail'
+        
+        
         })
       }
     },
@@ -105,7 +123,7 @@ window.$ = $;
     position: relative;
     width: 200px;
     height: 300px;
-    margin: 0px;
+    margin: 10px;
     overflow: hidden;
   }
 
