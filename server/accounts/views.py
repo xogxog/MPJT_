@@ -55,14 +55,12 @@ def signup(request):
 @api_view(['GET'])
 def login(request):
     user = get_object_or_404(User, username=request.GET.get('username'))
-    # user = User.objects.filter(username=request.GET.get('username')) // 이거뭐임....
     serializer= UserInfoSerializer(user)
     return Response(serializer.data)
 
 @api_view(['POST'])
 def otherProfile(request, user_pk):
     user = get_object_or_404(User, pk=user_pk)
-    # user = User.objects.filter(username=request.GET.get('username')) // 이거뭐임....
     serializer= UserInfoSerializer(user)
     return Response(serializer.data)
 
