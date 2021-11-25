@@ -51,10 +51,13 @@ import { mapState } from 'vuex'
       },
       
       EditProfileImage: function(){
-        console.log(this.image)
-
-        this.$store.dispatch('profile/editProfileImg', this.image)
-
+        if(this.image==null){
+          alert('프로필사진을 선택해주세요.')
+        }else{
+          this.$store.dispatch('profile/editProfileImg', this.image)
+          this.show=false
+        }
+        // console.log(this.image)
       },
     },
 
