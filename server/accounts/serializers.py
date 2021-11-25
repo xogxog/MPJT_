@@ -23,6 +23,13 @@ class UserInfoSerializer(serializers.ModelSerializer):
             fields =('movie_id','title','poster_path',)
     like_movies=MovieListSerializer(many=True, read_only=True)
 
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta : 
+            model = User
+            fields = ('id','nickname')
+    followings=UserSerializer(many=True, read_only=True)
+    followers=UserSerializer(many=True, read_only=True)
+
     class Meta :
         model = User
         fields = ('id','username','nickname','profile_path','followings','followers','like_genres','like_movies')
