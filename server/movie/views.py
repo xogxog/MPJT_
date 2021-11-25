@@ -49,10 +49,10 @@ def movie_list(request):
         for genre in sorted(genres_dic.items(), key=lambda x: x[1], reverse=True)[:3] :
             sorted_genres.append(int(genre[0]))
         get_user_like_genre = Genre.objects.filter(genre_id__in=sorted_genres)
-
+        get_user_like_genre2 = Genre.objects.filter(user__id=request.user.id) # 맨처음 장르만 선택했을때,
         # 좋아하는 장르 가장 많이 가진 영화 100순위 중 랜덤20개
         movies = sorted(Movie.objects.filter(
-            Q(genres__genre_id__in=get_user_like_genre) & ~Q(like_users__id=request.user.id)
+            Q(genres__genre_id__in=get_user_like_genre)|Q(genres__genre_id__in=get_user_like_genre2) & ~Q(like_users__id=request.user.id)
             ).annotate(
                 count_movies=Count('movie_id')
             ).order_by(
