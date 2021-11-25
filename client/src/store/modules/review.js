@@ -27,7 +27,7 @@ const review ={
     }
   },
   actions: {
-    createReview:function({rootState},reviewData){
+    createReview:function({rootState,dispatch},reviewData){
       let data = {
         'title' : reviewData.title,
         'content' : reviewData.content,
@@ -41,6 +41,7 @@ const review ={
       })
       .then(()=>{
         // console.log(res.data)
+        dispatch('getMovieDetail/movieDetail',null, {root : true})
       })
       .catch((err)=>{
         console.log(err)
@@ -72,7 +73,7 @@ const review ={
         }
       })
     },
-    editReview : function({rootState,commit},reviewData){
+    editReview : function({rootState,commit,dispatch},reviewData){
       let data = {
         'title' : reviewData.title,
         'content' : reviewData.content,
@@ -86,10 +87,11 @@ const review ={
       })
       .then((res)=>{
         commit('EDIT_REVIEW', res.data)
+        dispatch('getMovieDetail/movieDetail',null, {root : true})
         // this.getReviewDetail({rootState,commit},reviewData.reviewPk)
       })
     },
-    deleteReview : function({rootState,commit},reviewPk){
+    deleteReview : function({rootState,commit,dispatch},reviewPk){
       axios({
         method : 'delete',
         url : `http://127.0.0.1:8000/movie/movie/review/${reviewPk}/`,
@@ -97,6 +99,7 @@ const review ={
       })
       .then(()=>{
         commit('DELETE_REVIEW')
+        dispatch('getMovieDetail/movieDetail',null, {root : true})
       })
     },
     likeUnlikeReview : function({rootState, dispatch}, reviewPk){

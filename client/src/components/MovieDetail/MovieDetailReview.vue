@@ -5,13 +5,13 @@
       <v-card-title class="font-set align-center justify-content-between">
         <span class="text-h4">{{reviewDetail.title}} <br></span>
       <div v-if="likeReview">
-        <v-btn class="ma-3" text icon color="blue lighten-2" @click="likeUnlikeReview">
+        <v-btn class="ma-3" text fab color="indigo" @click="likeUnlikeReview" elevation="2" dark>
           <v-icon>mdi-thumb-up</v-icon>
         </v-btn>
       </div>
       <div v-else>
-        <v-btn class="ma-3" text icon color="secondary" @click="likeUnlikeReview">
-          <v-icon>mdi-thumb-up</v-icon>
+        <v-btn class="ma-3" text fab color="secondary" @click="likeUnlikeReview" elevation="2">
+          <v-icon >mdi-thumb-up</v-icon>
         </v-btn>
       </div>
       </v-card-title>
@@ -31,7 +31,7 @@
           <v-avatar>
             <img
               :src="`http://127.0.0.1:8000${reviewDetail.user.profile_path}`"
-              alt="John"
+              alt="profile_img"
             >
           </v-avatar>
           &nbsp;&nbsp;
@@ -149,7 +149,8 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
     likeUnlikeReview : function(){
       const reviewPk = this.reviewDetail.id
       this.$store.dispatch('review/likeUnlikeReview', reviewPk)
-      console.log(this.reviewDetail)
+      this.$store.dispatch('getMovieDetail/movieDetail')
+      // console.log(this.reviewDetail)
     },
     openAnotherUserProfile : function(otherUserPk, event){
       event.preventDefault()
@@ -159,7 +160,7 @@ import MovieReviewEdit from './MovieReviewEdit.vue'
     deleteReview:function(){
       let reviewPk = this.reviewDetail.id
       this.$store.dispatch('review/deleteReview',reviewPk)
-      location.reload()
+      // location.reload()
     },
     createComment : function(event){
       event.preventDefault()

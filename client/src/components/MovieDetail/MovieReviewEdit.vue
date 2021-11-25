@@ -13,7 +13,7 @@
         </v-form>
 
         <v-card-actions>
-          <v-btn text @click="editReview">Edit</v-btn>
+          <v-btn text @click="editReview" :show="showOrNotShow">Edit</v-btn>
           <v-btn text @click="resetForm">Reset</v-btn>
           <v-btn text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
@@ -39,6 +39,7 @@ import {mapState} from 'vuex'
     },
     methods: {
       editReview : function (){
+        this.show=true
         let reviewData = {
           'reviewPk' : this.reviewPk,
           'title' : this.title,
@@ -46,7 +47,8 @@ import {mapState} from 'vuex'
           'rank' : this.rank,
         }
         this.$store.dispatch('review/editReview',reviewData)
-        location.reload()
+        this.show=false
+        // location.reload()
         
       },
       resetForm : function () {

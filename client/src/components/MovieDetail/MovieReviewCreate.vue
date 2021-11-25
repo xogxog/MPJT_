@@ -13,7 +13,7 @@
         </v-form>
 
         <v-card-actions>
-          <v-btn flat text @click="createReview">Write</v-btn>
+          <v-btn flat text @click="createReview " :show="showOrNotshow">Write</v-btn>
           <v-btn text flat @click="resetForm">Reset</v-btn>
           <v-btn flat text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
@@ -32,6 +32,7 @@
     },
     data :function(){
       return{
+        // showOrNotshow : false,
         title : null,
         content :null,
         rank : 5,
@@ -39,6 +40,7 @@
     },
     methods: {
       createReview : function (){
+        this.show=true
         let reviewData = {
           'movieId' : this.movieId,
           'title' : this.title,
@@ -47,7 +49,10 @@
         }
         if(reviewData.title && reviewData.content){
           this.$store.dispatch('review/createReview',reviewData)
-          location.reload()
+          this.show=false
+          this.title=null
+          this.content=null
+          // location.reload()
         }else{
           alert('리뷰 제목 및 내용을 작성하세요.')
         }

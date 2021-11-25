@@ -14,11 +14,13 @@
           <h2>{{userProfile.nickname}}</h2>
         </v-title>
         <br>
-<v-btn text @click="EditProfileOpen=true">Edit</v-btn>
+        <div v-if="userProfile.id==userInfo.id">
+        <v-btn text @click="EditProfileOpen=true">Edit</v-btn>
+        </div>
         <v-divider></v-divider>
           <div class="d-flex justify-content-around">
               <div class="flex-column">
-                <h4>영화 찜</h4>
+                <h4>영화</h4>
                 <h5>{{userProfile.like_movies.length}}</h5>
               </div>
 
@@ -75,7 +77,7 @@ import EditProfile from '@/components/EditProfile.vue'
     },
 
     computed:{
-      ...mapState('login', ['userProfile']),
+      ...mapState('login', ['userProfile','userInfo']),
     },
     methods:{
       movieDetail: function (movieid) {
