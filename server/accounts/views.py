@@ -32,8 +32,6 @@ def signup(request):
 
     elif User.objects.filter(username=request.data.get('username')).exists():
         return Response({'error': '이미 존재하는 아이디입니다.'}, status=status.HTTP_403_FORBIDDEN)
-    # elif request.data.get('profile_path') == '':
-    #     return Response({'error': '프로필사진을 지정해주세요'}, status=status.HTTP_403_FORBIDDEN)
     
     elif not request.data.get('genres_name') :
         return Response({'error': '좋아하는 영화장르를 선택해주세요.'}, status=status.HTTP_403_FORBIDDEN)
