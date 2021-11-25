@@ -1,11 +1,13 @@
 <template>
   <div>
     <v-row justify="space-around">
-      <v-card width="80%" max-width="900px" style="background: rgba(255, 255, 255, 0.5); padding-bottom: 12px;">
+      <v-card width="80%" max-width="600px" style="background: rgba(255, 255, 255, 0.5); padding-bottom: 12px;">
         <v-img height="150px" src="https://source.unsplash.com/category/nature/900x200"
           style="overflow: visible; margin-top: 15px">
-
-          <v-avatar size="100" style="top: 60%;" rounded>
+          <div v-if="userProfile.id==userInfo.id" class="d-flex justify-content-end ma-1" >
+            <v-btn small @click="EditProfileOpen=true" style="background: rgba(255, 255, 255, 0.8);">Edit</v-btn>
+          </div>
+          <v-avatar size="100" style="top: 40%; left: 0%;" rounded>
             <img alt="user" :src="`http://127.0.0.1:8000${userProfile.profile_path}`">
           </v-avatar>
         </v-img>
@@ -24,45 +26,42 @@
         </div>
   </div>
         <br>
-        <div v-if="userProfile.id==userInfo.id">
-        <v-btn text @click="EditProfileOpen=true">Edit</v-btn>
-        </div>
         <v-divider></v-divider>
-          <div class="d-flex justify-content-around">
-              <div class="flex-column">
-                <h4>영화</h4>
-                <h5>{{userProfile.like_movies.length}}</h5>
-              </div>
-
-              <div class="flex-column">
-                <h4>팔로워</h4>
-                <h5>{{userProfile.followings.length}}</h5>
-              </div>
-              <div class="flex-column">
-                <h4>팔로워</h4>
-                <h5>{{userProfile.followers.length}}</h5>
-              </div>
+        <div class="d-flex justify-content-around">
+          <div class="flex-column tbx">
+            <h4>영화</h4>
+            <h5>{{userProfile.like_movies.length}}</h5>
           </div>
+
+          <div class="flex-column tbx">
+            <h4>팔로잉</h4>
+            <h5>{{userProfile.followings.length}}</h5>
+          </div>
+          <div class="flex-column tbx">
+            <h4>팔로워</h4>
+            <h5>{{userProfile.followers.length}}</h5>
+
+          </div>
+        </div>
         <v-divider></v-divider>
 
         <br>
-          <div class="warp container d-flex justify-content-around">
-            <div class="card" v-for="like_movie in userProfile.like_movies" :key="like_movie.movie_id" @click="movieDetail(like_movie.movie_id)">
-              <span></span>
-              <div class="imgBx" ><img :src="like_movie.poster_path"></div>
+        <div class="warp container d-flex justify-content-around">
+          <div class="card" v-for="like_movie in userProfile.like_movies" :key="like_movie.movie_id"
+            @click="movieDetail(like_movie.movie_id)">
+            <span></span>
+            <div class="imgBx"><img :src="like_movie.poster_path"></div>
+            <div class="content">
               <div class="content">
-                <div class="content">
-                  <h4>{{like_movie.title}}</h4>
-                  <!-- <p>Overview</p> -->
-                </div>
+                <h4>{{like_movie.title}}</h4>
+                <!-- <p>Overview</p> -->
               </div>
             </div>
           </div>
+        </div>
       </v-card>
     </v-row>
-        <EditProfile
-      v-model="EditProfileOpen"
-    ></EditProfile>
+    <EditProfile v-model="EditProfileOpen"></EditProfile>
   </div>
 </template>
 
@@ -120,6 +119,10 @@ import EditProfile from '@/components/EditProfile.vue'
 </script>
 
 <style scoped>
+  .tbx {
+    width: 30%;
+  }
+
   .cnt-box {
     width: 20%;
     padding-top: 6px;
