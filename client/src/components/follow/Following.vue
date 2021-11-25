@@ -5,16 +5,24 @@
       <v-card-title class="d-flex justify-center">
         <span class="text-h5 align-center">팔로잉</span>
       </v-card-title>
+      <v-divider></v-divider>
       <v-card-text class="text-body-1" style="color: black">
-        <div v-for="following in userProfile.followings" :key="following.id">
+        <div class="d-flex justify-content-around" v-for="following in userProfile.followings" :key="following.id">
+<<<<<<< Updated upstream
+          <v-avatar size="40">
+=======
           <v-avatar size="35">
+>>>>>>> Stashed changes
             <img
               :src="`http://127.0.0.1:8000${following.profile_path}`"
               alt="John"
             >
           </v-avatar>
-          <p @click="openProfile(following.id)" :show="a">{{following.nickname}}</p>
-          <v-divider></v-divider>
+<<<<<<< Updated upstream
+          <p class="mt-2" style="cursor: pointer;" @click="openProfile(following.id)" :show="a">{{following.nickname}}</p>
+=======
+          <p class="mt-2" @click="openProfile(following.id)" :show="a">{{following.nickname}}</p>
+>>>>>>> Stashed changes
         </div>
       </v-card-text>
       <v-card-actions>

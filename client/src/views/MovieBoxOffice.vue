@@ -9,7 +9,7 @@
       <span :style="`--i:${index+1}`" v-for="(trendmovie,index) in trendMovies" :key="index">
         <figure class="hover-effect" @click="movieDetail(trendmovie.id)">
           <img :src="`https://image.tmdb.org/t/p/original${trendmovie.poster_path}`">
-            <figcaption>
+            <figcaption class="">
               <h3>{{index+1}}</h3>
               <h5>{{trendmovie.title}}</h5>
               <!-- <h5>{{trendmovie.overview}}</h5> -->

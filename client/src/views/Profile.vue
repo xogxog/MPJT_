@@ -42,7 +42,18 @@
         </div>
         <v-divider></v-divider>
         <br>
-          <h2><strong>List</strong></h2>
+<<<<<<< Updated upstream
+        <h2><strong>{{userProfile.nickname}}'s     
+          <v-tooltip right>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon large v-bind="attrs" v-on="on">push_pin</v-icon>
+            </template>
+            <span><v-icon class="ma-1" large dark>emoji_people</v-icon>취향이 겹쳐요 !</span>
+          </v-tooltip>
+        </strong></h2>
+=======
+          <h2><strong>{{userProfile.nickname}}'s <v-icon large>push_pin</v-icon></strong></h2>
+>>>>>>> Stashed changes
         <div class="warp container d-flex justify-content-around">
           <div class="card" v-for="like_movie in userProfile.like_movies" :key="like_movie.movie_id"
             @click="movieDetail(like_movie.movie_id)">
@@ -50,7 +61,11 @@
             <div class="imgBx">
               <v-img :src="like_movie.poster_path">
                 <div class="d-flex justify-content-start" v-if="loginedUserLikeMovies.includes(like_movie.movie_id)">
-                  <v-icon class="ma-1" large dark color="" >emoji_people</v-icon>
+<<<<<<< Updated upstream
+                  <v-icon class="ma-1" large dark>emoji_people</v-icon>
+=======
+                  <v-icon class="ma-1" large dark color="">emoji_people</v-icon>
+>>>>>>> Stashed changes
                 </div>
               </v-img>
             </div>
