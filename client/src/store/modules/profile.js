@@ -2,10 +2,10 @@ import axios from 'axios'
 // import _ from 'lodash'
 import createPersistedState from "vuex-persistedstate";
 
-const editProfile ={
+const profile ={
   plugins: [createPersistedState()],
   namespaced : true,
-  state: {  
+  state: {
   },
   mutations: {
   },
@@ -22,15 +22,24 @@ const editProfile ={
           'Authorization': rootState.login.token.Authorization,
         },
       })
-      .then(res =>{
-        console.log(res.data)
+      .then(() =>{
+        // console.log(res.data)
         dispatch('login/getUserInfo',null,{root:true})
       })
       .catch(()=>{
         alert('실패....')
       })
+    },
+    likeUnlikeUser : function({rootState,dispatch},userProfile_pk){
+      axios({
+        method : 'post',
+        url :  `http://127.0.0.1:8000/accounts/${userProfile_pk}/follow/`,
+        headers : rootState.login.token,
+      })
+      .then(()=>{
+        dispatch('login/getOtherUserInfo',userProfile_pk,{root:true})
+      })
     }
-    
 
   },
   getters:{
@@ -38,4 +47,4 @@ const editProfile ={
   }
 }
 
-export default editProfile;
+export default profile;

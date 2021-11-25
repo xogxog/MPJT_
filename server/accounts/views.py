@@ -77,3 +77,14 @@ def editProfileImage(request,user_pk):
         user.save()
         return Response(status=status.HTTP_201_CREATED)
 
+#팔로우기능
+@api_view(['POST'])
+def follow(request, user_pk):
+    you = get_object_or_404(User, pk=user_pk)
+    me = get_object_or_404(User, pk=request.user.id) 
+    if me != you :
+        if you.followers.filter(pk=me.pk).exists():
+            you.followers.remove(me)
+        else :
+            you.followers.add(me)   
+        return Response(status=status.HTTP_201_CREATED)
