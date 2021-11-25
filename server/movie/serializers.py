@@ -39,6 +39,7 @@ class MovieSerializer(serializers.ModelSerializer) :
             'movie_id',
             'title',
             'overview',
+            'genres',
             'poster_path',
             'release_date',
             'vote_average',

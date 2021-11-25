@@ -30,7 +30,7 @@
 import axios from 'axios'
 
   export default {
-    name: 'Main',
+    name: 'Login',
     components: {
     },
 		data: function(){
