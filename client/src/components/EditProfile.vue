@@ -8,50 +8,28 @@
       <div class="container">
         <v-form ref="form" @submit.prevent>
           <v-file-input type="file" accept="image/*" @change="selectFile" class="form-control-file" id="profile_path" enctype="multipart/form-data"></v-file-input>
-          <!-- <div class="border p-2 mt-3">
-              <p>Preview Here</p>
-              <template v-if="credentials.profile_path">
-                <v-img :src="credentials.profile_path" class="img-fluid"></v-img>
-                <p class="mb-0">file name: {{ image.name }}</p>
-                <p class="mb-0">size: {{ image.size/1024 }}KB</p>
-              </template>
-          </div> -->
+          <div class="border p-2 mt-3">
+            <p>Preview Here</p>
+            <template v-if="previewImage">
+              <v-img :src="previewImage" class="img-fluid"></v-img>
+              <p class="mb-0">file name: {{ image.name }}</p>
+              <p class="mb-0">size: {{ image.size/1024 }}KB</p>
+            </template>
+          </div>
         </v-form>
         
         <v-card-actions>
-          <v-btn flat text @click="EditProfileImage">Edit</v-btn>
+          <v-btn flat text @click="EditProfileImage" :show="preShow">Edit</v-btn>
           <v-btn flat text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
         
       </div>
-
-      
-<!-- <v-form>
-            <label for="profile_path">Select Image</label>
-            <v-file-input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="profile_path"></v-file-input>
-            <input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="profile_path">
-                    <v-file-input
-          show-size
-          label="File input"
-          @change="selectFile"
-        ></v-file-input>
-            <div class="border p-2 mt-3">
-              <p>Preview Here</p>
-              <template v-if="credentials.profile_path">
-                <v-img :src="credentials.profile_path" class="img-fluid"></v-img>
-                <p class="mb-0">file name: {{ image.name }}</p>
-                <p class="mb-0">size: {{ image.size/1024 }}KB</p>
-              </template>
-          </div>
-        </v-form> -->
-
-
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
   export default {
     name: "EditProfile",
 
@@ -61,32 +39,29 @@
     data:function(){
       return{
         image:null,
+        previewImage: undefined,
+        preShow: false
       }
     },
     methods: {
       selectFile:function(file){
         this.image=file
+        console.log(this.image)
+        this.previewImage = URL.createObjectURL(this.image);
       },
+      
       EditProfileImage: function(){
         console.log(this.image)
+
         this.$store.dispatch('profile/editProfileImg', this.image)
-        
+
       },
-      // previewImage: function (event) {
-      //   var input = event.target;
-      //   // const frm = new FormData();
-      //   if (input.files) {
-      //     var reader = new FileReader();
-      //     reader.onload = (event) => {
-      //       this.credentials.profile_path = event.target.result;
-      //     }
-      //     this.image = input.files[0];
-      //     reader.readAsDataURL(input.files[0]);
-      //     }
-      //   },
     },
 
     computed: {
+      
+      ...mapState('login', ['userInfo']),
+
       show: {
         get() {
           return this.value
