@@ -9,31 +9,61 @@ import requests
 from rest_framework.permissions import AllowAny
 import random
 from django.db.models import Count
+from django.db.models import Q
 # Create your views here.
 
 #main page 전체영화 - 추천영화 알고리즘 짜기(10개만 보내기)
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def movie_list(request):
-    # 랜덤하게 보내기 - isLogin 확인해서 값 다르게 보내기
-    # print(request.GET.get('isLogin'))
+    # 찜할때마다 선호하는 장르 계산하도록 설계
     if request.GET.get('isLogin') == 'true' :
-        get_user_like_genre = Genre.objects.filter(user__id=request.user.id)
-        # 좋아하는 장르 가장 많이 가진 영화 -> vote_average 순으로 정렬해서 20개 추천
-        movies = Movie.objects.filter(
-            genres__genre_id__in=get_user_like_genre
+        user_like_movies=Movie.objects.filter(like_users__id=request.user.id) # 유저가 좋아하는 영화
+        user_like_movies_serializer=MovieSerializer(user_like_movies, many=True)
+        genres_dic={
+            '12':0,
+            '14':0,
+            '16':0,
+            '18':0,
+            '27':0,
+            '28':0,
+            '35':0,
+            '36':0,
+            '37':0,
+            '37':0,
+            '53':0,
+            '80':0,
+            '99':0,
+            '878':0,
+            '9648':0,
+            '10402':0,
+            '10749':0,
+            '10751':0,
+            '10770':0,
+        }
+        for movie in user_like_movies_serializer.data :
+            for movie_genre in movie.get('genres') :
+                genres_dic[str(movie_genre)] +=1
+        sorted_genres =[]
+        for genre in sorted(genres_dic.items(), key=lambda x: x[1], reverse=True)[:3] :
+            sorted_genres.append(int(genre[0]))
+        get_user_like_genre = Genre.objects.filter(genre_id__in=sorted_genres)
+
+        # 좋아하는 장르 가장 많이 가진 영화 100순위 중 랜덤20개
+        movies = sorted(Movie.objects.filter(
+            Q(genres__genre_id__in=get_user_like_genre) & ~Q(like_users__id=request.user.id)
             ).annotate(
                 count_movies=Count('movie_id')
             ).order_by(
-                '-count_movies','-vote_average'
-            )[:20]
+                '-count_movies','-vote_average',
+            )[:100], key=lambda x: random.random())[:20]
+        # print(movies)
+     
         # print(movies)
         serializers = MovieListSerializer(movies,many=True)
         return Response(serializers.data)
     else :
-        movies = get_list_or_404(Movie)[:20]
-        # test_movies = Movie.objects.order_by('-vote_average','-release_date').values('id','vote_average','release_date')
-        # print(movies)
+        movies = sorted(Movie.objects.all(),key=lambda x: random.random())[:20]
         serializers = MovieListSerializer(movies,many=True)
     return Response(serializers.data)
 
@@ -151,8 +181,8 @@ def save_movies(request) :
                 movie_id = _movie.get('id'),
                 title = _movie.get('title'),
                 overview = _movie.get('overview'),
-                poster_path = ('https://image.tmdb.org/t/p/original'+ _movie.get('poster_path') if _movie.get('poster_path') else ''),
-                release_date = _movie.get('release_date'),
+                poster_path = ('https://image.tmdb.org/t/p/original'+ _movie.get('poster_path') if _movie.get('poster_path') else '1000-01-01'),
+                release_date = (_movie.get('release_date') if _movie.get('release_date') else '정보없음'),
                 vote_average = _movie.get('vote_average'),
             )
                 # may-to-many field 저장 add 해야함.
