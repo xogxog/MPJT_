@@ -5,6 +5,7 @@ from rest_framework import serializers, status
 from .models import Director, Genre, Movie, Actor, Review, Comment
 from accounts.models import User
 from .serializers import ActorSerializer, Commentserializer,DirectorSerializer, MovieListSerializer,MovieSerializer,ReviewListSerializer,ReviewSerializer
+from accounts.serializers import UserInfoSerializer
 import requests
 from rest_framework.permissions import AllowAny
 import random
@@ -90,10 +91,14 @@ def movie_like(request, movie_id):
     # 좋아요 있으면
     if movie.like_users.filter(id=request.data.get("userid")):
         movie.like_users.remove(request.user)
-        return Response({'unlike': '영화 찜 취소'})
+        user=get_object_or_404(User,pk=request.user.id)
+        serializer= UserInfoSerializer(user)
+        return Response(serializer.data)
     else :
         movie.like_users.add(request.user)
-        return Response({'like' : '영화 찜'})
+        user=get_object_or_404(User,pk=request.user.id)
+        serializer= UserInfoSerializer(user)
+        return Response(serializer.data)
 
 # 리뷰따봉
 @api_view(['POST'])
@@ -182,7 +187,7 @@ def save_movies(request) :
                 title = _movie.get('title'),
                 overview = _movie.get('overview'),
                 poster_path = ('https://image.tmdb.org/t/p/original'+ _movie.get('poster_path') if _movie.get('poster_path') else '1000-01-01'),
-                release_date = (_movie.get('release_date') if _movie.get('release_date') else '정보없음'),
+                release_date = (_movie.get('release_date') if _movie.get('release_date') else '1900-01-01'),
                 vote_average = _movie.get('vote_average'),
             )
                 # may-to-many field 저장 add 해야함.

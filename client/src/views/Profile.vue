@@ -49,7 +49,7 @@
             <span></span>
             <div class="imgBx">
               <v-img :src="like_movie.poster_path">
-                <div class="d-flex justify-content-start">
+                <div class="d-flex justify-content-start" v-if="loginedUserLikeMovies.includes(like_movie.movie_id)">
                   <v-icon class="ma-1" large dark color="" >emoji_people</v-icon>
                 </div>
               </v-img>
@@ -85,6 +85,7 @@ import EditProfile from '@/components/EditProfile.vue'
     name: "Profile",
     data: function () {
       return {
+        loginedUserLikeMovies:[],
         EditProfileOpen: false,
         followerOpen: false,
         followingOpen: false,
@@ -98,7 +99,8 @@ import EditProfile from '@/components/EditProfile.vue'
     },
     methods:{
       followUnFollow:function(){
-        console.log(this.user_like_unlike)
+        console.log(this.userProfile)
+        console.log(this.userInfo)
         this.$store.dispatch('profile/likeUnlikeUser',this.userProfile.id)
       },
       movieDetail: function (movieid) {
@@ -113,6 +115,12 @@ import EditProfile from '@/components/EditProfile.vue'
       ...mapState('login', ['userProfile','userInfo','user_like_unlike']),
     },
     created:function(){
+      console.log(this.userInfo.like_movies.length)
+      for(let i=0; i<this.userInfo.like_movies.length;i++){
+        console.log(i)
+        this.loginedUserLikeMovies.push(this.userInfo.like_movies[i].movie_id)
+        console.log(this.loginedUserLikeMovies)
+      }
       // console.log(this.userProfile)
       $(document).ready(function(x, y) {
       $('.card').on('mouseenter', function(e){
@@ -126,6 +134,9 @@ import EditProfile from '@/components/EditProfile.vue'
         $(this).find('span').css({top:y, left:x})
       })
     })
+    },
+    beforeDestroy : function(){
+      this.loginedUserLikeMovies=[]
     }
 
   }

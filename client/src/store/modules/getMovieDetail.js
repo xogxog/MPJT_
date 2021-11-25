@@ -63,9 +63,10 @@ const getMovieDetail ={
         data : data,
         headers : rootState.login.token,
       })
-      .then(()=>{
+      .then((res)=>{
         dispatch('movieDetail')
         dispatch('getMovies/getMovie',null,{root:true})
+        dispatch('login/setUserInfo',res.data,{root:true})
       })
     }
   },

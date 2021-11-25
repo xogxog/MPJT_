@@ -64,6 +64,7 @@ const login ={
       .then((res)=>{
         console.log(res.data)
         commit('GET_USER_INFO',res.data)
+        commit('SET_USER_INFO',res.data)
       })
     },
     getOtherUserInfo : function({rootState, commit},otherUserPk){ // 다른사람 프로필 가져오기
@@ -82,7 +83,7 @@ const login ={
           commit('USER_LIKE_UNLIKE',false)
         }else{
           for(let follower of res.data.followers){
-            if(follower===rootState.login.userInfo.id){
+            if(follower.id===rootState.login.userInfo.id){
               commit('USER_LIKE_UNLIKE',true)
               break
             }else{
