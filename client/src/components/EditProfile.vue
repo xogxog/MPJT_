@@ -52,8 +52,9 @@ import { mapState } from 'vuex'
       
       EditProfileImage: function(){
         console.log(this.image)
-        this.$store.dispatch('editProfile/editProfileImg', this.image),
-        this.show = false
+
+        this.$store.dispatch('profile/editProfileImg', this.image)
+
       },
     },
 

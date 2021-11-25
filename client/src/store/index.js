@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import login from './modules/login'
-import editProfile from './modules/editProfile'
+import profile from './modules/profile'
 
 
 import getMovies from './modules/getMovies'
@@ -26,7 +26,7 @@ export default new Vuex.Store({
   },
   modules: {
     login,
-    editProfile,
+    profile,
     getMovies,
     saveMovies,
     getMovieDetail,

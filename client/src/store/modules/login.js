@@ -11,6 +11,7 @@ const login ={
     // nickname : null,
     userInfo : null, // user의 id,nickname,poster_path,username 
     userProfile :null,
+    user_like_unlike : null,
   },
   mutations: {
     LOGIN_CHECK : function(state, isLogin){
@@ -26,7 +27,7 @@ const login ={
     },
     SET_USER_INFO : function(state, userInfo){ // 맨처음 로그인했을때 내 정보 저장
       state.userInfo = userInfo
-      console.log(state.userInfo)
+      // console.log(state.userInfo)
     },
     GET_USER_INFO : function(state, userInfo){ // 내 프로필조회
       state.userProfile = userInfo
@@ -34,6 +35,9 @@ const login ={
     },
     GET_OTHER_USER_INFO:function(state, userProfile){ // 다른 사람 프로필 조회
       state.userProfile=userProfile
+    },
+    USER_LIKE_UNLIKE : function(state,user_like_unlike){
+      state.user_like_unlike=user_like_unlike
     }
     
   },
@@ -73,6 +77,19 @@ const login ={
       })
       .then((res)=>{
         commit('GET_OTHER_USER_INFO', res.data)
+        // console.log(res.data)
+        if(res.data.followers.length===0){
+          commit('USER_LIKE_UNLIKE',false)
+        }else{
+          for(let follower of res.data.followers){
+            if(follower===rootState.login.userInfo.id){
+              commit('USER_LIKE_UNLIKE',true)
+              break
+            }else{
+              commit('USER_LIKE_UNLIKE',false)
+            }
+          }
+        }
       })
     },
   },
