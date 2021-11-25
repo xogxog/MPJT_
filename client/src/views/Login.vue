@@ -14,7 +14,7 @@
 				<input type="password" required="" id="password" v-model="credentials.password" @keyup.enter="login"> 
 				<label for="password">Password</label>
 			</div>
-			<a href="" @click="login">
+			<a href="" @click.prevent="login">
 				<span></span>
 				<span></span>
 				<span></span>
