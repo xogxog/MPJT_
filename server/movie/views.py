@@ -115,7 +115,6 @@ def review_like(request, review_pk):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def create_review(request, movie_id):
-    print(f'dpfjd[fj')
     # 리뷰생성
     if request.method =='POST' :
         movie = get_object_or_404(Movie, movie_id=movie_id)
