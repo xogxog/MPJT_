@@ -11,7 +11,23 @@
       <slide class="sld" v-for="(movieItem, index) in movieItems" :key="index" :index="index">
         <span>
         <figure class="snip1504">
-          <img :src="movieItem.poster_path" alt="movie-poster">
+          <!-- <img :src="movieItem.poster_path" alt="movie-poster"> -->
+          <v-img class="test" :src="movieItem.poster_path" alt="movie-poster"><template v-slot:placeholder>
+          <v-row
+            class="fill-height ma-0"
+            align="center"
+            justify="center"
+          >
+            <v-progress-circular
+              indeterminate
+              :rotate="-90"
+              :size="100"
+              :width="15"
+              :value="value"
+              color="blue-grey darken-1"
+            ></v-progress-circular>
+          </v-row>
+        </template></v-img>
           <figcaption>
             <h5>{{ movieItem.title }}</h5>
           </figcaption>
@@ -110,7 +126,7 @@
   transition: all 0.45s ease;
 }
 
-.snip1504 img {
+.snip1504 .test {
   vertical-align: top;
   max-width: 100%;
   backface-visibility: hidden;
@@ -144,7 +160,7 @@
 }
 
 .snip1504 h5 {
-  font-weight: normal;
+  font-weight: bold;
   /* font-style: italic; */
   color: rgb(255, 255, 255);
   -webkit-transform: translateY(100%);
@@ -161,8 +177,8 @@
   
 }
 
-.snip1504:hover > img,
-.snip1504.hover > img {
+.snip1504:hover > .test,
+.snip1504.hover > .test {
   opacity: 0.1;
   
 }
