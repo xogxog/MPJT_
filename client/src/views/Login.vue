@@ -30,7 +30,7 @@
 import axios from 'axios'
 
   export default {
-    name: 'Main',
+    name: 'Login',
     components: {
     },
 		data: function(){
@@ -57,17 +57,30 @@ import axios from 'axios'
 				})
 					.then(res =>{
 						localStorage.setItem('jwt', res.data.token)
+						//유저 id 가지고 오기
 						const isLogin = true
 						const token = this.setToken()
-						const nickname = this.credentials.username
 						this.$store.dispatch('login/loginCheck', isLogin)
 						this.$store.dispatch('login/setToken', token)
-						this.$store.dispatch('login/setUserNickname', nickname)
+						const data = {
+							'username' : this.credentials.username,
+						}
+						axios({
+							method : 'get',
+							url : 'http://127.0.0.1:8000/accounts/login/',
+							params : data,
+							headers : this.setToken(),
+						})
+						.then((res)=>{
+							console.log(res.data)
+							this.$store.dispatch('login/setUserInfo',res.data)
+						})
+						
 						this.$router.push({name : 'Main'})
 					})
-					.catch(err =>{
-						alert(err)
-						console.log(err)
+					.catch((error) =>{
+						alert(error.message)
+						console.log('Error',error.message)
 					})
 				
 			}
@@ -88,7 +101,7 @@ import axios from 'axios'
   
   .welcome p {
     position: relative;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     /* color: white; */
     text-transform: uppercase;
     font-size: 2em;

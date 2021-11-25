@@ -8,7 +8,7 @@ class MovieListSerializer(serializers.ModelSerializer) :
 
     class Meta :
         model = Movie
-        fields =('id','movie_id','title','poster_path',)
+        fields =('movie_id','title','poster_path',)
 
 # 배우
 class ActorSerializer(serializers.ModelSerializer):
@@ -36,10 +36,10 @@ class MovieSerializer(serializers.ModelSerializer) :
     class Meta :
         model = Movie
         fields = (
-            'id',
             'movie_id',
             'title',
             'overview',
+            'genres',
             'poster_path',
             'release_date',
             'vote_average',
@@ -55,10 +55,11 @@ class ReviewSerializer(serializers.ModelSerializer):
     
     user = UserInfoSerializer(read_only=True) # 작성자
     movie = MovieSerializer(read_only=True)
-
+    like_users = UserInfoSerializer(many=True, read_only=True)
+    
     class Meta :
         model = Review
-        fields = ('id','title','content','rank','created_at','updated_at','movie','user')
+        fields = ('id','title','content','rank','created_at','updated_at','movie','user','like_users')
 
 # 리뷰 리스트
 class ReviewListSerializer(serializers.ModelSerializer):
@@ -68,6 +69,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
         source='like_users.count',
         read_only =True
     )
+    # updated_at=serializers.DateTimeField(format=base.DATETIME_FORMAT, input_formats=None)
     class Meta :
         model = Review
         fields = ('id','title','user','updated_at','like_users', 'like_users_count') #user는 작성자

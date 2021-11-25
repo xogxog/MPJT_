@@ -5,7 +5,8 @@
       class="mx-2"
       fab
       dark
-      @click.stop="drawer = !drawer">
+      @click.stop="drawer = !drawer"
+      >
       <v-icon dark>
         mdi-format-list-bulleted-square
       </v-icon>
@@ -22,7 +23,14 @@
       <v-list-item>
         <v-list-item-content>
           <span v-if="isLogin">
-          <v-list-item-title>{{nickname}}</v-list-item-title>
+          <v-avatar class="mt-6" size="70">
+            <img
+              :src="`http://127.0.0.1:8000${userInfo.profile_path}`"
+              alt="John"
+            >
+          </v-avatar>
+          
+          <v-list-item-title class="mt-4">{{userInfo.nickname}}</v-list-item-title>
           </span>
           <span v-else>
           <v-list-item-title>로그인 하세요.</v-list-item-title>
@@ -31,53 +39,76 @@
       </v-list-item>
 
       <v-divider></v-divider>
-
-      <v-list-item>
-        <v-autocomplete
-          label="Search"
-          dense
-          filled
-          rounded
-        ></v-autocomplete>
-      </v-list-item>
-
       <!-- 항상보임 -->
       <v-list>
         <span>
-          <v-list-item to="/" router exact>
-              <v-list-item-icon>
-                <v-icon>mdi-view-dashboard</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>Index</v-list-item-title>
-              </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item to="/test" router exact>
-              <v-list-item-icon>
-                <v-icon>mdi-forum</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>test</v-list-item-title>
-              </v-list-item-content>
-          </v-list-item>
-
+          <!-- 관리자만 보이는 관리자페이지 -->
+          <span v-if="userInfo !== null">
+            <span v-if="userInfo.username =='admin'">
+              <v-list-item href="http://127.0.0.1:8000/admin/" router exact>
+                <v-list-item-icon>
+                  <v-icon>admin_panel_settings</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>관리자페이지</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </span>
+          </span>
+          
+          <span v-if="isLogin">
+            <v-list-item to="/profile" router exact @click="getUserInfo">
+                <v-list-item-icon>
+                  <v-icon>account_circle</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>내 프로필</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+          </span>
           <v-list-item to="/Main" router exact>
               <v-list-item-icon>
-                <v-icon>mdi-forum</v-icon>
+                <v-icon>theaters</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>Main</v-list-item-title>
               </v-list-item-content>
           </v-list-item>
-
-          <v-list-item to="/MovieDetail" router exact>
+          <!-- 작업 수월용 -->
+          <!-- <v-list-item to="/MovieDetail" router exact>
               <v-list-item-icon>
                 <v-icon>mdi-forum</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>MovieDetail</v-list-item-title>
               </v-list-item-content>
+          </v-list-item> -->
+          
+          <v-list-item to="/MovieBoxOffice" router exact :disabled="!isLogin">
+              <v-list-item-icon>
+                <!-- 뭐깔라는데................................ -->
+                <!-- <v-icon color="green darken-2">fas fa-lock</v-icon> -->
+                
+                <v-icon>movie</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>MovieBoxOffice
+                  <v-icon v-if="!isLogin" class="material-icons-outlined" small disabled>lock</v-icon>
+                </v-list-item-title>
+                
+
+              </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item to="/MovieSearch" router exact :disabled="!isLogin">
+                <v-list-item-icon>
+                  <v-icon>search</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>MovieSearch
+                    <v-icon v-if="!isLogin" class="material-icons-outlined" small disabled>lock</v-icon>
+                  </v-list-item-title>
+                </v-list-item-content>
           </v-list-item>
         </span>
 
@@ -85,7 +116,7 @@
         <span v-if="isLogin">
           <v-list-item to="/#" router exact @click.native="logout">
             <v-list-item-icon>
-              <v-icon>mdi-forum</v-icon>
+              <v-icon>logout</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>Log Out</v-list-item-title>
@@ -97,7 +128,7 @@
         <span v-else>
           <v-list-item to="/Login" router exact>
               <v-list-item-icon>
-                <v-icon>mdi-forum</v-icon>
+                <v-icon>login</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>Login</v-list-item-title>
@@ -107,7 +138,7 @@
 
           <v-list-item to="/Signup" router exact>
               <v-list-item-icon>
-                <v-icon>mdi-forum</v-icon>
+                <v-icon>assignment_ind</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>Signup</v-list-item-title>
@@ -131,12 +162,15 @@ import {mapState} from 'vuex'
       }
     },
     methods:{
+      getUserInfo : function(){
+        this.$store.dispatch('login/getUserInfo')
+      },
       logout:function(){
         // this.isLogin = false
         localStorage.removeItem('jwt')
         const isLogin = false
         this.$store.dispatch('login/loginCheck', isLogin)
-        this.$router.push({name : 'Main'})
+        this.$router.push({name : 'index'})
       }
     },
     // created:function(){
@@ -146,12 +180,12 @@ import {mapState} from 'vuex'
     //   }
     // },
     computed :{
-      ...mapState('login', ['isLogin','nickname']),
- 
+      ...mapState('login', ['isLogin','userInfo']),
     }
   }
 </script>
 
 <style>
+
 
 </style>

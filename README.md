@@ -1,4 +1,3 @@
 # MPJT
-Movie Project SangJune &amp; TaeHyun
+Movie Project SangJune & TaeHyun
 
-2021.11.22 test2

@@ -11,7 +11,8 @@
         <v-img max-height="250px" max-width="250px" src="@/assets/logo.png"></v-img>
         <nav-toggle class="nav-toggle nav-in-box" style="z-index: 99" />
       </div>
-      <router-view style="z-index: 3"/>
+      <router-view style="z-index: 2"/>
+      <br><br><br><br>
     </v-app>
 
     <!-- particles 배경 -->
@@ -19,7 +20,7 @@
       id="particles-js"
       color="#fff"
       :particleOpacity="0.7"
-      :particlesNumber="60"
+      :particlesNumber="100"
       shapeType="circle"
       :particleSize="4"
       linesColor="#fff"
@@ -50,26 +51,7 @@ export default {
 </script>
 
 <style>
-  /* .back-img {
-    z-index: 1;
-    position: absolute;
-    background-image: linear-gradient(
-    rgba(0, 0, 0, 0.199), 
-    rgba(245, 174, 174, 0.158));
-    background-position: center;
-    background-size: cover;
-    background-repeat: repeat;
-    top: 0; 
-    bottom: 0; 
-    left: 0;
-    right: 0; 
-    height: 100vh;
-  } */
-
-  .main-img {
-    margin-top: 5%;
-    margin-bottom: 5%;
-  }
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
 
   .nav-in-box {
     width: 250px; height: 250px;
@@ -82,9 +64,7 @@ export default {
 
   #app {
     background: black;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'IBM Plex Sans KR', sans-serif !important;
     text-align: center;
   }
 /* 

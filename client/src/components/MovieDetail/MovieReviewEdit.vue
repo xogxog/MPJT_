@@ -3,60 +3,53 @@
     <v-card>
 
       <v-card-title>
-        <span class="text-h5">리뷰 작성</span>
+        <span class="text-h5">리뷰 수정</span>
       </v-card-title>
       <v-rating color="warning" background-color="grey" hover length="5" size="40" v-model="rank"></v-rating>
       <div class="container">
         <v-form ref="form" @submit.prevent>
           <v-text-field label="Title" required v-model="title"></v-text-field>
-          <v-textarea label="Content" v-model="content"></v-textarea>
+          <v-textarea label="Content" v-model="content" @keyup.enter="editReview"></v-textarea>
         </v-form>
 
         <v-card-actions>
-          <v-btn flat text @click="createReview " :show="showOrNotshow">Write</v-btn>
-          <v-btn text flat @click="resetForm">Reset</v-btn>
-          <v-btn flat text @click.stop="show=false">Close</v-btn>
+          <v-btn text @click="editReview" :show="showOrNotShow">Edit</v-btn>
+          <v-btn text @click="resetForm">Reset</v-btn>
+          <v-btn text @click.stop="show=false">Close</v-btn>
         </v-card-actions>
       </div>
     </v-card>
-
   </v-dialog>
 </template>
 
 <script>
-
+import {mapState} from 'vuex'
   export default {
+    name : 'MovieReviewEdit',
     props: {
       value: Boolean,
-      movieId: Number,
     },
     data :function(){
       return{
-        // showOrNotshow : false,
+        reviewPk:null,
         title : null,
         content :null,
-        rank : 5,
+        rank : null,
       }
     },
     methods: {
-      createReview : function (){
+      editReview : function (){
         this.show=true
         let reviewData = {
-          'movieId' : this.movieId,
+          'reviewPk' : this.reviewPk,
           'title' : this.title,
           'content' : this.content,
           'rank' : this.rank,
         }
-        if(reviewData.title && reviewData.content){
-          this.$store.dispatch('review/createReview',reviewData)
-          this.show=false
-          this.title=null
-          this.content=null
-          // location.reload()
-        }else{
-          alert('리뷰 제목 및 내용을 작성하세요.')
-        }
-
+        this.$store.dispatch('review/editReview',reviewData)
+        this.show=false
+        // location.reload()
+        
       },
       resetForm : function () {
         this.form = Object.assign({}, this.defaultForm)
@@ -64,6 +57,8 @@
       },
     },
     computed: {
+      ...mapState('review', ['reviewDetail']),
+      // 상준상코드 
       show: {
         get() {
           return this.value
@@ -72,6 +67,16 @@
           this.$emit('input', value)
         }
       }
-    }
+    },
+    created :function(){
+      // console.log('새로생성되었어쇼~!')
+      //default로 값 넣어주기
+      this.title = this.reviewDetail.title
+      this.content = this.reviewDetail.content
+      this.rank = this.reviewDetail.rank
+      this.reviewPk = this.reviewDetail.id
+      // console.log(this.title)
+      // console.log(this.content)
+    },
   }
 </script>

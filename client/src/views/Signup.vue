@@ -44,7 +44,7 @@
 
         <v-row align="center">
           <v-col>
-            <v-select v-model="credentials.genres_name" chips :items="genres" :menu-props="{ maxHeight: '400' }" label="Select" multiple
+            <v-select v-model="credentials.genres_name" :items="genres" :menu-props="{ maxHeight: '400' }" label="Select" multiple
               hint="Pick your favorite Genres" persistent-hint>
             </v-select>
           </v-col>
@@ -129,11 +129,11 @@ import axios from 'axios'
         })
         
           .then(()=>{
-            this.$router.push({ name:'Main'})
+            this.$router.push({ name:'Login'})
           })
           .catch(error =>{
-            alert(error.message)
-            console.log(error.message)
+            alert(error.response.data.error)
+            console.log(error.response.data.error)
           })
         },
       },
@@ -152,7 +152,7 @@ import axios from 'axios'
   
   .welcome p {
     position: relative;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     /* color: white; */
     text-transform: uppercase;
     font-size: 2em;
