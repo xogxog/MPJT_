@@ -10,6 +10,7 @@ import getMovieDetail from './modules/getMovieDetail'
 
 import review from './modules/review'
 import comment from './modules/comment'
+import recommendMovies from './modules/recommendMovies'
 import createPersistedState from "vuex-persistedstate";
 
 
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     getMovieDetail,
     review,
     comment,
+    recommendMovies,
   },
 })
 
