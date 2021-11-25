@@ -69,12 +69,6 @@
               </v-btn>
               <div style="margin-top:10px">찜</div>
             </div>
-            <!-- <div>
-              <v-btn color="primary" fab small dark>
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
-              <div>123</div>
-            </div> -->
             <div class="pt-4">
               <v-btn color="primary" fab small dark @click.stop="reviewWriteOpen=true">
                 <v-icon>mdi-pencil</v-icon>
@@ -105,7 +99,7 @@
       <div class="card" v-for="rmovie in recommendMovies" :key="rmovie.id">
         <span></span>
         <div class="imgBx"><img class="non-poster" :src="`https://image.tmdb.org/t/p/original${rmovie.poster_path}`" alt="포스터가 없습니다."></div>
-        <div class="content" @click="movieDetail(rmovie.id)">
+        <div class="content" @click="getRecommendMovies(rmovie.id)">
           <div class="content">
             <h4>{{rmovie.title}}</h4>
             <p>{{rmovie.release_date}}</p>
@@ -178,6 +172,12 @@ window.$ = $;
     
 
     methods: {
+      getRecommendMovies : function(movieId){
+        this.$store.dispatch('getMovieDetail/setMovieId', movieId)
+        this.$store.dispatch('recommendMovies/getRecommend', movieId)
+        // location.reload()
+        this.$router.push({name: 'MovieDetail'})
+      },
       openReviewDetail: function (reviewPk,event) {
         event.preventDefault()
         this.$store.dispatch('review/getReviewDetail', reviewPk)
@@ -210,8 +210,6 @@ window.$ = $;
           })
         })
       })
-        console.log(this.recommendMovies)
-        console.log(this.recommendMovies)
     },
 
     computed: {

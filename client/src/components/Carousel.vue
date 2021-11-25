@@ -23,7 +23,6 @@
               :rotate="-90"
               :size="100"
               :width="15"
-              :value="value"
               color="blue-grey darken-1"
             ></v-progress-circular>
           </v-row>
@@ -48,6 +47,7 @@
       Carousel3d,
       Slide,
     },
+
     methods: {
       movieDetail: function (movieid) {
         if(this.isLogin){
@@ -55,7 +55,7 @@
         // console.log(movieId)
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
         this.$store.dispatch('recommendMovies/getRecommend', movieId)
-        
+        this.$router.push({name: 'MovieDetail'})
         }else{
           alert('로그인 시 열람이 가능합니다.')
         }

@@ -22,26 +22,6 @@
           <input type="password" id="pwConfirmation" required="" v-model="credentials.pwConfirmation">
           <label for="pwConfirmation">Password Confirm</label>
         </div>
-
-        <!-- <form>
-            <label for="profile_path">Select Image</label>
-            <v-file-input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="profile_path"></v-file-input>
-            <input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="profile_path">
-                    <v-file-input
-          show-size
-          label="File input"
-          @change="selectFile"
-        ></v-file-input>
-            <div class="border p-2 mt-3">
-              <p>Preview Here</p>
-              <template v-if="credentials.profile_path">
-                <img :src="credentials.profile_path" class="img-fluid" />
-                <p class="mb-0">file name: {{ image.name }}</p>
-                <p class="mb-0">size: {{ image.size/1024 }}KB</p>
-              </template>
-          </div>
-        </form> -->
-
         <v-row align="center">
           <v-col>
             <v-select v-model="credentials.genres_name" :items="genres" :menu-props="{ maxHeight: '400' }" label="Select" multiple
@@ -80,7 +60,6 @@ import axios from 'axios'
 
     data() {
       return {
-       // profile_path: null,
         image: null,
         genres: ['모험','판타지','애니메이션','드라마','공포','액션','코미디','역사','서부','스릴러','범죄','다큐멘터리','SF','미스터리','음악','로맨스','가족','전쟁','TV 영화'],
         credentials: {
@@ -88,7 +67,6 @@ import axios from 'axios'
           password: null,
           pwConfirmation: null,
           nickname: null,
-          // profile_path: null,
           genres_name: [], 
         }
       }
@@ -110,22 +88,11 @@ import axios from 'axios'
       signup : function(event){
         
         event.preventDefault()
-        // const frm = new FormData();
-        // frm.append("username", this.credentials.username)
-        // frm.append("password", this.credentials.password)
-        // frm.append("pwConfirmation", this.credentials.pwConfirmation)
-        // frm.append("nickname", this.credentials.nickname)
-        // frm.append("profile_path", this.credentials.profile_path)
-        // frm.append("genres_name", this.credentials.genres_name)
-        // console.log(frm)
 
         axios({
           method: 'post',
           url : 'http://127.0.0.1:8000/accounts/signup/',
           data : this.credentials,
-          // headers: {
-          //   "Content-type": "multipart/form-data"
-          // },
         })
         
           .then(()=>{
@@ -133,7 +100,7 @@ import axios from 'axios'
           })
           .catch(error =>{
             alert(error.response.data.error)
-            console.log(error.response.data.error)
+            // console.log(error.response.data.error)
           })
         },
       },

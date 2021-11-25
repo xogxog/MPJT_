@@ -10,6 +10,7 @@ const saveMovies ={
   mutations: {
     SAVE_RECOMMEND_MOVIES : function(state, recommendMovies){
       state.recommendMovies=recommendMovies
+      // console.log(state.recommendMovies)
     }
   },
   actions: {
@@ -19,12 +20,6 @@ const saveMovies ={
         url :'http://127.0.0.1:8000/movie/movie/save_movies/',
         data : movies,
         headers : rootState.login.token,
-      })
-      .then(()=>{
-        console.log('성공성공')
-      })
-      .catch(()=>{
-        console.log('실패실패~!~!')
       })
     },
     saveRecommendMovies : function({commit}, recommendMovies){

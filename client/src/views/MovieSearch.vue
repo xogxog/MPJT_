@@ -48,6 +48,7 @@
       movieDetail: function (movieid) {
         let movieId = movieid
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
+        this.$store.dispatch('recommendMovies/getRecommend', movieId)
         this.$router.push({
           name: 'MovieDetail'
         })
@@ -63,7 +64,7 @@
               url: `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=ko-KR&query=${this.searchString}&page=1`
             })
             .then((res) => {
-              console.log(res.data.results)
+              // console.log(res.data.results)
               if (res.data.results.length >= 1) {
                 this.$store.dispatch('saveMovies/saveMovies', res.data.results)
                 this.searchedMovies = res.data.results

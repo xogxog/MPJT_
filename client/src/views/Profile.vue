@@ -109,13 +109,14 @@ import EditProfile from '@/components/EditProfile.vue'
     },
     methods:{
       followUnFollow:function(){
-        console.log(this.userProfile)
-        console.log(this.userInfo)
+        // console.log(this.userProfile)
+        // console.log(this.userInfo)
         this.$store.dispatch('profile/likeUnlikeUser',this.userProfile.id)
       },
       movieDetail: function (movieid) {
         let movieId = movieid
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
+        this.$store.dispatch('recommendMovies/getRecommend', movieId)
         this.$router.push({
           name: 'MovieDetail'
         })
@@ -125,13 +126,9 @@ import EditProfile from '@/components/EditProfile.vue'
       ...mapState('login', ['userProfile','userInfo','user_like_unlike']),
     },
     created:function(){
-      console.log(this.userInfo.like_movies.length)
       for(let i=0; i<this.userInfo.like_movies.length;i++){
-        console.log(i)
         this.loginedUserLikeMovies.push(this.userInfo.like_movies[i].movie_id)
-        console.log(this.loginedUserLikeMovies)
       }
-      // console.log(this.userProfile)
       $(document).ready(function(x, y) {
       $('.card').on('mouseenter', function(e){
         x = e.pageX - $(this).offset().left,

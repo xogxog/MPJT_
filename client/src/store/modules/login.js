@@ -62,7 +62,6 @@ const login ={
         headers : rootState.login.token,
       })
       .then((res)=>{
-        console.log(res.data)
         commit('GET_USER_INFO',res.data)
         commit('SET_USER_INFO',res.data)
       })

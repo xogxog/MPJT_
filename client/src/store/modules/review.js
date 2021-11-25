@@ -44,7 +44,7 @@ const review ={
         dispatch('getMovieDetail/movieDetail',null, {root : true})
       })
       .catch((err)=>{
-        console.log(err)
+        alert(err)
       })
     },
     getReviewDetail : function({rootState,state,commit}, reviewPk){

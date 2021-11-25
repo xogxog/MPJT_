@@ -72,7 +72,7 @@ import axios from 'axios'
 							headers : this.setToken(),
 						})
 						.then((res)=>{
-							console.log(res.data)
+							// console.log(res.data)
 							this.$store.dispatch('login/setUserInfo',res.data)
 						})
 						
@@ -80,7 +80,7 @@ import axios from 'axios'
 					})
 					.catch((error) =>{
 						alert(error.message)
-						console.log('Error',error.message)
+						// console.log('Error',error.message)
 					})
 				
 			}
