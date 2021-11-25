@@ -86,6 +86,7 @@
       </div>
     </div>
     <v-divider></v-divider>
+
       <h3>Review</h3>
       <div class="reviews container">
         <v-data-table class="elevation-1" no-data-text="No Review" style="background: rgba(255, 255, 255, 0.5);" dark
@@ -122,6 +123,7 @@
         :review-pk="reviewPk"
       ></MovieDetailReview>
 
+
     
   </article>
   <!-- 전체 -->
@@ -140,7 +142,7 @@ window.$ = $;
     name: 'MovieDetailContent',
     components: {
       MovieDetailReview,
-      MovieReviewCreate
+      MovieReviewCreate,
     },
     data: function () {
       return {

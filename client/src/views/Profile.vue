@@ -11,46 +11,49 @@
             <img alt="user" :src="`http://127.0.0.1:8000${userProfile.profile_path}`">
           </v-avatar>
         </v-img>
-        <br><br><br>
+        <br><br>
         <v-title>
-          <h2>{{userProfile.nickname}}</h2>
+          <h2 class="bold-text">{{userProfile.nickname}}</h2>
         </v-title>
-        <div class="text-center">
         <div v-if="userProfile.id!==userInfo.id">
-          <v-btn rounded color="primary" dark @click="followUnFollow" v-if="user_like_unlike">
+          <v-btn rounded small color="grey darken-1" dark @click="followUnFollow" v-if="user_like_unlike">
             unfollow
           </v-btn>
-          <v-btn rounded color="primary" dark @click="followUnFollow" v-else>
+          <v-btn rounded small color="red accent-2" dark @click="followUnFollow" v-else>
             follow
           </v-btn>
         </div>
-  </div>
         <br>
         <v-divider></v-divider>
         <div class="d-flex justify-content-around">
           <div class="flex-column tbx">
-            <h4>영화</h4>
-            <h5>{{userProfile.like_movies.length}}</h5>
+            <h4 class="bold-text">영화</h4>
+            <h5 class="bold-text">{{userProfile.like_movies.length}}</h5>
           </div>
 
           <div class="flex-column tbx">
-            <h4>팔로잉</h4>
-            <h5>{{userProfile.followings.length}}</h5>
+            <h4 class="bold-text"><a href="" class="dis-link-font" @click.prevent="followingOpen=true">팔로잉</a></h4>
+            <h5 class="bold-text">{{userProfile.followings.length}}</h5>
           </div>
           <div class="flex-column tbx">
-            <h4>팔로워</h4>
-            <h5>{{userProfile.followers.length}}</h5>
-
+            <h4 class="bold-text"><a href="" class="dis-link-font" @click.prevent="followerOpen=true">팔로워</a></h4>
+            <h5 class="bold-text">{{userProfile.followers.length}}</h5>
           </div>
         </div>
         <v-divider></v-divider>
-
         <br>
+          <h2><strong>List</strong></h2>
         <div class="warp container d-flex justify-content-around">
           <div class="card" v-for="like_movie in userProfile.like_movies" :key="like_movie.movie_id"
             @click="movieDetail(like_movie.movie_id)">
             <span></span>
-            <div class="imgBx"><img :src="like_movie.poster_path"></div>
+            <div class="imgBx">
+              <v-img :src="like_movie.poster_path">
+                <div class="d-flex justify-content-start">
+                  <v-icon class="ma-1" large dark color="" >emoji_people</v-icon>
+                </div>
+              </v-img>
+            </div>
             <div class="content">
               <div class="content">
                 <h4>{{like_movie.title}}</h4>
@@ -62,12 +65,17 @@
       </v-card>
     </v-row>
     <EditProfile v-model="EditProfileOpen"></EditProfile>
+    <Follower v-model="followerOpen"></Follower>
+    <Following v-model="followingOpen"></Following>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import jQuery from "jquery";
+import Follower from '@/components/follow/Follower.vue'
+import Following from '@/components/follow/Following.vue'
+
 const $ = jQuery;
 window.$ = $;
 
@@ -78,10 +86,15 @@ import EditProfile from '@/components/EditProfile.vue'
     data: function () {
       return {
         EditProfileOpen: false,
+        followerOpen: false,
+        followingOpen: false,
+
       }
     },
     components: {
       EditProfile,
+      Follower,
+      Following,
     },
     methods:{
       followUnFollow:function(){
@@ -119,6 +132,15 @@ import EditProfile from '@/components/EditProfile.vue'
 </script>
 
 <style scoped>
+  .dis-link-font {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 링크의 색상 제거 */
+  }
+
+  .bold-text {
+    font-weight: bold;
+  }
+
   .tbx {
     width: 30%;
   }
