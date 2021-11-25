@@ -8,21 +8,17 @@
         <v-divider></v-divider>
       <v-card-text class="text-body-1" style="color: black">
         <div class="d-flex justify-content-around" v-for="follower in userProfile.followers" :key="follower.id">
-<<<<<<< Updated upstream
+
           <v-avatar size="40">
-=======
-          <v-avatar size="35">
->>>>>>> Stashed changes
+
             <img
               :src="`http://127.0.0.1:8000${follower.profile_path}`"
               alt="John"
             >
           </v-avatar>
-<<<<<<< Updated upstream
+
           <p class="mt-2" style="cursor: pointer;" @click="openProfile(follower.id)" :show="a">{{follower.nickname}}</p>
-=======
-          <p class="mt-2" @click="openProfile(follower.id)" :show="a">{{follower.nickname}}</p>
->>>>>>> Stashed changes
+
         </div>
       </v-card-text>
       <v-card-actions>
