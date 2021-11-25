@@ -5,12 +5,12 @@
       <v-card-title class="font-set align-center justify-content-between">
         <span class="text-h4">{{reviewDetail.title}} <br></span>
       <div v-if="likeReview">
-        <v-btn class="ma-3" text icon color="blue lighten-2" @click="likeUnlikeReview" elevation="2">
+        <v-btn class="ma-3" text fab color="indigo" @click="likeUnlikeReview" elevation="2" dark>
           <v-icon>mdi-thumb-up</v-icon>
         </v-btn>
       </div>
       <div v-else>
-        <v-btn class="ma-3" text icon color="secondary" @click="likeUnlikeReview" elevation="2">
+        <v-btn class="ma-3" text fab color="secondary" @click="likeUnlikeReview" elevation="2">
           <v-icon >mdi-thumb-up</v-icon>
         </v-btn>
       </div>

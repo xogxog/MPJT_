@@ -32,7 +32,7 @@
     },
     data :function(){
       return{
-        showOrNotshow : false,
+        // showOrNotshow : false,
         title : null,
         content :null,
         rank : 5,

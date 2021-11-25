@@ -73,7 +73,7 @@ const review ={
         }
       })
     },
-    editReview : function({rootState,commit},reviewData){
+    editReview : function({rootState,commit,dispatch},reviewData){
       let data = {
         'title' : reviewData.title,
         'content' : reviewData.content,
@@ -87,6 +87,7 @@ const review ={
       })
       .then((res)=>{
         commit('EDIT_REVIEW', res.data)
+        dispatch('getMovieDetail/movieDetail',null, {root : true})
         // this.getReviewDetail({rootState,commit},reviewData.reviewPk)
       })
     },

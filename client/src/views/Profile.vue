@@ -20,7 +20,7 @@
         <v-divider></v-divider>
           <div class="d-flex justify-content-around">
               <div class="flex-column">
-                <h4>영화💖</h4>
+                <h4>영화</h4>
                 <h5>{{userProfile.like_movies.length}}</h5>
               </div>
 
