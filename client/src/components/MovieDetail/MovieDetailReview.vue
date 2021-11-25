@@ -3,23 +3,25 @@
     <v-card class="container">
 
       <v-card-title class="font-set align-center justify-content-between">
+        <div class="container d-flex align-center justify-content-between">
         <span class="text-h4">{{reviewDetail.title}} <br></span>
       <div v-if="likeReview">
-        <v-btn class="ma-3" text fab color="indigo" @click="likeUnlikeReview" elevation="2" dark>
-          <v-icon>mdi-thumb-up</v-icon>
+        <v-btn class="ma-3" fab dark color="deep-purple accent-2" @click="likeUnlikeReview" elevation="1">
+          <v-icon dark>mdi-thumb-up</v-icon>
         </v-btn>
       </div>
       <div v-else>
-        <v-btn class="ma-3" text fab color="secondary" @click="likeUnlikeReview" elevation="2">
+        <v-btn class="ma-3" text fab color="secondary" @click="likeUnlikeReview" elevation="1">
           <v-icon >mdi-thumb-up</v-icon>
         </v-btn>
       </div>
+      </div>
       </v-card-title>
-      <div class="d-flex justify-content-between">
-      <v-card-subtitle class="text-h5 float-left" style="margin-top:10px">
+      <div class="d-flex justify-content-between align-center">
+      <v-card-subtitle class="text-h6 float-left">
         {{reviewDetail.movie.title}}
       </v-card-subtitle>
-      <div class="ma-7">
+      <div class="">
         <v-rating :value="reviewDetail.rank" color="amber" dense half-increments readonly size="20"></v-rating>
       </div>
       <!-- 작성글 좋아요 버튼 -->
@@ -50,13 +52,13 @@
       <v-form ref="form" class="container align-self-end" @submit.prevent="createComment">
         <div class="d-flex">
         <v-text-field label="comment" v-model="comment"></v-text-field>
-            <v-btn
-              class="mt-3"
-              fab
-              dark
-              color="indigo"
-              small
-              >
+          <v-btn
+            class="mt-3"
+            fab
+            dark
+            color="indigo"
+            small
+            >
           <v-icon class="" dark @click="createComment">
             mdi-plus
           </v-icon>

@@ -112,7 +112,7 @@
 
 <style scoped>
   .non-poster {
-    background-color: rgba(58, 53, 53, 0.699);
+    background-color: rgba(58, 53, 53, 0.2);
     
   }
 
