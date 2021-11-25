@@ -44,10 +44,10 @@
         <span>
           <!-- 관리자만 보이는 관리자페이지 -->
           <span v-if="userInfo !== null">
-            <span v-if="userInfo.nickname =='admin'">
+            <span v-if="userInfo.username =='admin'">
               <v-list-item href="http://127.0.0.1:8000/admin/" router exact>
                 <v-list-item-icon>
-                  <v-icon>mdi-view-dashboard</v-icon>
+                  <v-icon>admin_panel_settings</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>관리자페이지</v-list-item-title>
@@ -59,7 +59,7 @@
           <span v-if="isLogin">
             <v-list-item to="/profile" router exact @click="getUserInfo">
                 <v-list-item-icon>
-                  <v-icon>mdi-view-dashboard</v-icon>
+                  <v-icon>account_circle</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>내 프로필</v-list-item-title>
@@ -68,7 +68,7 @@
           </span>
           <v-list-item to="/Main" router exact>
               <v-list-item-icon>
-                <v-icon>mdi-forum</v-icon>
+                <v-icon>theaters</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>Main</v-list-item-title>
@@ -89,7 +89,7 @@
                 <!-- 뭐깔라는데................................ -->
                 <!-- <v-icon color="green darken-2">fas fa-lock</v-icon> -->
                 
-                <v-icon>mdi-forum</v-icon>
+                <v-icon>movie</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>MovieBoxOffice
@@ -102,7 +102,7 @@
 
           <v-list-item to="/MovieSearch" router exact :disabled="!isLogin">
                 <v-list-item-icon>
-                  <v-icon>mdi-forum</v-icon>
+                  <v-icon>search</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>MovieSearch
@@ -116,7 +116,7 @@
         <span v-if="isLogin">
           <v-list-item to="/#" router exact @click.native="logout">
             <v-list-item-icon>
-              <v-icon>mdi-forum</v-icon>
+              <v-icon>logout</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>Log Out</v-list-item-title>
@@ -128,7 +128,7 @@
         <span v-else>
           <v-list-item to="/Login" router exact>
               <v-list-item-icon>
-                <v-icon>mdi-forum</v-icon>
+                <v-icon>login</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>Login</v-list-item-title>
@@ -138,7 +138,7 @@
 
           <v-list-item to="/Signup" router exact>
               <v-list-item-icon>
-                <v-icon>mdi-forum</v-icon>
+                <v-icon>assignment_ind</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>Signup</v-list-item-title>

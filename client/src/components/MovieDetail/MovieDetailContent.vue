@@ -92,7 +92,7 @@
         <v-data-table class="elevation-1" no-data-text="No Review" style="background: rgba(255, 255, 255, 0.5);" dark
           click:row :headers="headers" :items="movieDetail.reviews" multi-sort>
           <template v-slot:[`item.title`]="{item}">
-            <a href="" @click="openReviewDetail(item.id, $event)" @click.stop="reviewDetailOpen=true" >{{item.title}}</a>
+            <a class="" href="" @click="openReviewDetail(item.id, $event)" @click.stop="reviewDetailOpen=true" >{{item.title}}</a>
           </template>
           <template v-slot:[`item.updated_at`]="{item}">
             {{item.updated_at.slice(0,10)}}
@@ -210,7 +210,8 @@ window.$ = $;
           })
         })
       })
-        // console.log(this.recommendMovies)
+        console.log(this.recommendMovies)
+        console.log(this.recommendMovies)
     },
 
     computed: {
