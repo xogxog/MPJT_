@@ -31,10 +31,10 @@ import {mapState} from 'vuex'
     },
     data :function(){
       return{
-        reviewPk:null,
-        title : null,
-        content :null,
-        rank : null,
+        reviewPk:`${this.reviewDetail.id}`,
+        title : `${this.reviewDetail.title}`,
+        content :`${this.reviewDetail.content}`,
+        rank : `${this.reviewDetail.rank}`,
       }
     },
     methods: {
@@ -58,7 +58,6 @@ import {mapState} from 'vuex'
     },
     computed: {
       ...mapState('review', ['reviewDetail']),
-      // 상준상코드 
       show: {
         get() {
           return this.value
@@ -67,16 +66,6 @@ import {mapState} from 'vuex'
           this.$emit('input', value)
         }
       }
-    },
-    created :function(){
-      // console.log('새로생성되었어쇼~!')
-      //default로 값 넣어주기
-      this.title = this.reviewDetail.title
-      this.content = this.reviewDetail.content
-      this.rank = this.reviewDetail.rank
-      this.reviewPk = this.reviewDetail.id
-      // console.log(this.title)
-      // console.log(this.content)
     },
   }
 </script>

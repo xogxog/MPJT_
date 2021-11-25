@@ -23,7 +23,6 @@ const profile ={
         },
       })
       .then(() =>{
-        // console.log(res.data)
         dispatch('login/getUserInfo',null,{root:true})
       })
       .catch(()=>{

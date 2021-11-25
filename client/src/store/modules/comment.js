@@ -15,7 +15,7 @@ const comment ={
     },
     GET_COMMENTS : function(state, comments){
       state.comments=comments
-      console.log(comments)
+      // console.log(comments)
     },
     DELETE_COMMENT : function(state, comment){
       const index = state.comments.indexOf(comment)
@@ -34,7 +34,6 @@ const comment ={
         headers : rootState.login.token,
       })
       .then((res)=>{
-        console.log(res.data)
         commit('CREATE_COMMENT',res.data)
       })
     },

@@ -35,6 +35,7 @@ export default {
     movieDetail: function (movieid) {
         let movieId = movieid
         this.$store.dispatch('getMovieDetail/setMovieId', movieId)
+        this.$store.dispatch('recommendMovies/getRecommend', movieId)
         this.$router.push({
           name: 'MovieDetail'
         })
@@ -48,7 +49,7 @@ export default {
       url : `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
     })
       .then((res)=>{
-        console.log(res.data.results)
+        // console.log(res.data.results)
         this.trendMovies = res.data.results.slice(0,8)
         this.$store.dispatch('saveMovies/saveMovies',res.data.results)
       })

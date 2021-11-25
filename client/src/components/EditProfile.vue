@@ -46,7 +46,6 @@ import { mapState } from 'vuex'
     methods: {
       selectFile:function(file){
         this.image=file
-        console.log(this.image)
         this.previewImage = URL.createObjectURL(this.image);
       },
       
@@ -57,7 +56,6 @@ import { mapState } from 'vuex'
           this.$store.dispatch('profile/editProfileImg', this.image)
           this.show=false
         }
-        // console.log(this.image)
       },
     },
 

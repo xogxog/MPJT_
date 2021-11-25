@@ -10,14 +10,10 @@
         <div class="d-flex justify-content-around" v-for="following in userProfile.followings" :key="following.id">
 
           <v-avatar size="40">
-
-
             <img
               :src="`http://127.0.0.1:8000${following.profile_path}`"
-              alt="John"
-            >
+              alt="John">
           </v-avatar>
-
           <p class="mt-2" style="cursor: pointer;" @click="openProfile(following.id)" :show="a">{{following.nickname}}</p>
 
         </div>
