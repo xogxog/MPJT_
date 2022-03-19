@@ -36,7 +36,7 @@ const profile ={
         headers : rootState.login.token,
       })
       .then(()=>{
-        dispatch('login/getOtherUserInfo',userProfile_pk,{root:true})
+        dispatch('login/getOtherUserInfo', userProfile_pk, {root:true})
       })
     }
 

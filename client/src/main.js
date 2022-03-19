@@ -9,6 +9,7 @@ import Carousel3d from 'vue-carousel-3d';
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
+import './registerServiceWorker'
 
 Vue.config.productionTip = false
 // 배경
