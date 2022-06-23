@@ -216,23 +216,21 @@ def movie_list(request):
 
 ### 프로젝트 시작 전
 
-![Untitled](MPJT%20f781011d7fae474fa80e5ff485e27beb/Untitled.png)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fee1ec678-e82a-494e-9a5e-88918f8d30ce%2FUntitled.png?table=block&id=f781011d-7fae-474f-a80e-5ff485e27beb&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&width=2000&userId=&cache=v2)
 
 ### 프로젝트 시작 후 조금씩 수정
 
-![Untitled](MPJT%20f781011d7fae474fa80e5ff485e27beb/Untitled%201.png)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fb268712f-9ba4-4351-a5a8-796834912406%2FUntitled.png?table=block&id=4298da6b-0080-4378-b566-615e18581de8&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&width=2000&userId=&cache=v2)
 
 ## ERD
 
-![Untitled](MPJT%20f781011d7fae474fa80e5ff485e27beb/Untitled%202.png)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd4d03fc3-c392-4e9c-ac83-2254e24dd4f1%2FUntitled.png?table=block&id=818a94fb-e072-4031-b3c3-c9970fa28b73&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&width=2000&userId=&cache=v2)
 
 ## 작업일지
 
-- 토글 확인
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fbf8c861c-60dd-4f82-b8db-bec18cd4a0b1%2FUntitled.png?table=block&id=0e73e213-a8f1-474e-baa9-519542899bf2&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&width=2000&userId=&cache=v2)
 
-![Untitled](MPJT%20f781011d7fae474fa80e5ff485e27beb/Untitled%203.png)
-
-- 작업일지
+- 작업일지 - (노션 확인요망)
     - [x]  영화 - 평점 등록,수정,삭제
     - [x]  리뷰 - 조회,생성,수정,삭제
     - [x]  댓글 - 작성,삭제
@@ -242,12 +240,9 @@ def movie_list(request):
     - [x]  [추천알고리즘 짜기]
     - [x]  일간 박스오피스(한국 진흥원) - front → 포스터없어서 tmdb trend로 계획 수정
     
-    ---
+    [BACKEND](https://www.notion.so/6f148237c65d404188f88bbe71f48205)
     
-    [BACKEND](MPJT%20f781011d7fae474fa80e5ff485e27beb/BACKEND%206f148237c65d404188f88bbe71f48205.csv)
-    
-    [FRONTEND](MPJT%20f781011d7fae474fa80e5ff485e27beb/FRONTEND%200421f83c06754ac9996a7fa484821aa1.csv)
-    
+    [FRONTEND](https://www.notion.so/0421f83c06754ac9996a7fa484821aa1)
 
 ## 리뷰
 
@@ -330,7 +325,7 @@ def movie_get(request) :
 
 ### INDEX
 
-![index.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/index.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa14175f1-2710-44c7-9966-de4da753e6f4%2Findex.gif?table=block&id=9ae6cdd6-9d42-4e30-92da-463e3064b586&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
 - 전반적으로 Vuetify를 사용하여 레이아웃 구성
 - 뒷 배경은 디자인 컨셉에 particle 효과가 어울려 vue.js 라이브러리 사용하였고, 컨셉 색상인 검정을 전부 칠하니 살짝 밋밋하여 아래쪽은 살짝 붉은 빛을 줌
@@ -339,14 +334,14 @@ def movie_get(request) :
 
 ### MAIN
 
-![main.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/main.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa14175f1-2710-44c7-9966-de4da753e6f4%2Findex.gif?table=block&id=9ae6cdd6-9d42-4e30-92da-463e3064b586&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
 - Main에 미로그인 시 영화 무작위 추천, 로그인 시 `[알고리즘]()` 이용한 사용자 취향을 반영한 영화 추천
 - carousel은 Vue.js 라이브러리 이용 후 유튜브 참고하여 각 슬라이드마다 호버 시 투명 할 수 있도록 효과 삽입
 
 ### MOVIE DETAIL
 
-![moviedetail.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/moviedetail.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fea271fe6-5553-4089-a292-50574565612f%2Fmoviedetail.gif?table=block&id=c5904bda-8ee9-4ff0-9507-0214ce172dd9&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
 - TMDB API를 이용 Detail 보고 있는 영화와 관련된 추천 영화 하단에 삽입 후 각 Image는 Jquery 활용하여 마우스 효과 삽입(마우스 방향에 따른 검정 원 이동 효과)
 - 영화 찜, 리뷰작성, 리뷰 수정, 리뷰 삭제, 리뷰 좋아요, 댓글 작성 및 삭제 페이지 리로드 없이 화면 상에 바로 반영 가능하도록 로직 구성, 수정사항 발생 시 db에 바로 바로 반영
@@ -408,14 +403,14 @@ movieDetail : function({rootState,commit,state}){
 
 ### MOVIE SEARCH
 
-![search.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/search.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3a929665-3d7f-40e5-b86d-f2d1a871855a%2Fsearch.gif?table=block&id=aa32c26e-c0d4-498c-8cc4-563f93384e65&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
 - TMDB API를 활용, 영화 검색 후 DRF로 영화 데이터 저장, 이후 DRF DB와 연동하여 Detail 볼 수 있도록 함
 - 상위 Detail의 Jqeury를 활용한 Image 효과 사용
 
 ### MOVIE BOX OFFICE
 
-![boxoffice.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/boxoffice.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F18fcf398-ef89-4aba-96ba-da8ffcfea155%2Fboxoffice.gif?table=block&id=320dbaaa-ae29-4b72-aaa5-02e6060f78cd&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
 - 기존 영화진흥원 API를 이용하여 한국 BOX OFFICE 순위를 가져오도록 기획하였었으나, 데이터를 연동하고보니 Poster Image가 없는 문제 발생
 - 이후 계획 급 선회하여 TMDB API의 TREND에서 영화 추출
@@ -423,7 +418,7 @@ movieDetail : function({rootState,commit,state}){
 
 ### MOVIE REVIEW
 
-![moviereview.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/moviereview.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff64b12c7-8a2d-4408-abf3-de5d79fcb423%2Fmoviereview.gif?table=block&id=eb154b2c-6bcd-4ca6-9c4b-6b2520c2d086&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
 - 이것저것 탈이 많았던 Review
 - 해당 페이지의 경우 깔끔하게 디자인하기가 매우 힘들었고 이런저런 변경 사항이 많았다.
@@ -434,9 +429,9 @@ movieDetail : function({rootState,commit,state}){
 
 ### SIGNUP & LOGIN
 
-![signup.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/signup.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6cc9828f-89a6-41e0-931d-65f5e5e86b3f%2Fsignup.gif?table=block&id=d4b7d548-3bf0-4b2c-a0e9-da2e6108eead&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
-![login.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/login.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe8c7cb93-d0f2-4420-8382-da599d5313bf%2Flogin.gif?table=block&id=22bfead8-2cc9-4d7f-b888-45c9a1571d0b&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
 - Sign up 과 Login의 경우 프로젝트 진행 중 첫 DRF와 연동하는 작업에 익숙하지 못하여 상당한 시간을 소요함
 - 특히, vuex를 사용하여 데이터 연동의 중요성(편의성)의 깨달음을 선사함. 이후 거의 모든 작업은 vuex 모듈화를 통해 data 연동 작업 진행
@@ -444,7 +439,7 @@ movieDetail : function({rootState,commit,state}){
 
 ### PROFILE
 
-![profile.gif](MPJT%20f781011d7fae474fa80e5ff485e27beb/profile.gif)
+![img](https://applause1319.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F88802e71-22c4-46ab-b047-d0634b4560d7%2Fprofile.gif?table=block&id=c363faf4-3f1e-422e-9655-d0142f76559a&spaceId=4c17e30c-1886-4b94-b732-43a91268cc27&userId=&cache=v2)
 
 - 이미지 파일 수정 요청(Vue → Django)
     - 이미지 파일은 텍스트 형태가 아닌 파일 형태로 저장 요청해야 함.
